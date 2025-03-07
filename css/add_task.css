@@ -552,6 +552,7 @@ select {
   .add-task-prio > button {
     width: 100%;
     height: 41px;
+    padding: 4px;
   }
   .add-task-input-fields > input,
   .add-task-input-fields > textarea,
@@ -594,6 +595,9 @@ select {
 @media (max-width: 428px) {
   .add-task-bottom-buttons > button {
     font-size: 21px;
+  }
+  .add-task-prio > button > img {
+    margin-left: 0;
   }
 }
 
