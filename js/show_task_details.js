@@ -230,59 +230,8 @@ function editSubtasksList(mainTaskKey) {
   }
 }
 
-async function subtaskStatusChange(subtaskId, taskKey, subtaskEditId, statusText) {
-  let checkStatus = document.getElementById(subtaskEditId);
-  let statusChange = 0;
-  if (checkStatus.checked == true) {
-    statusChange = 1;
-  } else {
-    statusChange = 0;
-  }
-  await edit_data(
-    (path = `tasks/${taskKey}/subtask/${subtaskId}`),
-    (data = {
-      text: statusText,
-      checked: statusChange,
-    }),
-  );
-  await getTasks();
-  renderTasks();
-}
-
-async function deleteTask(path) {
-  await delete_data(path);
-  window.location.reload();
-}
-
-async function deleteSubtask(path) {
-  await delete_data(path);
-  await loadDataBoard();
-  editSubtasks();
-}
-
 function clearSubtaskInput(inputId) {
   document.getElementById(inputId).value = "";
-}
-
-async function addEditSubtask(inputId, mainTaskId) {
-  let inputValidate = document.getElementById(inputId);
-  let inputText = inputValidate.value.trim();
-  if (inputText == "") {
-    inputValidate.setCustomValidity("Please insert a subtask description");
-    inputValidate.reportValidity();
-    return true;
-  } else {
-    await update_data(
-      (path = `tasks/${mainTaskId}/subtask`),
-      (data = {
-        text: inputText,
-        checked: 0,
-      }),
-    );
-    clearSubtaskInput(inputId);
-    await loadDataBoard();
-    editSubtasks();
-  }
 }
 
 function createOkSaveButton() {
@@ -290,53 +239,11 @@ function createOkSaveButton() {
   document.getElementById("taskDetailsButtons").innerHTML = insertOkSaveButton(mainTaskKey);
 }
 
-async function updateListEdit(index, mainTaskKey) {
-  let listItem = document.getElementById(`listItem-${index}`);
-  let textChange = listItem.innerText;
-  let editIcon = document.getElementById(`editIcon-${index}`);
-  let checkIcon = document.getElementById(`checkIcon-${index}`);
-  if (textChange == "\n") {
-    deleteSubtask(`tasks/${mainTaskKey}/subtask/${index}`);
-  } else {
-    await patch_data(
-      (path = `tasks/${mainTaskKey}/subtask/${index}`),
-      (data = {
-        text: textChange,
-      }),
-    );
-    listItem.setAttribute("contenteditable", "false");
-    editIcon.style.display = "block";
-    checkIcon.style.display = "none";
-  }
-  await getTasks();
-  getTaskDetails(mainTaskKey);
-  editTaskDetails(mainTaskKey);
-}
-
 function handleEnterEdit(event, index, mainTaskKey) {
   if (event.key === "Enter") {
     event.preventDefault();
     updateListEdit(index, mainTaskKey);
   }
-}
-
-async function saveEditedTaskDetails(updatePath, mainTaskKey) {
-  let updateTitle = document.getElementById("inputTitleEdit").value;
-  let updateDesc = document.getElementById("inputDescriptionEdit").value;
-  let updateDate = document.getElementById("inputDueDateEdit").value;
-  let updatePrio = newPrio;
-  await patch_data(
-    (path = updatePath),
-    (data = {
-      title: updateTitle,
-      description: updateDesc,
-      date: updateDate,
-      prio: updatePrio,
-    }),
-  );
-  await getTasks();
-  await renderTasks();
-  getTaskDetails(mainTaskKey);
 }
 
 async function renderContactsBoard(filteredContacts, divId) {
