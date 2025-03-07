@@ -1,9 +1,15 @@
 let subtaskRef = document.getElementById("subtaskInput");
+
 let contactsInputRef = document.getElementById("contact-search");
+
 let contactsCheckRef = document.getElementById("contacts-checkbox");
+
 let passwordField = document.getElementById("password-login");
+
 let toggleButton = document.getElementById("toggle-password");
+
 let list = document.getElementById("contacts-checkbox");
+
 let searchBox = document.getElementById("contact-search");
 
 if (window.location.pathname.includes("board.html")) {

@@ -146,17 +146,21 @@ async function addEditSubtask(inputId, mainTaskId) {
     inputValidate.reportValidity();
     return true;
   } else {
-    await update_data(
-      (path = `tasks/${mainTaskId}/subtask`),
-      (data = {
-        text: inputText,
-        checked: 0,
-      }),
-    );
+    await submitSubTextChange(mainTaskId, inputText);
     clearSubtaskInput(inputId);
     await loadDataBoard();
     editSubtasks();
   }
+}
+
+async function submitSubTextChange(mainTaskId, inputText) {
+  await update_data(
+    (path = `tasks/${mainTaskId}/subtask`),
+    (data = {
+      text: inputText,
+      checked: 0,
+    }),
+  );
 }
 
 async function subtaskStatusChange(subtaskId, taskKey, subtaskEditId, statusText) {
@@ -167,6 +171,12 @@ async function subtaskStatusChange(subtaskId, taskKey, subtaskEditId, statusText
   } else {
     statusChange = 0;
   }
+  await submitStatusChange(subtaskId, taskKey, statusText, statusChange);
+  await getTasks();
+  renderTasks();
+}
+
+async function submitStatusChange(subtaskId, taskKey, statusText, statusChange) {
   await edit_data(
     (path = `tasks/${taskKey}/subtask/${subtaskId}`),
     (data = {
@@ -174,8 +184,6 @@ async function subtaskStatusChange(subtaskId, taskKey, subtaskEditId, statusText
       checked: statusChange,
     }),
   );
-  await getTasks();
-  renderTasks();
 }
 
 async function deleteTask(path) {

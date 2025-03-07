@@ -34,7 +34,6 @@ async function proofLoginTry(emailLogin, passwordLogin, loginData, userId, findU
       changeNavbarItems(window.innerWidth < 960 ? "mobile_greeting" : "summary");
       regAlright("logErrorName", "logInpName");
       regAlright("logErrorPw", "logInpPw");
-
       return;
     } else {
       regError("logErrorName", "logInpName");
@@ -97,7 +96,6 @@ function checkRegistrationData(insertedData, remove, add) {
 function checkBoxValidity(checkBox, remove) {
   if (checkBox.checked == true) {
     document.getElementById(remove).classList.add("d_none");
-
     return true;
   } else {
     document.getElementById(remove).classList.remove("d_none");
