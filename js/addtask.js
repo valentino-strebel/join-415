@@ -3,16 +3,7 @@ let selectedPrio = undefined;
 let todayDate = new Date().toJSON().slice(0, 10);
 
 function generateContactsHTML(contacts) {
-  return contacts
-    .map((contact) =>
-      listContactsAddtask(
-        contact.id,
-        contact.name,
-        contact.colorId,
-        currentUser,
-      ),
-    )
-    .join("");
+  return contacts.map((contact) => listContactsAddtask(contact.id, contact.name, contact.colorId, currentUser)).join("");
 }
 
 async function renderContacts(filteredContacts = contacts) {
@@ -29,11 +20,7 @@ async function renderContacts(filteredContacts = contacts) {
 
 function filterContacts(contactsCheck) {
   let searchTerm = document.getElementById(contactsCheck).value.toLowerCase();
-  let filteredContacts = searchTerm
-    ? contacts.filter((contact) =>
-        contact.name.toLowerCase().startsWith(searchTerm),
-      )
-    : contacts;
+  let filteredContacts = searchTerm ? contacts.filter((contact) => contact.name.toLowerCase().startsWith(searchTerm)) : contacts;
   renderContacts(filteredContacts);
 }
 
@@ -56,13 +43,9 @@ function setCheckbox(id) {
 }
 
 function renderAssignedContacts() {
-  let contactInfo = contacts.filter((contact) =>
-    selectedContactsIDs.some((selected) => selected.id === contact.id),
-  );
+  let contactInfo = contacts.filter((contact) => selectedContactsIDs.some((selected) => selected.id === contact.id));
   let content = document.getElementById("assignedContacts");
-  content.innerHTML = contactInfo
-    .map((contact) => listAssingedContacts(contact.name, contact.colorId))
-    .join("");
+  content.innerHTML = contactInfo.map((contact) => listAssingedContacts(contact.name, contact.colorId)).join("");
 }
 
 function setButtonColor(selectedButton, colorCode) {
@@ -73,8 +56,7 @@ function setButtonColor(selectedButton, colorCode) {
   if (!img) return;
   activeButton.style.backgroundColor = colorCode;
   activeButton.style.color = "#FFFFFF";
-  img.style.filter =
-    "brightness(0) saturate(100%) invert(93%) sepia(100%) saturate(0%) hue-rotate(141deg) brightness(104%) contrast(101%)";
+  img.style.filter = "brightness(0) saturate(100%) invert(93%) sepia(100%) saturate(0%) hue-rotate(141deg) brightness(104%) contrast(101%)";
   selectedPrio = selectedButton.toLowerCase();
 }
 
@@ -149,9 +131,7 @@ function editListItem(index) {
   let lengthThis = listItem.value.length;
   let editIcon = document.getElementById(`editIcon-${index}`);
   let checkIcon = document.getElementById(`checkIcon-${index}`);
-  let listItemContainer = document.getElementById(
-    `list-item-container-${index}`,
-  );
+  let listItemContainer = document.getElementById(`list-item-container-${index}`);
   listItem.setAttribute("contenteditable", "true");
   listItemContainer.classList.toggle("edit-subtask");
   listItem.focus();
@@ -265,9 +245,7 @@ function stautsEmpty(stauts) {
 }
 
 function showError(element, message) {
-  let parent =
-    element.closest(".add-task-input-fields") ||
-    element.closest(".add-task-prio");
+  let parent = element.closest(".add-task-input-fields") || element.closest(".add-task-prio");
   let errorSpan = parent.querySelector(".error-text");
   if (errorSpan) {
     errorSpan.remove();
@@ -303,11 +281,7 @@ function validateRequiredFields() {
 function validateContacts() {
   let contactSearch = document.getElementById("contacts-search");
   contactSearch.addEventListener("input", () => showError(contactSearch, ""));
-  if (
-    !selectedContactsIDs ||
-    !Array.isArray(selectedContactsIDs) ||
-    selectedContactsIDs.length === 0
-  ) {
+  if (!selectedContactsIDs || !Array.isArray(selectedContactsIDs) || selectedContactsIDs.length === 0) {
     return showError(contactSearch, "Please select at least one contact");
   }
   return showError(contactSearch, "");
@@ -335,12 +309,7 @@ function validatePriority() {
 }
 
 function validateData() {
-  return (
-    validateRequiredFields() &&
-    validateContacts() &&
-    validateCategory() &&
-    validatePriority()
-  );
+  return validateRequiredFields() && validateContacts() && validateCategory() && validatePriority();
 }
 
 function openContactsList(listId) {

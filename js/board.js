@@ -13,11 +13,7 @@ async function renderTasks() {
   for (let i = 0; i < tasks.length; i++) {
     let task = tasks[i];
     let taskElement = document.createElement("div");
-    taskElement.innerHTML = listTasks(
-      task,
-      i,
-      formatCategoryText(task.category),
-    );
+    taskElement.innerHTML = listTasks(task, i, formatCategoryText(task.category));
     taskElement = taskElement.firstElementChild;
     renderTasksStatus(todo, progress, feedback, done, task, taskElement);
     getAssignedContacts(task.assigned, i);
@@ -81,21 +77,10 @@ function getAssignedContacts(contactIDs, index) {
   setContainerWidth(assignedContacts, content);
 }
 
-function assignAvailableContacts(
-  totalContacts,
-  maxContactsToShow,
-  index,
-  content,
-) {
-  for (
-    let indexMy = 0;
-    indexMy < Math.min(totalContacts, maxContactsToShow);
-    indexMy++
-  ) {
+function assignAvailableContacts(totalContacts, maxContactsToShow, index, content) {
+  for (let indexMy = 0; indexMy < Math.min(totalContacts, maxContactsToShow); indexMy++) {
     let contactIdentifier = tasks[index].assigned[indexMy].mainContactId;
-    let contactIndex = contacts.findIndex(
-      (contact) => contact.id === contactIdentifier,
-    );
+    let contactIndex = contacts.findIndex((contact) => contact.id === contactIdentifier);
     if (contactIndex !== -1) {
       let assignedCode = contacts[contactIndex].colorId;
       let assignedName = contacts[contactIndex].name;
@@ -115,8 +100,7 @@ function insertMaximumContacts(totalContacts, maxContactsToShow, content) {
 }
 
 function setContainerWidth(assignedContacts, content) {
-  let widthContainer =
-    assignedContacts.length === 1 ? 32 : (assignedContacts.length - 1) * 32;
+  let widthContainer = assignedContacts.length === 1 ? 32 : (assignedContacts.length - 1) * 32;
   content.style.width = widthContainer + "px";
 }
 
@@ -136,32 +120,19 @@ function truncateText(text) {
  * Shows a message if no tasks match the search criteria.
  */
 function searchTasks() {
-  let searchInput = document
-    .querySelector("#board-search-container input")
-    .value.trim()
-    .toLowerCase();
+  let searchInput = document.querySelector("#board-search-container input").value.trim().toLowerCase();
   let taskContainers = document.querySelectorAll(".board-card");
   let noResultsMessage = document.getElementById("no-results-message");
-  let foundTasks= createTaskContainers(searchInput, taskContainers);
+  let foundTasks = createTaskContainers(searchInput, taskContainers);
   noResultsMessage.style.display = foundTasks ? "none" : "block";
 }
 
 function createTaskContainers(searchInput, taskContainers) {
   let foundTasks = false;
   taskContainers.forEach((task) => {
-    let title = task
-      .querySelector(".card-title-discription p.weight700")
-      ?.innerText.trim()
-      .toLowerCase();
-    let description = task
-      .querySelector(".card-title-discription p.weight400")
-      ?.innerText.trim()
-      .toLowerCase();
-    if (
-      searchInput === "" ||
-      (title && title.startsWith(searchInput)) ||
-      (description && description.startsWith(searchInput))
-    ) {
+    let title = task.querySelector(".card-title-discription p.weight700")?.innerText.trim().toLowerCase();
+    let description = task.querySelector(".card-title-discription p.weight400")?.innerText.trim().toLowerCase();
+    if (searchInput === "" || (title && title.startsWith(searchInput)) || (description && description.startsWith(searchInput))) {
       task.style.display = "flex";
       foundTasks = true;
     } else {
@@ -199,10 +170,7 @@ async function updateTaskStatusInFirebase(taskId, newStatus) {
   try {
     taskStatusTry(taskId, newStatus);
   } catch (error) {
-    console.error(
-      "Fehler beim Aktualisieren des Task-Status in Firebase:",
-      error,
-    );
+    console.error("Fehler beim Aktualisieren des Task-Status in Firebase:", error);
     throw error;
   }
 }
@@ -219,9 +187,7 @@ async function taskStatusTry(taskId, newStatus) {
     body: JSON.stringify(existingData),
   });
   if (!response.ok) {
-    throw new Error(
-      `Fehler beim Aktualisieren der Task: ${response.statusText}`,
-    );
+    throw new Error(`Fehler beim Aktualisieren der Task: ${response.statusText}`);
   }
 }
 
@@ -307,21 +273,14 @@ function renderProgressbarSubtask(cardSubtasks, index) {
     return;
   }
   let progressData = calcProgressSubtask(cardSubtasks);
-  let percentage =
-    (progressData.checkedQuantity / progressData.totalQuantity) * 100;
+  let percentage = (progressData.checkedQuantity / progressData.totalQuantity) * 100;
   progress.style.width = percentage + "%";
-  tasksDone.innerHTML =
-    progressData.checkedQuantity +
-    "/" +
-    progressData.totalQuantity +
-    " Subtasks";
+  tasksDone.innerHTML = progressData.checkedQuantity + "/" + progressData.totalQuantity + " Subtasks";
 }
 
 function calcProgressSubtask(cardSubtasks) {
   let totalQuantity = cardSubtasks.length;
-  let checkedQuantity = cardSubtasks.filter(
-    (task) => task.checked === 1,
-  ).length;
+  let checkedQuantity = cardSubtasks.filter((task) => task.checked === 1).length;
 
   return {
     totalQuantity,
@@ -360,9 +319,7 @@ function checkColumnEmpty(columnId) {
 function adjustSearchContainerPosition() {
   let searchContainer = document.getElementById("board-search-container");
   let boardHeader = document.querySelector(".board-header");
-  let searchContainerParent = document.querySelector(
-    ".board-search-add-container",
-  );
+  let searchContainerParent = document.querySelector(".board-search-add-container");
   if (window.innerWidth <= 960) {
     if (!searchContainer.classList.contains("search-container-moved")) {
       searchContainer.classList.add("search-container-moved");
@@ -383,23 +340,14 @@ function openUserStory() {
   if (overlay) overlay.classList.remove("d_none");
 
   setTimeout(() => {
-    toggleStyleChange(
-      "taskDetailsWindow",
-      "addContactWindowClosed",
-      "addContactWindow",
-    );
+    toggleStyleChange("taskDetailsWindow", "addContactWindowClosed", "addContactWindow");
   }, 100);
 }
 
 function closeUserStory() {
   let window = document.getElementById("taskDetailsWindow");
   let overlay = document.getElementById("overlayTasksDetail");
-  contactNoAction(
-    "taskDetailsWindow",
-    "addContactWindowClosed",
-    "addContactWindow",
-    "addContactWindowNoAction",
-  );
+  contactNoAction("taskDetailsWindow", "addContactWindowClosed", "addContactWindow", "addContactWindowNoAction");
   setTimeout(() => {
     if (window) window.classList.add("d_none");
     if (overlay) overlay.classList.add("d_none");

@@ -10,7 +10,6 @@ if (window.location.pathname.includes("board.html")) {
   window.addEventListener("resize", adjustSearchContainerPosition);
   window.addEventListener("load", adjustSearchContainerPosition);
   document.addEventListener("click", function (event) {
-
     if (!list.contains(event.target) && event.target !== searchBox) {
       list.style.display = "none";
     }

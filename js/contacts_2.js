@@ -1,8 +1,5 @@
 function hideDetails(windowId, styleA, styleB) {
-  if (
-    document.getElementById(windowId).classList ==
-    "contactsDisplay detailsWindow"
-  ) {
+  if (document.getElementById(windowId).classList == "contactsDisplay detailsWindow") {
     toggleStyleChange(windowId, styleA, styleB);
   }
 }

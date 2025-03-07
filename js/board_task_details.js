@@ -22,8 +22,7 @@ function prepareTaskDetails(taskKey, targetId, setPrio, taskId) {
 }
 
 function getTaskDetailsDom(targetId) {
-  document.getElementById("taskDetailsButtons").innerHTML =
-    detailsEditDeleteButtons(targetId);
+  document.getElementById("taskDetailsButtons").innerHTML = detailsEditDeleteButtons(targetId);
 }
 
 function getTag(taskKey) {
@@ -36,35 +35,27 @@ function getTag(taskKey) {
     case "User Story":
       backGroundColor = tagColors[0];
   }
-  document.getElementById("tagContainer").innerHTML = detailsTagInsert(
-    taskTag,
-    backGroundColor
-  );
+  document.getElementById("tagContainer").innerHTML = detailsTagInsert(taskTag, backGroundColor);
 }
 
 function getHeader(taskKey) {
   let cleanHeader = tasks[taskKey].title;
-  document.getElementById("taskDetailsHeader").innerHTML =
-    detailsHeaderInsert(cleanHeader);
+  document.getElementById("taskDetailsHeader").innerHTML = detailsHeaderInsert(cleanHeader);
 }
 
 function getDescription(taskKey) {
   let cleanDescription = tasks[taskKey].description;
-  document.getElementById("taskDetailDescription").innerHTML =
-    detailsDescriptionInsert(cleanDescription);
+  document.getElementById("taskDetailDescription").innerHTML = detailsDescriptionInsert(cleanDescription);
 }
 
 function getDueDate(taskKey) {
   let cleanDate = tasks[taskKey].date.split("-").reverse().join("/");
-  document.getElementById("dueDateTR").innerHTML =
-    detailsDueDateInsert(cleanDate);
+  document.getElementById("dueDateTR").innerHTML = detailsDueDateInsert(cleanDate);
 }
 
 function getPriority(setPrio) {
-  let cleanPriority =
-    String(setPrio).charAt(0).toUpperCase() + String(setPrio).slice(1);
-  document.getElementById("priorityDetailsTR").innerHTML =
-    detailsPriorityInsert(cleanPriority);
+  let cleanPriority = String(setPrio).charAt(0).toUpperCase() + String(setPrio).slice(1);
+  document.getElementById("priorityDetailsTR").innerHTML = detailsPriorityInsert(cleanPriority);
   getPrioImage(setPrio);
 }
 
@@ -83,22 +74,15 @@ function getPrioImage(setPrio) {
 }
 
 function getAssigneeContainer() {
-  document.getElementById("assigneeDetails").innerHTML =
-    assigneeContainerInsert();
+  document.getElementById("assigneeDetails").innerHTML = assigneeContainerInsert();
   getAssigneeData();
 }
 
 function getAssigneeData() {
   assigneeEditKey = [];
-  for (
-    let indexAssignee = 0;
-    indexAssignee < tasks[taskKey].assigned.length;
-    indexAssignee++
-  ) {
+  for (let indexAssignee = 0; indexAssignee < tasks[taskKey].assigned.length; indexAssignee++) {
     let assigneeId = tasks[taskKey].assigned[indexAssignee].mainContactId;
-    let assigneeKey = Object.keys(contacts).find(
-      (key) => contacts[key].id == assigneeId
-    );
+    let assigneeKey = Object.keys(contacts).find((key) => contacts[key].id == assigneeId);
     if (contacts[assigneeKey] == undefined) {
       continue;
     } else {
@@ -112,16 +96,11 @@ function assigneeDataSuccess(assigneeEditKey, assigneeKey) {
   let assignee = contacts[assigneeKey].name;
   let assigneeInitials = contacts[assigneeKey].initials;
   let assigneeColor = contacts[assigneeKey].colorId;
-  document.getElementById("assigneeList").innerHTML += detailsAssigneesInsert(
-    assignee,
-    assigneeInitials,
-    assigneeColor
-  );
+  document.getElementById("assigneeList").innerHTML += detailsAssigneesInsert(assignee, assigneeInitials, assigneeColor);
 }
 
 function getSubtaskContainer(taskKey, taskId) {
-  document.getElementById("subtaskContainer").innerHTML =
-    detailsSubtaskContainer();
+  document.getElementById("subtaskContainer").innerHTML = detailsSubtaskContainer();
   getSubtaskData(taskKey, taskId);
 }
 
@@ -129,26 +108,17 @@ function getSubtaskData(taskKey, taskId) {
   if (tasks[taskKey].subtasks == undefined) {
     return;
   } else {
-    for (
-      let indexSubtask = 0;
-      indexSubtask < tasks[taskKey].subtasks.length;
-      indexSubtask++
-    ) {
+    for (let indexSubtask = 0; indexSubtask < tasks[taskKey].subtasks.length; indexSubtask++) {
       let subtaskList = tasks[taskKey].subtasks[indexSubtask].text;
       let subtaskId = tasks[taskKey].subtasks[indexSubtask].id;
-      document.getElementById("substaskListDetails").innerHTML +=
-        detailsSubtaskInsert(indexSubtask, subtaskList, subtaskId, taskId);
+      document.getElementById("substaskListDetails").innerHTML += detailsSubtaskInsert(indexSubtask, subtaskList, subtaskId, taskId);
     }
   }
   getSubtaskStatus(taskKey);
 }
 
 function getSubtaskStatus(taskKey) {
-  for (
-    let indexSubStatus = 0;
-    indexSubStatus < tasks[taskKey].subtasks.length;
-    indexSubStatus++
-  ) {
+  for (let indexSubStatus = 0; indexSubStatus < tasks[taskKey].subtasks.length; indexSubStatus++) {
     let subtaskStatus = tasks[taskKey].subtasks[indexSubStatus].checked;
     let statusCheck = document.getElementById(`subtaskCheck${indexSubStatus}`);
     switch (subtaskStatus) {
@@ -191,21 +161,18 @@ function editTag() {
 
 function editHeader() {
   let headerText = document.getElementById("detailsHeader").innerHTML;
-  document.getElementById("taskDetailsHeader").innerHTML =
-    insertEditHeader(headerText);
+  document.getElementById("taskDetailsHeader").innerHTML = insertEditHeader(headerText);
 }
 
 function editDescription() {
   let descriptionText = document.getElementById("detailsDescription").innerHTML;
-  document.getElementById("taskDetailDescription").innerHTML =
-    insertEditDescription(descriptionText);
+  document.getElementById("taskDetailDescription").innerHTML = insertEditDescription(descriptionText);
 }
 
 function editDueDate() {
   let dueDateText = document.getElementById("dueDateDetails").innerHTML;
   let fixedDateFormat = dueDateText.split("/").reverse().join("-");
-  document.getElementById("dueDateTR").innerHTML =
-    insertEditDueDate(fixedDateFormat);
+  document.getElementById("dueDateTR").innerHTML = insertEditDueDate(fixedDateFormat);
   minDate("inputDueDateEdit");
 }
 
@@ -234,8 +201,7 @@ async function editAssignee(targetId) {
 }
 
 function editAssigneeList() {
-  document.getElementById("editAssigneeList").innerHTML +=
-    insertEditAssigneeSelectionList();
+  document.getElementById("editAssigneeList").innerHTML += insertEditAssigneeSelectionList();
 }
 
 function editAssigneeImage() {
@@ -245,38 +211,26 @@ function editAssigneeImage() {
     let assigneeImageColor = contacts[assigneeEditKey[indexFind]].colorId;
     let assigneeImageInitials = contacts[assigneeEditKey[indexFind]].initials;
     selectedAssignee.push(contacts[assigneeEditKey[indexFind]].id);
-    document.getElementById("editAssigneeImage").innerHTML +=
-      insertEditAssigneeImage(assigneeImageColor, assigneeImageInitials);
+    document.getElementById("editAssigneeImage").innerHTML += insertEditAssigneeImage(assigneeImageColor, assigneeImageInitials);
   }
 }
 
 function editSubtasks() {
   let mainTaskKey = tasks[taskKey].id;
   document.getElementById("subtaskContainer").innerHTML = "";
-  document.getElementById("subtaskContainer").innerHTML =
-    insertSubtaskContainer(mainTaskKey);
+  document.getElementById("subtaskContainer").innerHTML = insertSubtaskContainer(mainTaskKey);
   editSubtasksList(mainTaskKey);
 }
 
 function editSubtasksList(mainTaskKey) {
-  for (
-    let indexTaskKey = 0;
-    indexTaskKey < tasks[taskKey].subtasks.length;
-    indexTaskKey++
-  ) {
+  for (let indexTaskKey = 0; indexTaskKey < tasks[taskKey].subtasks.length; indexTaskKey++) {
     let subtaskText = tasks[taskKey].subtasks[indexTaskKey].text;
     let subtaskId = tasks[taskKey].subtasks[indexTaskKey].id;
-    document.getElementById("substaskListDetails").innerHTML +=
-      insertSubtasksList(subtaskText, subtaskId, mainTaskKey);
+    document.getElementById("substaskListDetails").innerHTML += insertSubtasksList(subtaskText, subtaskId, mainTaskKey);
   }
 }
 
-async function subtaskStatusChange(
-  subtaskId,
-  taskKey,
-  subtaskEditId,
-  statusText
-) {
+async function subtaskStatusChange(subtaskId, taskKey, subtaskEditId, statusText) {
   let checkStatus = document.getElementById(subtaskEditId);
   let statusChange = 0;
   if (checkStatus.checked == true) {
@@ -289,7 +243,7 @@ async function subtaskStatusChange(
     (data = {
       text: statusText,
       checked: statusChange,
-    })
+    }),
   );
   await getTasks();
   renderTasks();
@@ -323,7 +277,7 @@ async function addEditSubtask(inputId, mainTaskId) {
       (data = {
         text: inputText,
         checked: 0,
-      })
+      }),
     );
     clearSubtaskInput(inputId);
     await loadDataBoard();
@@ -333,8 +287,7 @@ async function addEditSubtask(inputId, mainTaskId) {
 
 function createOkSaveButton() {
   let mainTaskKey = tasks[taskKey].id;
-  document.getElementById("taskDetailsButtons").innerHTML =
-    insertOkSaveButton(mainTaskKey);
+  document.getElementById("taskDetailsButtons").innerHTML = insertOkSaveButton(mainTaskKey);
 }
 
 async function updateListEdit(index, mainTaskKey) {
@@ -349,7 +302,7 @@ async function updateListEdit(index, mainTaskKey) {
       (path = `tasks/${mainTaskKey}/subtask/${index}`),
       (data = {
         text: textChange,
-      })
+      }),
     );
     listItem.setAttribute("contenteditable", "false");
     editIcon.style.display = "block";
@@ -379,7 +332,7 @@ async function saveEditedTaskDetails(updatePath, mainTaskKey) {
       description: updateDesc,
       date: updateDate,
       prio: updatePrio,
-    })
+    }),
   );
   await getTasks();
   await renderTasks();

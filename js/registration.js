@@ -25,24 +25,13 @@ async function proofLoginData(userId, findUser) {
   }
 }
 
-async function proofLoginTry(
-  emailLogin,
-  passwordLogin,
-  loginData,
-  userId,
-  findUser,
-) {
+async function proofLoginTry(emailLogin, passwordLogin, loginData, userId, findUser) {
   for (let id in loginData) {
-    if (
-      loginData[id].email === emailLogin.value.trim() &&
-      loginData[id].password === passwordLogin.value.trim()
-    ) {
+    if (loginData[id].email === emailLogin.value.trim() && loginData[id].password === passwordLogin.value.trim()) {
       findUser = loginData[id];
       userId = Object.keys(login)[id];
       await edit_data("/current-user", findUser);
-      changeNavbarItems(
-        window.innerWidth < 960 ? "mobile_greeting" : "summary",
-      );
+      changeNavbarItems(window.innerWidth < 960 ? "mobile_greeting" : "summary");
       regAlright("logErrorName", "logInpName");
       regAlright("logErrorPw", "logInpPw");
 
@@ -63,33 +52,11 @@ async function registrationData() {
   let emailValid = checkRegistrationData(email, "regErrorEmail", "regInpEmail");
   let passValid = checkRegistrationData(password, "regErrorPw", "regInpPw");
   let checkBoxValid = checkBoxValidity(checkBox, "regErrorCheckBox");
-  registrationValidation(
-    nameValid,
-    emailValid,
-    passValid,
-    checkBoxValid,
-    email,
-    password,
-    name,
-  );
+  registrationValidation(nameValid, emailValid, passValid, checkBoxValid, email, password, name);
 }
 
-async function registrationValidation(
-  nameValid,
-  emailValid,
-  passValid,
-  checkBoxValid,
-  email,
-  password,
-  name,
-) {
-  if (
-    confirmPassword() == true &&
-    emailValid == true &&
-    passValid == true &&
-    nameValid == true &&
-    checkBoxValid == true
-  ) {
+async function registrationValidation(nameValid, emailValid, passValid, checkBoxValid, email, password, name) {
+  if (confirmPassword() == true && emailValid == true && passValid == true && nameValid == true && checkBoxValid == true) {
     successNotice();
     await update_data("/login-data", {
       email: `${email.value.trim()}`,
@@ -106,10 +73,7 @@ async function registrationValidation(
 function confirmPassword() {
   let passwordInput = document.getElementById("password-input");
   let confPasswordInput = document.getElementById("confirm-password-input");
-  if (
-    passwordInput.value.trim() === confPasswordInput.value.trim() &&
-    (passwordInput.value.trim() && confPasswordInput.value.trim()) != ""
-  ) {
+  if (passwordInput.value.trim() === confPasswordInput.value.trim() && (passwordInput.value.trim() && confPasswordInput.value.trim()) != "") {
     regAlright("regErrorPwCheck", "regInpPwCheck");
     return true;
   } else {
@@ -153,20 +117,17 @@ function regAlright(remove, add) {
 function changePWImage() {
   let pwInput = document.getElementById("password-input");
 
-  pwInput.style.backgroundImage =
-    "url(../assets/icons/login_signup/visibility_off.svg)";
+  pwInput.style.backgroundImage = "url(../assets/icons/login_signup/visibility_off.svg)";
 }
 
 function changeConfPWImage() {
   let confPWInput = document.getElementById("confirm-password-input");
-  confPWInput.style.backgroundImage =
-    "url(../assets/icons/login_signup/visibility_off.svg)";
+  confPWInput.style.backgroundImage = "url(../assets/icons/login_signup/visibility_off.svg)";
 }
 
 function changeImageLogin() {
   let pwLogin = document.getElementById("password-login");
-  pwLogin.style.backgroundImage =
-    "url(../assets/icons/login_signup/visibility_off.svg)";
+  pwLogin.style.backgroundImage = "url(../assets/icons/login_signup/visibility_off.svg)";
 }
 
 function changeLogoSize() {

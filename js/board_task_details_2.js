@@ -1,16 +1,6 @@
 function generateContactsBoardEdit(sortedContacts) {
   let mainTaskKey = tasks[taskKey].id;
-  return sortedContacts
-    .map((contact) =>
-      editAddContacts(
-        contact.id,
-        contact.name,
-        contact.colorId,
-        currentUser,
-        mainTaskKey
-      )
-    )
-    .join("");
+  return sortedContacts.map((contact) => editAddContacts(contact.id, contact.name, contact.colorId, currentUser, mainTaskKey)).join("");
 }
 
 /**
@@ -18,15 +8,13 @@ function generateContactsBoardEdit(sortedContacts) {
  * @param {string} [path='tasks/'] - The API path to fetch tasks.
  */
 async function assignEditContact(contactId, mainTaskKey) {
-  let myCheckbox = document.getElementById(
-    `checkboxEdit-${contactId}-${mainTaskKey}`
-  );
+  let myCheckbox = document.getElementById(`checkboxEdit-${contactId}-${mainTaskKey}`);
   if (myCheckbox.checked == true) {
     await update_data(
       (path = `tasks/${mainTaskKey}/contact/`),
       (data = {
         id: contactId,
-      })
+      }),
     );
   } else {
     await findDeleteContact(myCheckbox, mainTaskKey);
@@ -39,9 +27,7 @@ async function findDeleteContact(myCheckbox, mainTaskKey) {
   for (let index = 0; index < tasks[taskKey].assigned.length; index++) {
     assigneeArray.push(tasks[taskKey].assigned[index]);
   }
-  let assigneeIdentifier = assigneeArray.findIndex(
-    (item) => item.mainContactId == myCheckbox.value
-  );
+  let assigneeIdentifier = assigneeArray.findIndex((item) => item.mainContactId == myCheckbox.value);
   let assigneeDeleter = tasks[taskKey].assigned[assigneeIdentifier].assigneeId;
   await delete_data((path = `tasks/${mainTaskKey}/contact/${assigneeDeleter}`));
 }
@@ -64,10 +50,7 @@ function selectContact(contactId, mainTaskKey) {
 
 function editAssigneeData() {
   assigneeEditKey = [];
-  if (
-    typeof tasks[taskKey].assigned !== "undefined" &&
-    tasks[taskKey].assigned.length > 0
-  ) {
+  if (typeof tasks[taskKey].assigned !== "undefined" && tasks[taskKey].assigned.length > 0) {
     assigneeEditSuccess();
   } else {
     document.getElementById("editAssigneeImage").innerHTML = "";
@@ -75,15 +58,9 @@ function editAssigneeData() {
 }
 
 function assigneeEditSuccess() {
-  for (
-    let indexAssignee = 0;
-    indexAssignee < tasks[taskKey].assigned.length;
-    indexAssignee++
-  ) {
+  for (let indexAssignee = 0; indexAssignee < tasks[taskKey].assigned.length; indexAssignee++) {
     let assigneeId = tasks[taskKey].assigned[indexAssignee].mainContactId;
-    let assigneeKey = Object.keys(contacts).find(
-      (key) => contacts[key].id == assigneeId
-    );
+    let assigneeKey = Object.keys(contacts).find((key) => contacts[key].id == assigneeId);
     if (contacts[assigneeKey] == undefined) {
       continue;
     } else {
@@ -94,16 +71,10 @@ function assigneeEditSuccess() {
 }
 
 function editInsertCheckmark(targetId) {
-  for (
-    let indexSelect = 0;
-    indexSelect < selectedAssignee.length;
-    indexSelect++
-  ) {
+  for (let indexSelect = 0; indexSelect < selectedAssignee.length; indexSelect++) {
     let id = selectedAssignee[indexSelect];
     document.getElementById(`checkboxEdit-${id}-${targetId}`).checked = true;
-    document
-      .getElementById(`focusEdit-${id}-${targetId}`)
-      .classList.add("divFocus");
+    document.getElementById(`focusEdit-${id}-${targetId}`).classList.add("divFocus");
   }
 }
 

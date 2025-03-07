@@ -13,20 +13,7 @@ let urgencySymbols = [
   "../assets/icons/add_task/prio-medium-icon.svg",
   "../assets/icons/add_task/prio-urgent-icon.svg",
 ];
-let months = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
-];
+let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 let bgcolors = [
   { id: 0, rgba: "rgba(255, 105, 135, 1)" },
   { id: 1, rgba: "rgba(255, 180, 120, 1)" },
@@ -115,16 +102,16 @@ async function getTasks(path = `tasks/`) {
   }
 }
 
-function tasksPush(tasks, id, content, subtasksArray, contactArray){
-tasks.push({
-  id: id,
-  status: content.status,
-  category: content.category,
-  title: content.title,
-  description: content.description,
-  subtasks: subtasksArray,
-  assigned: contactArray,
-  prio: content.prio,
-  date: content.date,
-});
+function tasksPush(tasks, id, content, subtasksArray, contactArray) {
+  tasks.push({
+    id: id,
+    status: content.status,
+    category: content.category,
+    title: content.title,
+    description: content.description,
+    subtasks: subtasksArray,
+    assigned: contactArray,
+    prio: content.prio,
+    date: content.date,
+  });
 }

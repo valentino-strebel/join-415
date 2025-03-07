@@ -37,11 +37,7 @@ function showClosestDate(dates) {
     let splitDate = sortedDates[0].split("-");
     let splitDay = splitDate[2];
     let splitYear = splitDate[0];
-    document.getElementById("deadline").innerHTML = summaryDueDateInsert(
-      closestDate,
-      splitDay,
-      splitYear
-    );
+    document.getElementById("deadline").innerHTML = summaryDueDateInsert(closestDate, splitDay, splitYear);
   }
 }
 

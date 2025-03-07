@@ -1,5 +1,4 @@
-const BASE_URL =
-  "https://join-415-default-rtdb.europe-west1.firebasedatabase.app/";
+const BASE_URL = "https://join-415-default-rtdb.europe-west1.firebasedatabase.app/";
 let media = window.matchMedia("(max-width: 960px)");
 let currentUser = null;
 
@@ -276,9 +275,7 @@ function renderInitials(id, currentUser) {
 }
 
 function sortContacts(contacts) {
-  return contacts.sort((a, b) =>
-    a.name.localeCompare(b.name, "de", { sensitivity: "base" })
-  );
+  return contacts.sort((a, b) => a.name.localeCompare(b.name, "de", { sensitivity: "base" }));
 }
 
 async function checkLoggedIn() {
@@ -301,14 +298,7 @@ async function changeNavbar(styleID) {
   changeNavbarExecute(styleDiv, desktopID, footerID, profile, help, styleID);
 }
 
-async function changeNavbarExecute(
-  styleDiv,
-  desktopID,
-  footerID,
-  profile,
-  help,
-  styleID
-) {
+async function changeNavbarExecute(styleDiv, desktopID, footerID, profile, help, styleID) {
   if (await checkLoggedIn()) {
     footerID.innerHTML = mobileFooterLoggedIn();
     desktopID.innerHTML = desktopNavbarLoggedIn();
