@@ -129,11 +129,18 @@ function mediaQuery() {
   let kanban = document.getElementsByClassName("kanban");
   let help = document.getElementsByClassName("help");
   let logo = document.getElementsByClassName("join-mobile-logo");
+  mediaQueryFunctionsExec();
+  mediaQueryDNone(header, footer, kanban, help, logo);
+}
+
+function mediaQueryFunctionsExec() {
   loginMedia();
   summaryMedia();
   contactsMedia();
   boardMedia();
   mobileIntro();
+}
+function mediaQueryDNone(header, footer, kanban, help, logo) {
   if (media.matches) {
     Array.from(header).forEach((el) => el.classList.add("d_none"));
     Array.from(footer).forEach((el) => el.classList.remove("d_none"));
