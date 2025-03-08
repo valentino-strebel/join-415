@@ -284,6 +284,7 @@ async function editUserSuccess(name, email, tel, id, indexContacts) {
   findEditedContactIndex(editedContact);
   clearInput(name, email, tel);
   closeEditContactSave();
+  d_none("overlayEdit");
 }
 
 /**

@@ -175,8 +175,7 @@ input#telInput {
   background-color: transparent;
   border-style: none;
   cursor: pointer;
-  background: url(../assets/icons/add_task/cross-icon.svg) no-repeat center
-    center;
+  background: url(../assets/icons/add_task/cross-icon.svg) no-repeat center center;
   height: 32px;
   width: 32px;
 }
@@ -184,7 +183,7 @@ input#telInput {
 .addContactFull {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 0;
 }
 
 .backButton {
@@ -247,7 +246,7 @@ input#telInput {
 
   .addContactsInput {
     width: 396px;
-    padding: 0;
+    padding-top: 16px;
     height: 409px;
     justify-content: center;
   }
@@ -268,6 +267,10 @@ input#telInput {
     position: absolute;
     top: -60px;
   }
+  .emptyProfileEdit {
+    position: absolute;
+    top: -40px;
+  }
 
   .emptyProfile img {
     height: 120px;
@@ -279,11 +282,11 @@ input#telInput {
   }
 
   .dataInput form {
-    gap: 24px;
+    gap: 0;
   }
 
   .addContactFull {
-    gap: 24px;
+    gap: 0;
   }
 
   .add-task-bottom-buttons {
@@ -387,58 +390,58 @@ input#telInput {
   }
 }
 
-@media (max-width: 550px) { 
- .addContactsLogo{
+@media (max-width: 550px) {
+  .addContactsLogo {
     width: 310px;
   }
-  .addContactsInput{
+  .addContactsInput {
     width: 310px;
   }
-  .dataInput input{
+  .dataInput input {
     width: 258px;
   }
-  .emptyProfileAdd{
+  .emptyProfileAdd {
     right: 89px;
   }
-  .mobile-add-contact-button{
+  .mobile-add-contact-button {
     padding-right: 40px;
   }
 }
 
-@media (max-width: 410px){
-  .addContactWindow{
+@media (max-width: 410px) {
+  .addContactWindow {
     left: 10%;
   }
 }
 
-@media (max-width: 350px){
-  .addContactWindow{
+@media (max-width: 350px) {
+  .addContactWindow {
     left: 5%;
   }
 }
 
-@media (max-width: 330px){
-  .addContactWindow{
+@media (max-width: 330px) {
+  .addContactWindow {
     left: 0%;
   }
 }
 
-@media(max-height: 850px){
-  .dataInput form{
+@media (max-height: 850px) {
+  .dataInput form {
     gap: 0px;
     margin-top: -30px;
   }
-  .mobile-add-contact-button{
+  .mobile-add-contact-button {
     bottom: 230px;
   }
-  .addContactsInput{
+  .addContactsInput {
     height: 320px;
     border-radius: 0 0 30px 30px;
   }
-  .addContactsLogo{
+  .addContactsLogo {
     height: 260px;
   }
-  .emptyProfile img{
+  .emptyProfile img {
     height: 80px;
     width: 80px;
     transform: translate(-15px, 0px);
