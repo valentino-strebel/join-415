@@ -399,7 +399,7 @@ function toggleStyleChange(windowId, styleA, styleB) {
  * @param {string} styleB - The second class to toggle.
  */
 async function showContactDetails(windowId, styleA, styleB) {
-  if (document.getElementById(windowId).classList.contains("contactsDisplay detailsWindow")) {
+  if (document.getElementById(windowId).classList.value == "contactsDisplay detailsWindow") {
     toggleStyleChange(windowId, styleA, styleB);
     await delay(0.1);
     toggleStyleChange(windowId, styleA, styleB);
