@@ -104,8 +104,10 @@ function assigneeEditSuccess() {
 function editInsertCheckmark(targetId) {
   for (let indexSelect = 0; indexSelect < selectedAssignee.length; indexSelect++) {
     let id = selectedAssignee[indexSelect];
-    document.getElementById(`checkboxEdit-${id}-${targetId}`).checked = true;
-    document.getElementById(`focusEdit-${id}-${targetId}`).classList.add("divFocus");
+    let checkboxEdit= document.getElementById(`checkboxEdit-${id}-${targetId}`);
+    let focusEdit = document.getElementById(`focusEdit-${id}-${targetId}`);
+    if(checkboxEdit) checkboxEdit.checked = true;
+    if (focusEdit) focusEdit.classList.add("divFocus");
   }
 }
 
