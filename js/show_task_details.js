@@ -123,15 +123,15 @@ function getPrioImage(setPrio) {
 /**
  * Initializes the assignee container and loads the assignee data.
  */
-function getAssigneeContainer() {
+function getAssigneeContainer(taskKey) {
   document.getElementById("assigneeDetails").innerHTML = assigneeContainerInsert();
-  getAssigneeData();
+  getAssigneeData(taskKey);
 }
 
 /**
  * Retrieves and processes the assigned contacts for a task.
  */
-function getAssigneeData() {
+function getAssigneeData(taskKey) {
   assigneeEditKey = [];
   for (let indexAssignee = 0; indexAssignee < tasks[taskKey].assigned.length; indexAssignee++) {
     let assigneeId = tasks[taskKey].assigned[indexAssignee].mainContactId;
