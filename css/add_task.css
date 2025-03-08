@@ -100,14 +100,12 @@
 }
 
 .add-task-items::-webkit-scrollbar-button:single-button:vertical:decrement {
-  background: url(../assets/icons/contacts/scrollbar_up.svg) no-repeat center
-    bottom;
+  background: url(../assets/icons/contacts/scrollbar_up.svg) no-repeat center bottom;
   height: 10px;
 }
 
 .add-task-items::-webkit-scrollbar-button:single-button:vertical:increment {
-  background: url(../assets/icons/contacts/scrollbar_down.svg) no-repeat center
-    top;
+  background: url(../assets/icons/contacts/scrollbar_down.svg) no-repeat center top;
   height: 10px;
 }
 
@@ -190,8 +188,7 @@ select {
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
-  background: url(../assets/icons/add_task/arrow_drop_down.svg) no-repeat right
-    19px center;
+  background: url(../assets/icons/add_task/arrow_drop_down.svg) no-repeat right 19px center;
   background-color: white;
   background-size: 7px;
 }
@@ -254,8 +251,7 @@ select {
 }
 
 .add-task-subtasks-check {
-  filter: brightness(0) saturate(100%) invert(16%) sepia(10%) saturate(2019%)
-    hue-rotate(176deg) brightness(96%) contrast(85%);
+  filter: brightness(0) saturate(100%) invert(16%) sepia(10%) saturate(2019%) hue-rotate(176deg) brightness(96%) contrast(85%);
 }
 
 .add-task-subtasks-icons-wrapper {
@@ -332,8 +328,7 @@ select {
   color: rgba(41, 171, 226, 1);
   border-color: rgba(41, 171, 226, 1);
   > img {
-    filter: brightness(0) saturate(100%) invert(59%) sepia(54%) saturate(655%)
-      hue-rotate(157deg) brightness(89%) contrast(98%);
+    filter: brightness(0) saturate(100%) invert(59%) sepia(54%) saturate(655%) hue-rotate(157deg) brightness(89%) contrast(98%);
   }
 }
 
@@ -422,8 +417,7 @@ select {
 }
 
 .check-icon {
-  filter: brightness(0) saturate(100%) invert(14%) sepia(10%) saturate(2286%)
-    hue-rotate(176deg) brightness(104%) contrast(84%);
+  filter: brightness(0) saturate(100%) invert(14%) sepia(10%) saturate(2286%) hue-rotate(176deg) brightness(104%) contrast(84%);
 }
 
 .required-mobile {
@@ -597,7 +591,7 @@ select {
     font-size: 21px;
   }
   .add-task-prio > button > img {
-    margin-left: 0;
+    margin-left: 4px;
   }
 }
 

@@ -1,3 +1,8 @@
+/**
+ * Generates the header for a contact list section based on the given letter.
+ * @param {string} letter - The letter representing the contact section.
+ * @returns {string} - The HTML string for the contact header.
+ */
 function listContactHeader(letter) {
   return `
     <div class="contactsHeader size20"><p>${letter}</p></div>
@@ -5,6 +10,13 @@ function listContactHeader(letter) {
   `;
 }
 
+/**
+ * Generates the HTML for a single contact entry.
+ * @param {Object} contact - The contact object containing name, email, and color ID.
+ * @param {number} index - The index of the contact in the contact list.
+ * @param {Object} currentUser - The current user object.
+ * @returns {string} - The HTML string for a contact entry.
+ */
 function listContactData(contact, index, currentUser) {
   return `
     <div
@@ -17,14 +29,18 @@ function listContactData(contact, index, currentUser) {
       </div>
       <div class="contactsContainerUserinfo">
         <p class="weight400 size20">${contact.name}${currentUser.name === contact.name ? " (You)" : ""}</p>
-        <a class="weight400 size16 emailLink"
-          >${contact.email}</a
-        >
+        <a class="weight400 size16 emailLink">${contact.email}</a>
       </div>
     </div>
   `;
 }
 
+/**
+ * Generates the profile details for a contact.
+ * @param {Object} contact - The contact object containing name and color ID.
+ * @param {number} index - The index of the contact in the contact list.
+ * @returns {string} - The HTML string for contact profile details.
+ */
 function detailsProfileInsert(contact, index) {
   return `
     <div
@@ -67,19 +83,33 @@ function detailsProfileInsert(contact, index) {
   `;
 }
 
+/**
+ * Generates the contact details (email and phone) for a contact.
+ * @param {Object} contact - The contact object containing email and phone.
+ * @returns {string} - The HTML string for contact details.
+ */
 function detailsContactInsert(contact) {
   return `
     <p class="weight700 size16">Email</p>
-    <a class="weight400 size16 emailLink" href="mailto:${contact.email}"
-      >${contact.email}</a
-    >
+    <a class="weight400 size16 emailLink" href="mailto:${contact.email}">
+      ${contact.email}
+    </a>
     <p class="weight700 size16">Phone</p>
-    <a class="weight400 size16 phoneLink" href="tel:${contact.phone}"
-      >${contact.phone}</a
-    >
+    <a class="weight400 size16 phoneLink" href="tel:${contact.phone}">
+      ${contact.phone}
+    </a>
   `;
 }
-
+/**
+ * Generates an HTML string for displaying a contact in the task list.
+ *
+ * @param {string} id - The unique identifier of the contact.
+ * @param {string} name - The name of the contact.
+ * @param {number} colorId - The ID corresponding to the contact's assigned background color.
+ * @param {Object} currentUser - The current user object.
+ * @param {string} currentUser.name - The name of the current user.
+ * @returns {string} - The generated HTML string for the contact entry.
+ */
 function listContactsAddtask(id, name, colorId, currentUser) {
   let checked = selectedContactsIDs.includes(id) ? "checked" : "";
 
@@ -108,10 +138,26 @@ function listContactsAddtask(id, name, colorId, currentUser) {
   `;
 }
 
+/**
+ * Generates an HTML string for displaying an assigned contact's initials.
+ *
+ * @param {string} name - The name of the assigned contact.
+ * @param {number} colorId - The ID corresponding to the contact's assigned background color.
+ * @returns {string} - The generated HTML string for the assigned contact.
+ */
 function listAssingedContacts(name, colorId) {
   return `<div class="background-contacts bg-contact-chechbox" style="background-color: ${bgcolors[colorId].rgba};">${getInitials(name)}</div>`;
 }
 
+/**
+ * Generates an HTML form for editing a contact's information.
+ *
+ * @param {Object} contact - The contact object.
+ * @param {string} contact.name - The name of the contact.
+ * @param {string} contact.email - The email of the contact.
+ * @param {string} contact.phone - The phone number of the contact.
+ * @returns {string} - The generated HTML string for the edit form.
+ */
 function editFormInsert(contact) {
   return `
     <div id="inputEditErrorName" class="">
@@ -130,7 +176,6 @@ function editFormInsert(contact) {
 
     <div id="inputEditErrorEmail" class="">
       <input id="mailInputEdit" class="weight400 size20" type="email" placeholder="Email" pattern="^[^s@]+@[^s@]+.[^s@]+$" value="${contact.email}" />
-
       <div class="contactError">
         <p id="editErrorEmail" class="size12 d_none">Please insert a valid email - e.g.: name@email.com</p>
       </div>
@@ -145,6 +190,14 @@ function editFormInsert(contact) {
   `;
 }
 
+/**
+ * Generates HTML buttons for editing a contact.
+ *
+ * @param {Object} contact - The contact object.
+ * @param {string} contact.id - The unique identifier of the contact.
+ * @param {number} index - The index of the contact in the list.
+ * @returns {string} - The generated HTML string for the edit and delete buttons.
+ */
 function editButtonsInsert(contact, index) {
   return `
     <button
@@ -162,6 +215,14 @@ function editButtonsInsert(contact, index) {
   `;
 }
 
+/**
+ * Generates an HTML string for displaying a contact's initials in the edit view.
+ *
+ * @param {Object} contact - The contact object.
+ * @param {string} contact.name - The name of the contact.
+ * @param {number} contact.colorId - The ID corresponding to the contact's assigned background color.
+ * @returns {string} - The generated HTML string for displaying the initials.
+ */
 function editInitialsInsert(contact) {
   return `
     <div class="background-contacts bg-details" style="background-color: ${bgcolors[contact.colorId].rgba};">
@@ -169,7 +230,13 @@ function editInitialsInsert(contact) {
     </div>
   `;
 }
-
+/**
+ * Generates HTML markup for a subtask list item.
+ *
+ * @param {number} i - The index of the subtask item.
+ * @param {string} content - The content of the subtask item.
+ * @returns {string} - The HTML string representing the subtask item.
+ */
 function listSubtasks(i, content) {
   return `
     <div class="list-item-container" id="list-item-container-${i}">
@@ -213,6 +280,19 @@ function listSubtasks(i, content) {
   `;
 }
 
+/**
+ * Generates HTML markup for a task card.
+ *
+ * @param {Object} task - The task object.
+ * @param {string} task.id - The unique identifier of the task.
+ * @param {string} task.category - The category of the task.
+ * @param {string} task.title - The title of the task.
+ * @param {string} [task.description] - The description of the task.
+ * @param {string} task.prio - The priority of the task (e.g., high, medium, low).
+ * @param {number} i - The index of the task.
+ * @param {string} category - The category class for styling purposes.
+ * @returns {string} - The HTML string representing the task card.
+ */
 function listTasks(task, i, category) {
   return `
     <div
@@ -277,12 +357,23 @@ function listTasks(task, i, category) {
   `;
 }
 
+/**
+ * Generates HTML markup for a contact badge in a task card.
+ *
+ * @param {string} assignedName - The name of the assigned person.
+ * @param {string} assignedCode - The code used to determine the background color.
+ * @returns {string} - The HTML string representing the contact badge.
+ */
 function listCardContacts(assignedName, assignedCode) {
-  return /*html*/ `
-          <div class="background-contacts card-contact-bg" style="background-color:${bgcolors[assignedCode].rgba};">${getInitials(assignedName)}</div>
-          `;
+  return ` 
+  <div class="background-contacts card-contact-bg" style="background-color:${bgcolors[assignedCode].rgba};">${getInitials(assignedName)}</div> 
+  `;
 }
-
+/**
+ * Generates the HTML for the mobile footer when the user is logged out.
+ *
+ * @returns {string} HTML string for the logged-out mobile footer.
+ */
 function mobileFooterLoggedOut() {
   return `
   <div class="navbar-wrapper-footer logIn" onclick='changeNavbarItems("login")'>
@@ -291,7 +382,6 @@ function mobileFooterLoggedOut() {
         </button>
         <span>Log In</span>
       </div>
-
 
       <div id="loggedOutLinks">
         <div class="navbar-wrapper-footer loggedOutButtons" 
@@ -310,94 +400,93 @@ function mobileFooterLoggedOut() {
   `;
 }
 
+/**
+ * Generates the HTML for the mobile footer when the user is logged in.
+ *
+ * @returns {string} HTML string for the logged-in mobile footer.
+ */
 function mobileFooterLoggedIn() {
   return `
-<div
-          class="navbar-wrapper-footer"
-          onclick='changeNavbarItems("summary")'
-        >
-          <button class="navbar-menu-button navbar-footer-button">
-            <img src="../assets/icons/nav_bar/summary-icon.svg" />
-          </button>
-          <span>Summary</span>
-        </div>
-        <div class="navbar-wrapper-footer" onclick='changeNavbarItems("board")'>
-          <button class="navbar-menu-button navbar-footer-button">
-            <img src="../assets/icons/nav_bar/board-icon.svg" />
-          </button>
-          <span>Board</span>
-        </div>
-        <div
-          class="navbar-wrapper-footer"
-          onclick='changeNavbarItems("addtask")'
-        >
-          <button class="navbar-menu-button navbar-footer-button">
-            <img src="../assets/icons/nav_bar/addtask-icon.svg" />
-          </button>
-          <span>Add Task</span>
-        </div>
-        <div
-          class="navbar-wrapper-footer"
-          onclick='changeNavbarItems("contacts")'
-        >
-          <button class="navbar-menu-button navbar-footer-button">
-            <img src="../assets/icons/nav_bar/contacts-icon.svg" />
-          </button>
-          <span>Contacts</span>
-        </div>
+<div class="navbar-wrapper-footer" onclick='changeNavbarItems("summary")'>
+  <button class="navbar-menu-button navbar-footer-button">
+    <img src="../assets/icons/nav_bar/summary-icon.svg" />
+  </button>
+  <span>Summary</span>
+</div>
+<div class="navbar-wrapper-footer" onclick='changeNavbarItems("board")'>
+  <button class="navbar-menu-button navbar-footer-button">
+    <img src="../assets/icons/nav_bar/board-icon.svg" />
+  </button>
+  <span>Board</span>
+</div>
+<div class="navbar-wrapper-footer" onclick='changeNavbarItems("addtask")'>
+  <button class="navbar-menu-button navbar-footer-button">
+    <img src="../assets/icons/nav_bar/addtask-icon.svg" />
+  </button>
+  <span>Add Task</span>
+</div>
+<div class="navbar-wrapper-footer" onclick='changeNavbarItems("contacts")'>
+  <button class="navbar-menu-button navbar-footer-button">
+    <img src="../assets/icons/nav_bar/contacts-icon.svg" />
+  </button>
+  <span>Contacts</span>
+</div>
 `;
 }
 
+/**
+ * Generates the HTML for the desktop navbar when the user is logged in.
+ *
+ * @returns {string} HTML string for the logged-in desktop navbar.
+ */
 function desktopNavbarLoggedIn() {
   return `
-         <div
-            class="navbar-menu-button-wrapper"
-            onclick='changeNavbarItems("summary")'
-          >
-            <button class="navbar-menu-button">
-              <img src="../assets/icons/nav_bar/summary-icon.svg" />Summary
-            </button>
-          </div>
-          <div
-            class="navbar-menu-button-wrapper"
-            onclick='changeNavbarItems("addtask")'
-          >
-            <button class="navbar-menu-button">
-              <img src="../assets/icons/nav_bar/addtask-icon.svg" />Add Task
-            </button>
-          </div>
-          <div
-            class="navbar-menu-button-wrapper"
-            onclick='changeNavbarItems("board")'
-          >
-            <button class="navbar-menu-button">
-              <img src="../assets/icons/nav_bar/board-icon.svg" />Board
-            </button>
-          </div>
-          <div
-            class="navbar-menu-button-wrapper"
-            onclick='changeNavbarItems("contacts")'
-          >
-            <button class="navbar-menu-button">
-              <img src="../assets/icons/nav_bar/contacts-icon.svg" />Contacs
-            </button>
-          </div>
-`;
+    <div class="navbar-menu-button-wrapper" onclick='changeNavbarItems("summary")'>
+      <button class="navbar-menu-button">
+        <img src="../assets/icons/nav_bar/summary-icon.svg" />Summary
+      </button>
+    </div>
+    <div class="navbar-menu-button-wrapper" onclick='changeNavbarItems("addtask")'>
+      <button class="navbar-menu-button">
+        <img src="../assets/icons/nav_bar/addtask-icon.svg" />Add Task
+      </button>
+    </div>
+    <div class="navbar-menu-button-wrapper" onclick='changeNavbarItems("board")'>
+      <button class="navbar-menu-button">
+        <img src="../assets/icons/nav_bar/board-icon.svg" />Board
+      </button>
+    </div>
+    <div class="navbar-menu-button-wrapper" onclick='changeNavbarItems("contacts")'>
+      <button class="navbar-menu-button">
+        <img src="../assets/icons/nav_bar/contacts-icon.svg" />Contacts
+      </button>
+    </div>
+  `;
 }
 
+/**
+ * Generates the HTML for the desktop navbar when the user is logged out.
+ *
+ * @returns {string} HTML string for the logged-out desktop navbar.
+ */
 function desktopNavbarLoggedOut() {
   return `
-          <div
-            class="navbar-menu-button-wrapper"
-            onclick='changeNavbarItems("login")'
-          >
-            <button class="navbar-menu-button">
-              <img src="../assets/icons/nav_bar/log-in.svg" />Log In
-            </button>
-          </div>
-`;
+    <div class="navbar-menu-button-wrapper" onclick='changeNavbarItems("login")'>
+      <button class="navbar-menu-button">
+        <img src="../assets/icons/nav_bar/log-in.svg" />Log In
+      </button>
+    </div>
+  `;
 }
 
+/**
+ * Generates an HTML snippet for displaying a due date in the summary.
+ *
+ * @param {Date} closestDate - The closest due date.
+ * @param {string} splitDay - The day of the due date.
+ * @param {string} splitYear - The year of the due date.
+ * @returns {string} HTML string displaying the due date.
+ */
 function summaryDueDateInsert(closestDate, splitDay, splitYear) {
   return `
     <p class="weight700 size21">
@@ -407,9 +496,16 @@ function summaryDueDateInsert(closestDate, splitDay, splitYear) {
   `;
 }
 
+/**
+ * Generates an HTML message when there are no tasks in a specific status.
+ *
+ * @param {string} status - The task status (e.g., "To Do", "In Progress").
+ * @param {string} id - The unique ID for the message container.
+ * @returns {string} HTML string displaying the no-task message.
+ */
 function noTaskMessage(status, id) {
-  return /*html*/ `
+  return `
   <div class="board-no-task size16" id="no-task-message-${id}">
-  <p>No tasks in ${status}</p>
-</div>`;
+    <p>No tasks in ${status}</p>
+  </div>`;
 }

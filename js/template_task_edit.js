@@ -1,3 +1,9 @@
+/**
+ * Generates a styled tag element.
+ * @param {string} taskTag - The text for the tag.
+ * @param {string} backGroundColor - The background color of the tag.
+ * @returns {string} - The HTML string for the tag element.
+ */
 function detailsTagInsert(taskTag, backGroundColor) {
   return `
     <div class="tag" style="background-color:${backGroundColor}">
@@ -6,18 +12,33 @@ function detailsTagInsert(taskTag, backGroundColor) {
   `;
 }
 
+/**
+ * Generates an HTML string for the details header.
+ * @param {string} cleanHeader - The text content of the header.
+ * @returns {string} - The HTML string for the header element.
+ */
 function detailsHeaderInsert(cleanHeader) {
   return `
   <p id="detailsHeader" class="weight700 size61">${cleanHeader}</p>
   `;
 }
 
+/**
+ * Generates an HTML string for the details description.
+ * @param {string} cleanDescription - The text content of the description.
+ * @returns {string} - The HTML string for the description element.
+ */
 function detailsDescriptionInsert(cleanDescription) {
   return `
   <p id="detailsDescription" class="weight400 size20">${cleanDescription}</p>
   `;
 }
 
+/**
+ * Generates an HTML string for the due date display.
+ * @param {string} cleanDate - The due date in string format.
+ * @returns {string} - The HTML string for the due date row.
+ */
 function detailsDueDateInsert(cleanDate) {
   return `
     <td class="weight400 size20 colorDarkBlue">Due Date:</td>
@@ -25,6 +46,11 @@ function detailsDueDateInsert(cleanDate) {
   `;
 }
 
+/**
+ * Generates an HTML string for the priority display.
+ * @param {string} cleanPriority - The priority level.
+ * @returns {string} - The HTML string for the priority row.
+ */
 function detailsPriorityInsert(cleanPriority) {
   return `
     <td class="weight400 size20 colorDarkBlue">Priority:</td>
@@ -35,6 +61,10 @@ function detailsPriorityInsert(cleanPriority) {
   `;
 }
 
+/**
+ * Generates an HTML string for the assignee container.
+ * @returns {string} - The HTML string for the assignee container.
+ */
 function assigneeContainerInsert() {
   return `
     <p class="weight400 size20 colorDarkBlue">Assigned to:</p>
@@ -42,6 +72,13 @@ function assigneeContainerInsert() {
   `;
 }
 
+/**
+ * Generates an HTML string for an assignee item.
+ * @param {string} assignee - The assignee's name.
+ * @param {string} assigneeInitials - The initials of the assignee.
+ * @param {string} assigneeColor - The color associated with the assignee.
+ * @returns {string} - The HTML string for an assignee item.
+ */
 function detailsAssigneesInsert(assignee, assigneeInitials, assigneeColor) {
   return `
     <div class="assignee">
@@ -53,13 +90,25 @@ function detailsAssigneesInsert(assignee, assigneeInitials, assigneeColor) {
   `;
 }
 
+/**
+ * Generates an HTML string for the subtask container.
+ * @returns {string} - The HTML string for the subtask container.
+ */
 function detailsSubtaskContainer() {
   return `
-    <p class="weight400 size20 colorDarkBlue">Substasks</p>
+    <p class="weight400 size20 colorDarkBlue">Subtasks</p>
     <div id="substaskListDetails" class="subtaskList"></div>
   `;
 }
 
+/**
+ * Generates an HTML string for a subtask item.
+ * @param {number} indexSubtask - The index of the subtask.
+ * @param {string} subtaskList - The subtask description.
+ * @param {string} subtaskId - The ID of the subtask.
+ * @param {string} taskId - The ID of the parent task.
+ * @returns {string} - The HTML string for a subtask item.
+ */
 function detailsSubtaskInsert(indexSubtask, subtaskList, subtaskId, taskId) {
   return `
     <div class="subtask">
@@ -75,6 +124,11 @@ function detailsSubtaskInsert(indexSubtask, subtaskList, subtaskId, taskId) {
   `;
 }
 
+/**
+ * Generates an HTML string for the edit and delete buttons.
+ * @param {string} targetId - The ID of the task to be edited or deleted.
+ * @returns {string} - The HTML string for the edit and delete buttons.
+ */
 function detailsEditDeleteButtons(targetId) {
   return `
     <div class="detailsEdit">
@@ -91,6 +145,11 @@ function detailsEditDeleteButtons(targetId) {
   `;
 }
 
+/**
+ * Generates an HTML string for an editable task title field.
+ * @param {string} headerText - The text content for the title input field.
+ * @returns {string} - The HTML string for the editable task title.
+ */
 function insertEditHeader(headerText) {
   return `
     <p class="weight400 size16 editHeadline">Title</p>
@@ -99,7 +158,11 @@ function insertEditHeader(headerText) {
     </div>
   `;
 }
-
+/**
+ * Generates the HTML for an editable task description input field.
+ * @param {string} descriptionText - The pre-filled text for the description field.
+ * @returns {string} The HTML string for the description input field.
+ */
 function insertEditDescription(descriptionText) {
   return `
     <p class="weight400 size16 editHeadline">Description</p>
@@ -112,15 +175,24 @@ function insertEditDescription(descriptionText) {
   `;
 }
 
+/**
+ * Generates the HTML for an editable due date input field.
+ * @param {string} dueDateText - The pre-filled date value for the due date field.
+ * @returns {string} The HTML string for the due date input field.
+ */
 function insertEditDueDate(dueDateText) {
   return `
     <p class="weight400 size16 editHeadline">Due Date</p>
     <div class="add-task-input-fields">
-      <input value="${dueDateText}"  type="date" id="inputDueDateEdit" />
+      <input value="${dueDateText}" type="date" id="inputDueDateEdit" />
     </div>
   `;
 }
 
+/**
+ * Generates the HTML for an editable priority selection field.
+ * @returns {string} The HTML string for the priority selection field.
+ */
 function insertEditPriority() {
   return `
     <p class="weight700 size16 colorLightGrey editHeadline">Priority</p>
@@ -161,6 +233,10 @@ function insertEditPriority() {
   `;
 }
 
+/**
+ * Generates the HTML for an editable assignee input field.
+ * @returns {string} The HTML string for the assignee input field.
+ */
 function insertEditAssignee() {
   return `
     <div class="add-task-input-fields editAssigned">
@@ -180,6 +256,10 @@ function insertEditAssignee() {
   `;
 }
 
+/**
+ * Generates the HTML for the assignee selection list.
+ * @returns {string} The HTML string for the selection list.
+ */
 function insertEditAssigneeSelectionList() {
   return `
     <ul
@@ -190,6 +270,12 @@ function insertEditAssigneeSelectionList() {
   `;
 }
 
+/**
+ * Generates the HTML for displaying an assignee's profile image.
+ * @param {string} assigneeImageColor - The key to fetch the background color for the assignee.
+ * @param {string} assigneeImageInitials - The initials to be displayed inside the profile image.
+ * @returns {string} The HTML string for the assignee's profile image.
+ */
 function insertEditAssigneeImage(assigneeImageColor, assigneeImageInitials) {
   return `
     <div
@@ -200,7 +286,12 @@ function insertEditAssigneeImage(assigneeImageColor, assigneeImageInitials) {
     </div>
   `;
 }
-
+/**
+ * Generates the HTML structure for a subtask input field and subtask list container.
+ *
+ * @param {string} mainTaskKey - The unique identifier of the main task to which the subtask belongs.
+ * @returns {string} - The HTML string for the subtask input field and list container.
+ */
 function insertSubtaskContainer(mainTaskKey) {
   return `
     <div class="add-task-input-fields editAssigned">
@@ -255,6 +346,14 @@ function insertSubtaskContainer(mainTaskKey) {
   `;
 }
 
+/**
+ * Generates the HTML structure for a single subtask item inside the subtask list.
+ *
+ * @param {string} subtaskText - The text content of the subtask.
+ * @param {string} subtaskId - The unique identifier of the subtask.
+ * @param {string} mainTaskKey - The unique identifier of the main task to which the subtask belongs.
+ * @returns {string} - The HTML string for the subtask item.
+ */
 function insertSubtasksList(subtaskText, subtaskId, mainTaskKey) {
   return `
     <div class="list-item-container" id="list-item-container-${subtaskId}">
@@ -297,7 +396,12 @@ function insertSubtasksList(subtaskText, subtaskId, mainTaskKey) {
     </div>
   `;
 }
-
+/**
+ * Generates an HTML string for an "Ok" save button inside a task overlay.
+ *
+ * @param {string} mainTaskKey - The unique key identifying the main task.
+ * @returns {string} The HTML string containing the button.
+ */
 function insertOkSaveButton(mainTaskKey) {
   return `
     <div class="add-task-bottom-buttons-overlay">
@@ -311,6 +415,17 @@ function insertOkSaveButton(mainTaskKey) {
   `;
 }
 
+/**
+ * Generates an HTML string for a contact list item in an editable task contacts section.
+ *
+ * @param {string} id - The unique identifier of the contact.
+ * @param {string} name - The name of the contact.
+ * @param {number} colorId - The index for the background color from `bgcolors` array.
+ * @param {Object} currentUser - The currently logged-in user.
+ * @param {string} currentUser.name - The name of the currently logged-in user.
+ * @param {string} mainTaskKey - The unique key identifying the main task.
+ * @returns {string} The HTML string containing the editable contact item.
+ */
 function editAddContacts(id, name, colorId, currentUser, mainTaskKey) {
   return ` <div id="focusEdit-${id}-${mainTaskKey}">
     <li
