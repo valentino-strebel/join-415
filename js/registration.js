@@ -57,10 +57,10 @@ async function proofLoginData(userId, findUser) {
  * @returns {Promise<void>}
  */
 async function proofLoginTry(emailLogin, passwordLogin, loginData, userId, findUser) {
-  for (let id in loginData) {
-    if (loginData[id].email === emailLogin.value.trim() && loginData[id].password === passwordLogin.value.trim()) {
-      findUser = loginData[id];
-      userId = Object.keys(login)[id];
+  let results= findMatchingLoginData(emailLogin, passwordLogin, loginData)
+    if (results.success) {
+      userId = results.userId;
+      findUser = results.findUser; 
       await edit_data("/current-user", findUser);
       await changeNavbarItems(window.innerWidth < 960 ? "mobile_greeting" : "summary");
       regAlright("logErrorName", "logInpName");
@@ -71,6 +71,23 @@ async function proofLoginTry(emailLogin, passwordLogin, loginData, userId, findU
       regError("logErrorPw", "logInpPw");
     }
   }
+
+  /**
+ * Searches for a matching user in the login data based on email and password input.
+ *
+ * @param {HTMLInputElement} emailLogin - The input field containing the user's email.
+ * @param {HTMLInputElement} passwordLogin - The input field containing the user's password.
+ * @param {Array<Object>} loginData - An array of user objects containing email and password information.
+ * @returns {{ userId: string|null, findUser: Object|null, success: boolean }} 
+ *          Returns an object with the userId, findUser object, and a success boolean.
+ */
+function findMatchingLoginData(emailLogin, passwordLogin, loginData) {
+  for (let id in loginData) {
+    if (loginData[id].email === emailLogin.value.trim() && loginData[id].password === passwordLogin.value.trim()) {
+      return { userId: Object.keys(login)[id], findUser: loginData[id], success: true };
+    }
+  }
+  return { userId: null, findUser: null, success: false };
 }
 
 /**
