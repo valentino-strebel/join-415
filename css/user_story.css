@@ -227,6 +227,9 @@
 }
 
 @media (max-width: 960px) {
+  #inputDescriptionEdit{
+    height: 130px;
+  }
   .userStoryContainer {
     transform: translate(0%, -2%);
   }

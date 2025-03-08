@@ -147,7 +147,7 @@ async function saveEditedTaskDetails(updatePath, mainTaskKey) {
 /**
  * Submits changes to the task via a patch request.
  */
-async function submitTaskChanges() {
+async function submitTaskChanges(updateTitle, updateDesc, updateDate, updatePrio, updatePath) {
   await patch_data(
     (path = updatePath),
     (data = {
