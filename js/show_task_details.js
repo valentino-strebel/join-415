@@ -1,14 +1,28 @@
+/**
+ * Retrieves and displays task details based on the given task ID.
+ *
+ * @param {number} taskId - The ID of the task to retrieve details for.
+ */
 function getTaskDetails(taskId) {
   let targetId = taskId;
-  taskKey = Object.keys(tasks).find((key) => tasks[key].id == targetId);
+  let taskKey = Object.keys(tasks).find((key) => tasks[key].id == targetId);
   let setPrio = tasks[taskKey].prio;
+
   prepareTaskDetails(taskKey, targetId, setPrio, taskId);
-  window.scrollTo({
-    top: 0,
-  });
+
+  // Scroll to the top of the page and disable scrolling
+  window.scrollTo({ top: 0 });
   document.body.style.overflow = "hidden";
 }
 
+/**
+ * Prepares the task details by calling relevant functions to display task information.
+ *
+ * @param {string} taskKey - The key of the task in the tasks object.
+ * @param {number} targetId - The target task ID.
+ * @param {string} setPrio - The priority level of the task.
+ * @param {number} taskId - The ID of the task.
+ */
 function prepareTaskDetails(taskKey, targetId, setPrio, taskId) {
   clearTaskDetails();
   getTag(taskKey);
@@ -21,23 +35,41 @@ function prepareTaskDetails(taskKey, targetId, setPrio, taskId) {
   getSubtaskContainer(taskKey, taskId);
 }
 
+/**
+ * Updates the DOM with task details buttons for editing and deleting.
+ *
+ * @param {number} targetId - The ID of the task.
+ */
 function getTaskDetailsDom(targetId) {
   document.getElementById("taskDetailsButtons").innerHTML = detailsEditDeleteButtons(targetId);
 }
 
+/**
+ * Retrieves the category tag of a task and updates the UI with the appropriate color.
+ *
+ * @param {string} taskKey - The key of the task in the tasks object.
+ */
 function getTag(taskKey) {
   let taskTag = tasks[taskKey].category;
   let backGroundColor = "";
+
   switch (taskTag) {
     case "Technical Task":
       backGroundColor = tagColors[1];
       break;
     case "User Story":
       backGroundColor = tagColors[0];
+      break;
   }
+
   document.getElementById("tagContainer").innerHTML = detailsTagInsert(taskTag, backGroundColor);
 }
 
+/**
+ * Retrieves the task title and updates the UI header.
+ *
+ * @param {string} taskKey - The key of the task in the tasks object.
+ */
 function getHeader(taskKey) {
   let cleanHeader = tasks[taskKey].title;
   document.getElementById("taskDetailsHeader").innerHTML = detailsHeaderInsert(cleanHeader);

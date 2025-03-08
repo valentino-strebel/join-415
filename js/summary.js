@@ -1,3 +1,7 @@
+/**
+ * Updates the task board with the number of tasks, urgent tasks, and the closest due date.
+ * Calls functions to display urgent task count and closest due date.
+ */
 function showTaskNumbers() {
   let priorities = [];
   let dates = [];
@@ -15,32 +19,39 @@ function showTaskNumbers() {
   }
 }
 
+/**
+ * Counts and displays the number of urgent tasks.
+ * @param {string[]} priorities - Array of task priorities.
+ */
 function showurgentNumber(priorities) {
   let urgentCount = 0;
-
   for (let indexUrgent = 0; indexUrgent < priorities.length; indexUrgent++) {
     if (priorities[indexUrgent] == "urgent") {
       urgentCount++;
     }
-    document.getElementById("urgent").innerHTML = urgentCount;
   }
+  document.getElementById("urgent").innerHTML = urgentCount;
 }
 
+/**
+ * Finds and displays the closest due date among urgent tasks.
+ * @param {string[]} dates - Array of dates in string format (YYYY-MM-DD).
+ */
 function showClosestDate(dates) {
   if (dates.length == 0) {
     return;
-  } else {
-    let sortedDates = dates.sort((a, b) => {
-      return new Date(a) - new Date(b);
-    });
-    let closestDate = new Date(sortedDates[0]);
-    let splitDate = sortedDates[0].split("-");
-    let splitDay = splitDate[2];
-    let splitYear = splitDate[0];
-    document.getElementById("deadline").innerHTML = summaryDueDateInsert(closestDate, splitDay, splitYear);
   }
+  let sortedDates = dates.sort((a, b) => new Date(a) - new Date(b));
+  let closestDate = new Date(sortedDates[0]);
+  let splitDate = sortedDates[0].split("-");
+  let splitDay = splitDate[2];
+  let splitYear = splitDate[0];
+  document.getElementById("deadline").innerHTML = summaryDueDateInsert(closestDate, splitDay, splitYear);
 }
 
+/**
+ * Counts tasks based on their status and inserts the values into the DOM.
+ */
 function countStatusTasks() {
   let statusAmount = [];
   for (let indexStatus = 0; indexStatus < tasks.length; indexStatus++) {
@@ -53,6 +64,10 @@ function countStatusTasks() {
   insertStatusTasks(count);
 }
 
+/**
+ * Inserts task counts into corresponding HTML elements.
+ * @param {Object} count - Object containing status counts.
+ */
 function insertStatusTasks(count) {
   let count_to_do = document.getElementById("tasks_to_do");
   let count_done = document.getElementById("tasks_done");
@@ -61,17 +76,25 @@ function insertStatusTasks(count) {
   statusTaskSelection(count, count_to_do, count_done, count_progress, count_feedback);
 }
 
-function statusTaskSelection() {
-  if (count.todo != undefined) {
+/**
+ * Updates the DOM with the count of tasks for different statuses.
+ * @param {Object} count - Object containing status counts.
+ * @param {HTMLElement} count_to_do - Element for "to-do" task count.
+ * @param {HTMLElement} count_done - Element for "done" task count.
+ * @param {HTMLElement} count_progress - Element for "in progress" task count.
+ * @param {HTMLElement} count_feedback - Element for "awaiting feedback" task count.
+ */
+function statusTaskSelection(count, count_to_do, count_done, count_progress, count_feedback) {
+  if (count.todo !== undefined) {
     count_to_do.innerHTML = count.todo;
   }
-  if (count.done != undefined) {
+  if (count.done !== undefined) {
     count_done.innerHTML = count.done;
   }
-  if (count.progress != undefined) {
+  if (count.progress !== undefined) {
     count_progress.innerHTML = count.progress;
   }
-  if (count.feedback != undefined) {
+  if (count.feedback !== undefined) {
     count_feedback.innerHTML = count.feedback;
   }
 }

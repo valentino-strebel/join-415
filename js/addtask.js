@@ -1,15 +1,41 @@
+/**
+ * Represents the status of a task.
+ * @type {string}
+ */
 let taskStatus = "todo";
+
+/**
+ * Represents the selected priority.
+ * @type {undefined|string}
+ */
 let selectedPrio = undefined;
+
+/**
+ * Gets the current date in YYYY-MM-DD format.
+ * @type {string}
+ */
 let todayDate = new Date().toJSON().slice(0, 10);
 
+/**
+ * Generates HTML for contacts list.
+ * @param {Array<Object>} contacts - Array of contact objects.
+ * @returns {string} - HTML string for contacts.
+ */
 function generateContactsHTML(contacts) {
   return contacts.map((contact) => listContactsAddtask(contact.id, contact.name, contact.colorId, currentUser)).join("");
 }
 
+/**
+ * Renders the contacts in the UI.
+ * @async
+ * @param {Array<Object>} [filteredContacts=contacts] - Array of filtered contacts.
+ * @returns {Promise<void>}
+ */
 async function renderContacts(filteredContacts = contacts) {
   let sortedContacts = await sortContacts(filteredContacts);
   let list = document.getElementById("contacts-checkbox");
   list.innerHTML = generateContactsHTML(sortedContacts);
+
   selectedContactsIDs.forEach((selected) => {
     let checkbox = document.getElementById(`checkbox-${selected.id}`);
     if (checkbox) {
@@ -18,12 +44,20 @@ async function renderContacts(filteredContacts = contacts) {
   });
 }
 
+/**
+ * Filters contacts based on search input.
+ * @param {string} contactsCheck - The ID of the input element used for searching.
+ */
 function filterContacts(contactsCheck) {
   let searchTerm = document.getElementById(contactsCheck).value.toLowerCase();
   let filteredContacts = searchTerm ? contacts.filter((contact) => contact.name.toLowerCase().startsWith(searchTerm)) : contacts;
   renderContacts(filteredContacts);
 }
 
+/**
+ * Toggles a contact's selection status.
+ * @param {number|string} id - The ID of the contact.
+ */
 function toggleCheckbox(id) {
   if (selectedContactsIDs.some((obj) => obj.id === id)) {
     selectedContactsIDs = selectedContactsIDs.filter((obj) => obj.id !== id);
@@ -31,7 +65,6 @@ function toggleCheckbox(id) {
     selectedContactsIDs.push({ id: id });
   }
   renderAssignedContacts(id);
-  return;
 }
 
 function setCheckbox(id) {

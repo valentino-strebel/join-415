@@ -1,5 +1,3 @@
-//from here task details window
-
 function detailsTagInsert(taskTag, backGroundColor) {
   return `
     <div class="tag" style="background-color:${backGroundColor}">
@@ -78,7 +76,7 @@ function detailsSubtaskInsert(indexSubtask, subtaskList, subtaskId, taskId) {
 }
 
 function detailsEditDeleteButtons(targetId) {
-  return /*html*/ `
+  return `
     <div class="detailsEdit">
       <button onclick="deleteTask('tasks/${targetId}')">
         <img src="../assets/icons/contacts/delete.svg" alt="Delete Symbol" />
@@ -93,7 +91,6 @@ function detailsEditDeleteButtons(targetId) {
   `;
 }
 
-//from here task edit window
 function insertEditHeader(headerText) {
   return `
     <p class="weight400 size16 editHeadline">Title</p>
@@ -125,7 +122,7 @@ function insertEditDueDate(dueDateText) {
 }
 
 function insertEditPriority() {
-  return /*html*/ `
+  return `
     <p class="weight700 size16 colorLightGrey editHeadline">Priority</p>
     <div class="add-task-input-fields">
       <div class="add-task-prio">
@@ -165,7 +162,7 @@ function insertEditPriority() {
 }
 
 function insertEditAssignee() {
-  return /*html*/ `
+  return `
     <div class="add-task-input-fields editAssigned">
       <div class="editHeadline">Assigned to<span class="add-task-required">*</span></div>
     </div>
@@ -192,7 +189,7 @@ function insertEditAssigneeSelectionList() {
     ></ul>
   `;
 }
-//inserts image of assigned user
+
 function insertEditAssigneeImage(assigneeImageColor, assigneeImageInitials) {
   return `
     <div
@@ -205,7 +202,7 @@ function insertEditAssigneeImage(assigneeImageColor, assigneeImageInitials) {
 }
 
 function insertSubtaskContainer(mainTaskKey) {
-  return /*html*/ `
+  return `
     <div class="add-task-input-fields editAssigned">
       <p class="weight400 size16 editHeadline">Subtasks</p>
       <div class="add-task-input-subtasks">
