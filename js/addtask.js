@@ -66,7 +66,10 @@ function toggleCheckbox(id) {
   }
   renderAssignedContacts(id);
 }
-
+/**
+ * Toggles the state of a checkbox and calls toggleCheckbox function.
+ * @param {string} id - The identifier for the checkbox.
+ */
 function setCheckbox(id) {
   let checkbox = document.getElementById(`checkbox-${id}`);
   if (checkbox) {
@@ -75,12 +78,20 @@ function setCheckbox(id) {
   toggleCheckbox(id);
 }
 
+/**
+ * Renders the assigned contacts based on selectedContactsIDs.
+ */
 function renderAssignedContacts() {
   let contactInfo = contacts.filter((contact) => selectedContactsIDs.some((selected) => selected.id === contact.id));
   let content = document.getElementById("assignedContacts");
   content.innerHTML = contactInfo.map((contact) => listAssingedContacts(contact.name, contact.colorId)).join("");
 }
 
+/**
+ * Sets the background color of a selected button and resets other buttons.
+ * @param {string} selectedButton - The ID of the selected button.
+ * @param {string} colorCode - The color code to set as the background color.
+ */
 function setButtonColor(selectedButton, colorCode) {
   resetButtonColors();
   let activeButton = document.getElementById(`button${selectedButton}`);
@@ -93,6 +104,9 @@ function setButtonColor(selectedButton, colorCode) {
   selectedPrio = selectedButton.toLowerCase();
 }
 
+/**
+ * Resets the background color and styles of all buttons that match the pattern "button*".
+ */
 function resetButtonColors() {
   let buttons = document.querySelectorAll("[id^='button']");
   buttons.forEach((button) => {
@@ -105,6 +119,12 @@ function resetButtonColors() {
   });
 }
 
+/**
+ * Focuses and selects the text inside an input field.
+ * @param {string} inputId - The ID of the input field.
+ * @param {string} add - The ID of the add icon.
+ * @param {string} check - The ID of the check icon.
+ */
 function selectInput(inputId, add, check) {
   showButtons(add, check);
   let input = document.getElementById(inputId);
@@ -112,6 +132,11 @@ function selectInput(inputId, add, check) {
   input.select();
 }
 
+/**
+ * Shows specific buttons when an input is selected.
+ * @param {string} add - The ID of the add icon.
+ * @param {string} check - The ID of the check icon.
+ */
 function showButtons(add, check) {
   let checkCross = document.getElementById(check);
   let addIcon = document.getElementById(add);
@@ -119,6 +144,12 @@ function showButtons(add, check) {
   addIcon.style.display = "none";
 }
 
+/**
+ * Hides the buttons after an input loses focus and clears its value.
+ * @param {string} inputId - The ID of the input field.
+ * @param {string} cross - The ID of the cross icon.
+ * @param {string} add - The ID of the add icon.
+ */
 function hideButtons(inputId, cross, add) {
   let input = document.getElementById(inputId);
   let checkCross = document.getElementById(cross);
@@ -131,6 +162,9 @@ function hideButtons(inputId, cross, add) {
   }, 150);
 }
 
+/**
+ * Clears the input field and sets focus to it.
+ */
 function clearInput() {
   let content = document.getElementById("subtaskInput");
   content.value = "";
@@ -138,6 +172,10 @@ function clearInput() {
   content.select();
 }
 
+/**
+ * Adds a new subtask to the subtaskInputs array if input is not empty.
+ * Clears the input field and re-renders the subtask list.
+ */
 function confirmInput() {
   let input = document.getElementById("subtaskInput");
   if (input.value.trim() !== "") {
@@ -150,6 +188,10 @@ function confirmInput() {
   }
 }
 
+/**
+ * Renders the list of subtasks dynamically in the DOM.
+ * Iterates over subtaskInputs and updates the list element.
+ */
 function renderSubtasks() {
   let list = document.getElementById("subtaskList");
   list.innerHTML = "";
@@ -159,12 +201,16 @@ function renderSubtasks() {
   }
 }
 
+/**
+ * Enables editing mode for a specific subtask.
+ * @param {number} index - Index of the subtask to be edited.
+ */
 function editListItem(index) {
   let listItem = document.getElementById(`listItem-${index}`);
-  let lengthThis = listItem.value.length;
   let editIcon = document.getElementById(`editIcon-${index}`);
   let checkIcon = document.getElementById(`checkIcon-${index}`);
   let listItemContainer = document.getElementById(`list-item-container-${index}`);
+
   listItem.setAttribute("contenteditable", "true");
   listItemContainer.classList.toggle("edit-subtask");
   listItem.focus();
@@ -172,20 +218,33 @@ function editListItem(index) {
   checkIcon.style.display = "block";
 }
 
+/**
+ * Updates the subtask text after editing and re-renders the list.
+ * If the text is empty, the subtask is deleted.
+ * @param {number} index - Index of the subtask being updated.
+ */
 function updateListItem(index) {
   let listItem = document.getElementById(`listItem-${index}`);
   let editIcon = document.getElementById(`editIcon-${index}`);
   let checkIcon = document.getElementById(`checkIcon-${index}`);
+
   subtaskInputs[index].text = listItem.innerText.trim();
   listItem.setAttribute("contenteditable", "false");
+
   if (listItem.innerText.length === 0) {
     deleteListItem(index);
   }
+
   editIcon.style.display = "block";
   checkIcon.style.display = "none";
   renderSubtasks();
 }
 
+/**
+ * Handles Enter key press event to save subtask updates.
+ * @param {KeyboardEvent} event - The keypress event.
+ * @param {number} index - Index of the subtask being edited.
+ */
 function handleEnter(event, index) {
   if (event.key === "Enter") {
     event.preventDefault();
@@ -193,6 +252,10 @@ function handleEnter(event, index) {
   }
 }
 
+/**
+ * Deletes a subtask from the subtaskInputs array and re-renders the list.
+ * @param {number} index - Index of the subtask to be deleted.
+ */
 function deleteListItem(index) {
   subtaskInputs.splice(index, 1);
   renderSubtasks();
@@ -218,23 +281,42 @@ async function resetAllInputs() {
   renderAssignedContacts();
   renderSubtasks();
 }
-
+/**
+ * Resets all checkboxes assigned to selected contacts.
+ * @async
+ * @returns {Promise<void>}
+ */
 async function resetCheckboxAssignee() {
   for (let index = 0; index < selectedContactsIDs.length; index++) {
     let id = selectedContactsIDs[index].id;
     let chekboxCheck = document.getElementById("checkbox-" + id);
-    chekboxCheck.checked = false;
+    if (chekboxCheck) {
+      chekboxCheck.checked = false;
+    }
   }
 }
 
+/**
+ * Removes focus highlighting from all selected contact elements.
+ * @async
+ * @returns {Promise<void>}
+ */
 async function resetCheckboxFocus() {
   for (let index = 0; index < selectedContactsIDs.length; index++) {
     let id = selectedContactsIDs[index].id;
     let focusedDivs = document.getElementById("focus-" + id);
-    focusedDivs.classList.remove("divFocus");
+    if (focusedDivs) {
+      focusedDivs.classList.remove("divFocus");
+    }
   }
 }
 
+/**
+ * Retrieves task data, validates it, and updates the database.
+ * If successful, resets inputs and navigates to the board page.
+ * @async
+ * @returns {Promise<void>}
+ */
 async function getTaskData() {
   if (validateData()) {
     let data = prepareTaskData();
@@ -250,26 +332,28 @@ async function getTaskData() {
   }
 }
 
+/**
+ * Prepares task data by gathering input values.
+ * @returns {Object} Task data object.
+ */
 function prepareTaskData() {
-  let title = document.getElementById("taskTitle").value;
-  let description = document.getElementById("taskDescription").value;
-  let contact = selectedContactsIDs;
-  let date = document.getElementById("date").value;
-  let prio = selectedPrio;
-  let category = document.getElementById("inputCategory").value;
-  let subtask = subtaskInputs;
   return {
-    title,
-    description,
-    contact,
-    date,
-    prio,
-    category,
-    subtask,
+    title: document.getElementById("taskTitle").value,
+    description: document.getElementById("taskDescription").value,
+    contact: selectedContactsIDs,
+    date: document.getElementById("date").value,
+    prio: selectedPrio,
+    category: document.getElementById("inputCategory").value,
+    subtask: subtaskInputs,
     status: stautsEmpty(taskStatus),
   };
 }
 
+/**
+ * Returns a default status if the status is empty.
+ * @param {string} stauts - The current status of the task.
+ * @returns {string} The determined task status.
+ */
 function stautsEmpty(stauts) {
   if (!stauts) {
     return (taskStatus = "todo");
@@ -277,6 +361,12 @@ function stautsEmpty(stauts) {
   return taskStatus;
 }
 
+/**
+ * Displays an error message for the given input element.
+ * @param {HTMLElement} element - The input element where the error occurred.
+ * @param {string} message - The error message to display.
+ * @returns {boolean} False if an error is displayed, true otherwise.
+ */
 function showError(element, message) {
   let parent = element.closest(".add-task-input-fields") || element.closest(".add-task-prio");
   let errorSpan = parent.querySelector(".error-text");
@@ -293,7 +383,12 @@ function showError(element, message) {
   }
   return true;
 }
-
+/**
+ * Validates all required input fields.
+ * Adds event listeners to clear errors when input is provided.
+ *
+ * @returns {boolean} - Returns true if all required fields are filled, otherwise false.
+ */
 function validateRequiredFields() {
   let requiredFields = document.querySelectorAll("[required]");
   let isValid = true;
@@ -311,6 +406,12 @@ function validateRequiredFields() {
   return isValid;
 }
 
+/**
+ * Validates the contacts selection.
+ * Ensures at least one contact is selected.
+ *
+ * @returns {boolean} - Returns false and shows error if no contact is selected, otherwise true.
+ */
 function validateContacts() {
   let contactSearch = document.getElementById("contacts-search");
   contactSearch.addEventListener("input", () => showError(contactSearch, ""));
@@ -320,6 +421,12 @@ function validateContacts() {
   return showError(contactSearch, "");
 }
 
+/**
+ * Validates the category selection.
+ * Ensures a category is selected.
+ *
+ * @returns {boolean} - Returns false and shows error if no category is selected, otherwise true.
+ */
 function validateCategory() {
   let category = document.getElementById("inputCategory");
   category.addEventListener("change", () => showError(category, ""));
@@ -329,6 +436,12 @@ function validateCategory() {
   return showError(category, "");
 }
 
+/**
+ * Validates the priority selection.
+ * Ensures a priority button is selected.
+ *
+ * @returns {boolean} - Returns false and shows error if no priority is selected, otherwise true.
+ */
 function validatePriority() {
   let priorityButtons = document.querySelectorAll(".add-task-prio button");
   priorityButtons.forEach((button) => {
@@ -341,34 +454,62 @@ function validatePriority() {
   return true;
 }
 
+/**
+ * Validates all form fields including required fields, contacts, category, and priority.
+ *
+ * @returns {boolean} - Returns true if all validations pass, otherwise false.
+ */
 function validateData() {
   return validateRequiredFields() && validateContacts() && validateCategory() && validatePriority();
 }
 
+/**
+ * Opens the contacts list dropdown.
+ *
+ * @param {string} listId - The ID of the contacts list element.
+ */
 function openContactsList(listId) {
   document.getElementById(listId).style.display = "block";
 }
 
+/**
+ * Closes the contacts list dropdown.
+ *
+ * @param {string} listId - The ID of the contacts list element.
+ */
 function closeContactsList(listId) {
   document.getElementById(listId).style.display = "none";
 }
 
+/**
+ * Toggles the selection of a contact checkbox.
+ *
+ * @param {string} checkboxId - The ID of the checkbox element.
+ * @param {string} contactId - The ID of the contact.
+ * @param {string} selectId - The ID of the selection container.
+ */
 function selectCheckBox(checkboxId, contactId, selectId) {
   let checkStatus = document.getElementById(checkboxId);
-  if (checkStatus.checked == true) {
-    checkStatus.checked = false;
-  } else {
-    checkStatus.checked = true;
-  }
+  checkStatus.checked = !checkStatus.checked;
   focusDiv(selectId);
   toggleCheckbox(contactId);
 }
 
+/**
+ * Sets the minimum selectable date for a date input field.
+ *
+ * @param {string} dateId - The ID of the date input field.
+ */
 function minDate(dateId) {
   let inputDate = document.getElementById(dateId);
   inputDate.min = todayDate;
 }
 
+/**
+ * Toggles a focus effect on a specified element.
+ *
+ * @param {string} divId - The ID of the div element.
+ */
 function focusDiv(divId) {
   document.getElementById(divId).classList.toggle("divFocus");
 }

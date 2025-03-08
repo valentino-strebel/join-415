@@ -74,23 +74,38 @@ function getHeader(taskKey) {
   let cleanHeader = tasks[taskKey].title;
   document.getElementById("taskDetailsHeader").innerHTML = detailsHeaderInsert(cleanHeader);
 }
-
+/**
+ * Retrieves and displays the description of a task.
+ * @param {string} taskKey - The key identifying the task.
+ */
 function getDescription(taskKey) {
   let cleanDescription = tasks[taskKey].description;
   document.getElementById("taskDetailDescription").innerHTML = detailsDescriptionInsert(cleanDescription);
 }
 
+/**
+ * Retrieves and formats the due date of a task, then displays it.
+ * @param {string} taskKey - The key identifying the task.
+ */
 function getDueDate(taskKey) {
   let cleanDate = tasks[taskKey].date.split("-").reverse().join("/");
   document.getElementById("dueDateTR").innerHTML = detailsDueDateInsert(cleanDate);
 }
 
+/**
+ * Retrieves and displays the priority level of a task.
+ * @param {string} setPrio - The priority level of the task ('low', 'medium', 'urgent').
+ */
 function getPriority(setPrio) {
   let cleanPriority = String(setPrio).charAt(0).toUpperCase() + String(setPrio).slice(1);
   document.getElementById("priorityDetailsTR").innerHTML = detailsPriorityInsert(cleanPriority);
   getPrioImage(setPrio);
 }
 
+/**
+ * Retrieves and updates the priority icon based on the priority level.
+ * @param {string} setPrio - The priority level ('low', 'medium', 'urgent').
+ */
 function getPrioImage(setPrio) {
   let prioUrl = document.getElementById("priorityIcon");
   switch (setPrio) {
@@ -105,11 +120,17 @@ function getPrioImage(setPrio) {
   }
 }
 
+/**
+ * Initializes the assignee container and loads the assignee data.
+ */
 function getAssigneeContainer() {
   document.getElementById("assigneeDetails").innerHTML = assigneeContainerInsert();
   getAssigneeData();
 }
 
+/**
+ * Retrieves and processes the assigned contacts for a task.
+ */
 function getAssigneeData() {
   assigneeEditKey = [];
   for (let indexAssignee = 0; indexAssignee < tasks[taskKey].assigned.length; indexAssignee++) {
@@ -123,6 +144,11 @@ function getAssigneeData() {
   }
 }
 
+/**
+ * Processes and displays the assigned contact details.
+ * @param {Array} assigneeEditKey - The array storing assigned contact keys.
+ * @param {string} assigneeKey - The key of the assigned contact.
+ */
 function assigneeDataSuccess(assigneeEditKey, assigneeKey) {
   assigneeEditKey.push(assigneeKey);
   let assignee = contacts[assigneeKey].name;
@@ -131,11 +157,20 @@ function assigneeDataSuccess(assigneeEditKey, assigneeKey) {
   document.getElementById("assigneeList").innerHTML += detailsAssigneesInsert(assignee, assigneeInitials, assigneeColor);
 }
 
+/**
+ * Initializes the subtask container and loads its data.
+ * @param {string} taskKey - The key identifying the task.
+ * @param {string} taskId - The ID of the task.
+ */
 function getSubtaskContainer(taskKey, taskId) {
   document.getElementById("subtaskContainer").innerHTML = detailsSubtaskContainer();
   getSubtaskData(taskKey, taskId);
 }
-
+/**
+ * Retrieves and displays subtasks for a given task.
+ * @param {string} taskKey - The key of the task.
+ * @param {number} taskId - The ID of the task.
+ */
 function getSubtaskData(taskKey, taskId) {
   if (tasks[taskKey].subtasks == undefined) {
     return;
@@ -149,6 +184,10 @@ function getSubtaskData(taskKey, taskId) {
   getSubtaskStatus(taskKey);
 }
 
+/**
+ * Updates the status of subtasks based on their checked state.
+ * @param {string} taskKey - The key of the task.
+ */
 function getSubtaskStatus(taskKey) {
   for (let indexSubStatus = 0; indexSubStatus < tasks[taskKey].subtasks.length; indexSubStatus++) {
     let subtaskStatus = tasks[taskKey].subtasks[indexSubStatus].checked;
@@ -163,6 +202,9 @@ function getSubtaskStatus(taskKey) {
   }
 }
 
+/**
+ * Clears all task detail fields in the UI.
+ */
 function clearTaskDetails() {
   document.getElementById("tagContainer").innerHTML = "";
   document.getElementById("taskDetailsHeader").innerHTML = "";
@@ -175,7 +217,10 @@ function clearTaskDetails() {
   document.getElementById("taskDetailsButtons").innerHTML = "";
 }
 
-//edit task window from here on
+/**
+ * Enables editing mode for task details.
+ * @param {number} targetId - The ID of the task to be edited.
+ */
 function editTaskDetails(targetId) {
   editTag();
   editHeader();
@@ -187,27 +232,41 @@ function editTaskDetails(targetId) {
   createOkSaveButton();
 }
 
+/**
+ * Clears the tag container for editing.
+ */
 function editTag() {
   document.getElementById("tagContainer").innerHTML = "";
 }
 
+/**
+ * Enables editing mode for the task header.
+ */
 function editHeader() {
   let headerText = document.getElementById("detailsHeader").innerHTML;
   document.getElementById("taskDetailsHeader").innerHTML = insertEditHeader(headerText);
 }
 
+/**
+ * Enables editing mode for the task description.
+ */
 function editDescription() {
   let descriptionText = document.getElementById("detailsDescription").innerHTML;
   document.getElementById("taskDetailDescription").innerHTML = insertEditDescription(descriptionText);
 }
 
+/**
+ * Enables editing mode for the task due date.
+ */
 function editDueDate() {
   let dueDateText = document.getElementById("dueDateDetails").innerHTML;
   let fixedDateFormat = dueDateText.split("/").reverse().join("-");
   document.getElementById("dueDateTR").innerHTML = insertEditDueDate(fixedDateFormat);
   minDate("inputDueDateEdit");
 }
-
+/**
+ * Updates the priority editing UI and sets the button colors based on the current priority.
+ */
 function editPriority() {
   let setPrioEdit = tasks[taskKey].prio;
   document.getElementById("priorityDetailsTR").innerHTML = insertEditPriority();
@@ -224,6 +283,10 @@ function editPriority() {
   updatePrio(setPrioEdit);
 }
 
+/**
+ * Initiates the editing of an assignee by updating the UI and rendering the contacts board.
+ * @param {string} targetId - The ID of the target element.
+ */
 async function editAssignee(targetId) {
   document.getElementById("assigneeDetails").innerHTML = insertEditAssignee();
   editAssigneeList();
@@ -232,10 +295,16 @@ async function editAssignee(targetId) {
   editInsertCheckmark(targetId);
 }
 
+/**
+ * Updates the list of assignees available for selection.
+ */
 function editAssigneeList() {
   document.getElementById("editAssigneeList").innerHTML += insertEditAssigneeSelectionList();
 }
 
+/**
+ * Updates the displayed images of selected assignees.
+ */
 function editAssigneeImage() {
   document.getElementById("editAssigneeImage").innerHTML = "";
   selectedAssignee = [];
@@ -247,6 +316,9 @@ function editAssigneeImage() {
   }
 }
 
+/**
+ * Updates the UI for editing subtasks of a task.
+ */
 function editSubtasks() {
   let mainTaskKey = tasks[taskKey].id;
   document.getElementById("subtaskContainer").innerHTML = "";
@@ -254,6 +326,10 @@ function editSubtasks() {
   editSubtasksList(mainTaskKey);
 }
 
+/**
+ * Populates the list of subtasks for the given task.
+ * @param {string} mainTaskKey - The unique identifier for the main task.
+ */
 function editSubtasksList(mainTaskKey) {
   for (let indexTaskKey = 0; indexTaskKey < tasks[taskKey].subtasks.length; indexTaskKey++) {
     let subtaskText = tasks[taskKey].subtasks[indexTaskKey].text;
@@ -262,15 +338,28 @@ function editSubtasksList(mainTaskKey) {
   }
 }
 
+/**
+ * Clears the value of the given input field.
+ * @param {string} inputId - The ID of the input field to clear.
+ */
 function clearSubtaskInput(inputId) {
   document.getElementById(inputId).value = "";
 }
 
+/**
+ * Creates and displays the "OK" and "Save" buttons for task editing.
+ */
 function createOkSaveButton() {
   let mainTaskKey = tasks[taskKey].id;
   document.getElementById("taskDetailsButtons").innerHTML = insertOkSaveButton(mainTaskKey);
 }
 
+/**
+ * Handles the "Enter" key event when editing a list item.
+ * @param {KeyboardEvent} event - The keyboard event.
+ * @param {number} index - The index of the item being edited.
+ * @param {string} mainTaskKey - The unique identifier for the main task.
+ */
 function handleEnterEdit(event, index, mainTaskKey) {
   if (event.key === "Enter") {
     event.preventDefault();
@@ -278,6 +367,11 @@ function handleEnterEdit(event, index, mainTaskKey) {
   }
 }
 
+/**
+ * Renders the contacts board with filtered contacts in a given container.
+ * @param {Array} filteredContacts - The list of filtered contacts to display.
+ * @param {string} divId - The ID of the container where the contacts will be rendered.
+ */
 async function renderContactsBoard(filteredContacts, divId) {
   let sortedContacts = await sortContacts(filteredContacts);
   let list = document.getElementById(divId);

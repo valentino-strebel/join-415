@@ -136,7 +136,6 @@ function mediaQuery() {
 function mediaQueryFunctionsExec() {
   loginMedia();
   summaryMedia();
-  contactsMedia();
   boardMedia();
   mobileIntro();
 }
@@ -194,18 +193,6 @@ function boardMedia() {
   } else {
     if (addTaskSpan) addTaskSpan.classList.remove("d_none");
   }
-}
-
-function contactsMedia() {
-  /*let details = document.getElementById("contactsDetailsMobile");
-  let editWindow = document.getElementById("editWindow");
-  let contactWindow = document.getElementById("contactWindow");
-
-  if (media.matches) {
-    if (details) details.classList.add("d_none");
-    if (editWindow) editWindow.classList.add("d_none");
-    if (contactWindow) contactWindow.classList.add("d_none");
-  }*/
 }
 
 function loginMedia() {

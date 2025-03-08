@@ -76,7 +76,14 @@ function getAssignedContacts(contactIDs, index) {
   insertMaximumContacts(totalContacts, maxContactsToShow, content);
   setContainerWidth(assignedContacts, content);
 }
-
+/**
+ * Assigns available contacts to a given task and updates the provided content element.
+ *
+ * @param {number} totalContacts - Total number of contacts assigned to the task.
+ * @param {number} maxContactsToShow - Maximum number of contacts to display.
+ * @param {number} index - Index of the task in the tasks array.
+ * @param {HTMLElement} content - The HTML element where the contacts will be displayed.
+ */
 function assignAvailableContacts(totalContacts, maxContactsToShow, index, content) {
   for (let indexMy = 0; indexMy < Math.min(totalContacts, maxContactsToShow); indexMy++) {
     let contactIdentifier = tasks[index].assigned[indexMy].mainContactId;
@@ -91,6 +98,13 @@ function assignAvailableContacts(totalContacts, maxContactsToShow, index, conten
   }
 }
 
+/**
+ * Inserts an indicator showing the number of additional contacts beyond the displayed limit.
+ *
+ * @param {number} totalContacts - Total number of contacts assigned to the task.
+ * @param {number} maxContactsToShow - Maximum number of contacts to display.
+ * @param {HTMLElement} content - The HTML element where the indicator will be added.
+ */
 function insertMaximumContacts(totalContacts, maxContactsToShow, content) {
   if (totalContacts > maxContactsToShow) {
     let remainingContacts = totalContacts - maxContactsToShow;
@@ -99,11 +113,23 @@ function insertMaximumContacts(totalContacts, maxContactsToShow, content) {
   }
 }
 
+/**
+ * Sets the width of the container based on the number of assigned contacts.
+ *
+ * @param {Array} assignedContacts - Array of assigned contact objects.
+ * @param {HTMLElement} content - The HTML element whose width needs to be adjusted.
+ */
 function setContainerWidth(assignedContacts, content) {
   let widthContainer = assignedContacts.length === 1 ? 32 : (assignedContacts.length - 1) * 32;
   content.style.width = widthContainer + "px";
 }
 
+/**
+ * Formats category text by trimming and removing the last word, then converting to lowercase.
+ *
+ * @param {string} category - The category string to format.
+ * @returns {string} - The formatted category text.
+ */
 function formatCategoryText(category) {
   let formatCategory = category.trim().split(" ");
   formatCategory.pop().toLowerCase();
@@ -111,6 +137,12 @@ function formatCategoryText(category) {
   return formattedText;
 }
 
+/**
+ * Truncates text to a maximum of 48 characters, adding ellipsis if necessary.
+ *
+ * @param {string} text - The text to truncate.
+ * @returns {string} - The truncated text with ellipsis if needed.
+ */
 function truncateText(text) {
   return text.length > 48 ? text.substring(0, 48) + "..." : text;
 }
@@ -126,7 +158,12 @@ function searchTasks() {
   let foundTasks = createTaskContainers(searchInput, taskContainers);
   noResultsMessage.style.display = foundTasks ? "none" : "block";
 }
-
+/**
+ * Filters and displays task containers based on search input.
+ * @param {string} searchInput - The search query input.
+ * @param {NodeList} taskContainers - List of task elements to filter.
+ * @returns {boolean} - Returns true if any task matches the search, otherwise false.
+ */
 function createTaskContainers(searchInput, taskContainers) {
   let foundTasks = false;
   taskContainers.forEach((task) => {
@@ -142,6 +179,11 @@ function createTaskContainers(searchInput, taskContainers) {
   return foundTasks;
 }
 
+/**
+ * Handles the drop event to move a task to a different column.
+ * @param {DragEvent} ev - The drag event.
+ * @param {string} targetColumn - The target column identifier where the task is dropped.
+ */
 async function drop(ev, targetColumn) {
   ev.preventDefault();
   removeHighlight(targetColumn);
@@ -166,15 +208,27 @@ async function drop(ev, targetColumn) {
   }
 }
 
+/**
+ * Updates the task status in Firebase.
+ * @param {string} taskId - The ID of the task.
+ * @param {string} newStatus - The new status of the task.
+ * @throws Will throw an error if updating the task status fails.
+ */
 async function updateTaskStatusInFirebase(taskId, newStatus) {
   try {
-    taskStatusTry(taskId, newStatus);
+    await taskStatusTry(taskId, newStatus);
   } catch (error) {
-    console.error("Fehler beim Aktualisieren des Task-Status in Firebase:", error);
+    console.error("Error updating task status in Firebase:", error);
     throw error;
   }
 }
 
+/**
+ * Sends a request to Firebase to update the task status.
+ * @param {string} taskId - The ID of the task.
+ * @param {string} newStatus - The new status to be updated.
+ * @throws Will throw an error if the request fails.
+ */
 async function taskStatusTry(taskId, newStatus) {
   const getResponse = await fetch(`${BASE_URL}tasks/${taskId}.json`);
   const existingData = await getResponse.json();
@@ -187,17 +241,26 @@ async function taskStatusTry(taskId, newStatus) {
     body: JSON.stringify(existingData),
   });
   if (!response.ok) {
-    throw new Error(`Fehler beim Aktualisieren der Task: ${response.statusText}`);
+    throw new Error(`Error updating task: ${response.statusText}`);
   }
 }
 
+/**
+ * Allows an element to be dropped by preventing default behavior.
+ * @param {DragEvent} ev - The drag event.
+ */
 function allowDrop(ev) {
   ev.preventDefault();
 }
 
+/**
+ * Handles the drag event by storing the dragged element's ID.
+ * @param {DragEvent} ev - The drag event.
+ */
 function drag(ev) {
   ev.dataTransfer.setData("text", ev.target.id);
 }
+
 /**
  * Adds a CSS class to highlight the specified column.
  * @param {string} columnId - Example: 'todo', 'progress', 'feedback', 'done'
@@ -263,21 +326,35 @@ document.addEventListener("DOMContentLoaded", () => {
     boardWrapper.insertBefore(noResultsMessage, boardWrapper.firstChild);
   }
 });
-
+/**
+ * Renders the progress bar for subtasks within a card.
+ *
+ * @param {Array} cardSubtasks - The list of subtasks associated with the card.
+ * @param {number} index - The index of the card to update the progress bar.
+ */
 function renderProgressbarSubtask(cardSubtasks, index) {
   let statusContainer = document.getElementById("subtaskStatus-" + index);
   let progress = document.getElementById("subtaskProgress-" + index);
   let tasksDone = document.getElementById("subtaskDone-" + index);
+
   if (!cardSubtasks || cardSubtasks.length === 0) {
     statusContainer.style.display = "none";
     return;
   }
+
   let progressData = calcProgressSubtask(cardSubtasks);
   let percentage = (progressData.checkedQuantity / progressData.totalQuantity) * 100;
+
   progress.style.width = percentage + "%";
   tasksDone.innerHTML = progressData.checkedQuantity + "/" + progressData.totalQuantity + " Subtasks";
 }
 
+/**
+ * Calculates the progress of subtasks.
+ *
+ * @param {Array} cardSubtasks - The list of subtasks to evaluate.
+ * @returns {Object} - An object containing the total and checked subtask count.
+ */
 function calcProgressSubtask(cardSubtasks) {
   let totalQuantity = cardSubtasks.length;
   let checkedQuantity = cardSubtasks.filter((task) => task.checked === 1).length;
@@ -297,7 +374,11 @@ function clearTasksContent() {
   document.getElementById("board_feedback").innerHTML = "";
   document.getElementById("board_done").innerHTML = "";
 }
-
+/**
+ * Checks if a column is empty and updates its content accordingly.
+ *
+ * @param {string} columnId - The ID of the column to check.
+ */
 function checkColumnEmpty(columnId) {
   let container = document.getElementById(`board_${columnId}`);
   let noTaskElement = container.querySelector(`#no-task-message-${columnId}`);
@@ -307,6 +388,7 @@ function checkColumnEmpty(columnId) {
     feedback: "Await Feedback",
     done: "Done",
   };
+
   if (container.children.length === 0) {
     container.innerHTML = noTaskMessage(columnNames[columnId], columnId);
   } else {
@@ -316,10 +398,14 @@ function checkColumnEmpty(columnId) {
   }
 }
 
+/**
+ * Adjusts the position of the search container based on screen width.
+ */
 function adjustSearchContainerPosition() {
   let searchContainer = document.getElementById("board-search-container");
   let boardHeader = document.querySelector(".board-header");
   let searchContainerParent = document.querySelector(".board-search-add-container");
+
   if (window.innerWidth <= 960) {
     if (!searchContainer.classList.contains("search-container-moved")) {
       searchContainer.classList.add("search-container-moved");
@@ -333,9 +419,13 @@ function adjustSearchContainerPosition() {
   }
 }
 
+/**
+ * Opens the user story window by making it visible.
+ */
 function openUserStory() {
   let window = document.getElementById("taskDetailsWindow");
   let overlay = document.getElementById("overlayTasksDetail");
+
   if (window) window.classList.remove("d_none");
   if (overlay) overlay.classList.remove("d_none");
 
@@ -344,10 +434,15 @@ function openUserStory() {
   }, 100);
 }
 
+/**
+ * Closes the user story window by hiding it.
+ */
 function closeUserStory() {
   let window = document.getElementById("taskDetailsWindow");
   let overlay = document.getElementById("overlayTasksDetail");
+
   contactNoAction("taskDetailsWindow", "addContactWindowClosed", "addContactWindow", "addContactWindowNoAction");
+
   setTimeout(() => {
     if (window) window.classList.add("d_none");
     if (overlay) overlay.classList.add("d_none");
