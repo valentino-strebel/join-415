@@ -70,10 +70,10 @@ function getAssignedContacts(contactIDs, index) {
 
   let content = document.getElementById("cardContact-" + index);
   content.innerHTML = "";
-  //let maxContactsToShow = 5;
+  let maxContactsToShow = 5;
   let totalContacts = contactIDs.length;
   assignAvailableContacts(contactIDs, index, content);
-  //insertMaximumContacts(totalContacts, maxContactsToShow, content);
+  insertMaximumContacts(totalContacts, maxContactsToShow, content);
   setContainerWidth(assignedContacts, content);
 }
 /**

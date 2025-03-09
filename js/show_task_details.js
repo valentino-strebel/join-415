@@ -375,7 +375,6 @@ function handleEnterEdit(event, index, mainTaskKey) {
 async function renderContactsBoard(targetId, filteredContacts, divId) {
   let sortedContacts = await sortContacts(filteredContacts);
   let list = document.getElementById(divId);
-  console.log(sortedContacts);
   list.innerHTML = await generateContactsBoardEdit(targetId, sortedContacts);
   list.style.display = "none";
 }

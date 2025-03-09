@@ -29,7 +29,7 @@ async function assignEditContact(contactId, mainTaskKey) {
     await findDeleteContact(myCheckbox, mainTaskKey);
   }
   await loadDataBoard();
-  Data();
+  editAssigneeData();
 }
 
 /**
@@ -41,6 +41,7 @@ async function assignEditContact(contactId, mainTaskKey) {
  */
 async function findDeleteContact(myCheckbox, mainTaskKey) {
   let assigneeArray = [];
+  let taskKey = tasks.findIndex((task) => task.id === mainTaskKey);
   for (let index = 0; index < tasks[taskKey].assigned.length; index++) {
     assigneeArray.push(tasks[taskKey].assigned[index]);
   }
@@ -108,7 +109,6 @@ function editInsertCheckmark(targetId) {
     let focusEdit = document.getElementById(`focusEdit-${contactId}-${targetId}`);
     if (checkboxEdit) checkboxEdit.checked = true;
     if (focusEdit) focusEdit.classList.add("divFocus");
-    console.log(`checkboxEdit-${contactId}-${targetId}`);
   }
 }
 
