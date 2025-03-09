@@ -6,7 +6,6 @@
 function getTaskDetails(taskId) {
   let targetId = taskId;
   let taskKey = tasks.findIndex((task) => task.id === targetId);
-  console.log(taskId);
   let setPrio = tasks[taskKey].prio;
 
   prepareTaskDetails(taskKey, targetId, setPrio, taskId);
