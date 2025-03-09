@@ -72,7 +72,7 @@ function getAssignedContacts(contactIDs, index) {
   content.innerHTML = "";
   let maxContactsToShow = 5;
   let totalContacts = contactIDs.length;
-  assignAvailableContacts(contactIDs, index, content);
+  assignAvailableContacts(maxContactsToShow, totalContacts, index, content);
   insertMaximumContacts(totalContacts, maxContactsToShow, content);
   setContainerWidth(assignedContacts, content);
 }
@@ -84,10 +84,11 @@ function getAssignedContacts(contactIDs, index) {
  * @param {number} index - Index of the task in the tasks array.
  * @param {HTMLElement} content - The HTML element where the contacts will be displayed.
  */
-function assignAvailableContacts(contactIDs, index, content) {
-  for (let indexMy = 0; indexMy < contactIDs.length; indexMy++) {
+function assignAvailableContacts(maxContactsToShow, totalContacts, index, content) {
+  for (let indexMy = 0; indexMy < Math.min(totalContacts, maxContactsToShow); indexMy++) {
     let contactIdentifier = tasks[index].assigned[indexMy].mainContactId;
-    let contactIndex = contacts.findIndex((contact) => contact.id === contactIdentifier);
+    let contactIndex = contacts.findIndex((contact) => contact.id === contactIdentifier
+  );
     if (contactIndex !== -1) {
       let assignedCode = contacts[contactIndex].colorId;
       let assignedName = contacts[contactIndex].name;
