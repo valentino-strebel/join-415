@@ -28,7 +28,7 @@ function prepareTaskDetails(taskKey, targetId, setPrio, taskId) {
   getTag(taskKey);
   getHeader(taskKey);
   getDescription(taskKey);
-  getTaskDetailsDom(targetId, taskKey);
+  getTaskDetailsDom(targetId);
   getDueDate(taskKey);
   getPriority(setPrio);
   getAssigneeContainer(taskKey);
@@ -290,8 +290,8 @@ function editPriority() {
 async function editAssignee(targetId) {
   document.getElementById("assigneeDetails").innerHTML = insertEditAssignee();
   editAssigneeList();
-  editAssigneeImage();
-  await renderContactsBoard(contacts, "editAssigneesCheckbox");
+  await editAssigneeImage();
+  await renderContactsBoard(targetId, contacts, "editAssigneesCheckbox");
   editInsertCheckmark(targetId);
 }
 
@@ -305,7 +305,7 @@ function editAssigneeList() {
 /**
  * Updates the displayed images of selected assignees.
  */
-function editAssigneeImage() {
+async function editAssigneeImage() {
   document.getElementById("editAssigneeImage").innerHTML = "";
   selectedAssignee = [];
   for (let indexFind = 0; indexFind < assigneeEditKey.length; indexFind++) {
@@ -372,9 +372,10 @@ function handleEnterEdit(event, index, mainTaskKey) {
  * @param {Array} filteredContacts - The list of filtered contacts to display.
  * @param {string} divId - The ID of the container where the contacts will be rendered.
  */
-async function renderContactsBoard(filteredContacts, divId) {
+async function renderContactsBoard(targetId, filteredContacts, divId) {
   let sortedContacts = await sortContacts(filteredContacts);
   let list = document.getElementById(divId);
-  list.innerHTML = await generateContactsBoardEdit(sortedContacts);
+  console.log(sortedContacts);
+  list.innerHTML = await generateContactsBoardEdit(targetId, sortedContacts);
   list.style.display = "none";
 }

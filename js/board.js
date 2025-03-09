@@ -70,10 +70,10 @@ function getAssignedContacts(contactIDs, index) {
 
   let content = document.getElementById("cardContact-" + index);
   content.innerHTML = "";
-  let maxContactsToShow = 5;
+  //let maxContactsToShow = 5;
   let totalContacts = contactIDs.length;
-  assignAvailableContacts(totalContacts, maxContactsToShow, index, content);
-  insertMaximumContacts(totalContacts, maxContactsToShow, content);
+  assignAvailableContacts(contactIDs, index, content);
+  //insertMaximumContacts(totalContacts, maxContactsToShow, content);
   setContainerWidth(assignedContacts, content);
 }
 /**
@@ -84,8 +84,8 @@ function getAssignedContacts(contactIDs, index) {
  * @param {number} index - Index of the task in the tasks array.
  * @param {HTMLElement} content - The HTML element where the contacts will be displayed.
  */
-function assignAvailableContacts(totalContacts, maxContactsToShow, index, content) {
-  for (let indexMy = 0; indexMy < Math.min(totalContacts, maxContactsToShow); indexMy++) {
+function assignAvailableContacts(contactIDs, index, content) {
+  for (let indexMy = 0; indexMy < contactIDs.length; indexMy++) {
     let contactIdentifier = tasks[index].assigned[indexMy].mainContactId;
     let contactIndex = contacts.findIndex((contact) => contact.id === contactIdentifier);
     if (contactIndex !== -1) {

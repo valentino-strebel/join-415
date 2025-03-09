@@ -4,8 +4,8 @@
  * @param {Array} sortedContacts - An array of contact objects containing id, name, and colorId.
  * @returns {string} - A string representation of the edited contacts board.
  */
-function generateContactsBoardEdit(sortedContacts) {
-  let mainTaskKey = tasks[taskKey].id;
+async function generateContactsBoardEdit(targetId, sortedContacts) {
+  let mainTaskKey = targetId;
   return sortedContacts.map((contact) => editAddContacts(contact.id, contact.name, contact.colorId, currentUser, mainTaskKey)).join("");
 }
 
@@ -29,7 +29,7 @@ async function assignEditContact(contactId, mainTaskKey) {
     await findDeleteContact(myCheckbox, mainTaskKey);
   }
   await loadDataBoard();
-  editAssigneeData();
+  Data();
 }
 
 /**
@@ -103,11 +103,12 @@ function assigneeEditSuccess() {
  */
 function editInsertCheckmark(targetId) {
   for (let indexSelect = 0; indexSelect < selectedAssignee.length; indexSelect++) {
-    let id = selectedAssignee[indexSelect];
-    let checkboxEdit= document.getElementById(`checkboxEdit-${id}-${targetId}`);
-    let focusEdit = document.getElementById(`focusEdit-${id}-${targetId}`);
-    if(checkboxEdit) checkboxEdit.checked = true;
+    let contactId = selectedAssignee[indexSelect];
+    let checkboxEdit = document.getElementById(`checkboxEdit-${contactId}-${targetId}`);
+    let focusEdit = document.getElementById(`focusEdit-${contactId}-${targetId}`);
+    if (checkboxEdit) checkboxEdit.checked = true;
     if (focusEdit) focusEdit.classList.add("divFocus");
+    console.log(`checkboxEdit-${contactId}-${targetId}`);
   }
 }
 
