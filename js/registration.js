@@ -8,10 +8,15 @@ let login;
  * @async
  * @returns {Promise<void>}
  */
-async function getLoggedIn() {
+async function getLoggedIn(guest) {
   try {
     await getLoginData("/login-data");
-    proofLoginData();
+  
+    if(guest){
+      changeNavbarItems(window.innerWidth < 960 ? "mobile_greeting" : "summary");
+    } else{
+      proofLoginData();
+    }
   } catch (error) {
     console.error("Error fetching login data", error);
   }
@@ -251,7 +256,7 @@ async function openGuestLogin() {
     password: 12345678,
   };
   await edit_data("/current-user", guest);
-  getLoggedIn();
+  getLoggedIn(guest);
   changeNavbarItems(window.innerWidth < 960 ? "mobile_greeting" : "summary");
 }
 
