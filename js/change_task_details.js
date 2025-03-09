@@ -29,7 +29,7 @@ async function assignEditContact(contactId, mainTaskKey) {
     await findDeleteContact(myCheckbox, mainTaskKey);
   }
   await loadDataBoard();
-  editAssigneeData();
+  editAssigneeData(mainTaskKey);
 }
 
 /**
@@ -41,12 +41,12 @@ async function assignEditContact(contactId, mainTaskKey) {
  */
 async function findDeleteContact(myCheckbox, mainTaskKey) {
   let assigneeArray = [];
-  let taskKey = tasks.findIndex((task) => task.id === mainTaskKey);
-  for (let index = 0; index < tasks[taskKey].assigned.length; index++) {
-    assigneeArray.push(tasks[taskKey].assigned[index]);
+  let thisKey = tasks.findIndex((task) => task.id === mainTaskKey);
+  for (let index = 0; index < tasks[thisKey].assigned.length; index++) {
+    assigneeArray.push(tasks[thisKey].assigned[index]);
   }
   let assigneeIdentifier = assigneeArray.findIndex((item) => item.mainContactId == myCheckbox.value);
-  let assigneeDeleter = tasks[taskKey].assigned[assigneeIdentifier].assigneeId;
+  let assigneeDeleter = tasks[thisKey].assigned[assigneeIdentifier].assigneeId;
   await delete_data((path = `tasks/${mainTaskKey}/contact/${assigneeDeleter}`));
 }
 /**
@@ -75,10 +75,11 @@ function selectContact(contactId, mainTaskKey) {
 /**
  * Initializes the editing process for assignees.
  */
-function editAssigneeData() {
+function editAssigneeData(mainTaskKey) {
   assigneeEditKey = [];
-  if (typeof tasks[taskKey].assigned !== "undefined" && tasks[taskKey].assigned.length > 0) {
-    assigneeEditSuccess();
+  let thisTaskKey = tasks.findIndex((task) => task.id === mainTaskKey);
+  if (typeof tasks[thisTaskKey].assigned !== "undefined" && tasks[thisTaskKey].assigned.length > 0) {
+    assigneeEditSuccess(thisTaskKey);
   } else {
     document.getElementById("editAssigneeImage").innerHTML = "";
   }
@@ -87,7 +88,7 @@ function editAssigneeData() {
 /**
  * Processes assigned contacts and updates the UI accordingly, adding the assignee circle with initials to task.
  */
-function assigneeEditSuccess() {
+function assigneeEditSuccess(taskKey) {
   for (let indexAssignee = 0; indexAssignee < tasks[taskKey].assigned.length; indexAssignee++) {
     let assigneeId = tasks[taskKey].assigned[indexAssignee].mainContactId;
     let assigneeKey = Object.keys(contacts).find((key) => contacts[key].id == assigneeId);

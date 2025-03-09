@@ -10,7 +10,6 @@ function getTaskDetails(taskId) {
 
   prepareTaskDetails(taskKey, targetId, setPrio, taskId);
 
-  // Scroll to the top of the page and disable scrolling
   window.scrollTo({ top: 0 });
   document.body.style.overflow = "hidden";
 }
@@ -228,7 +227,7 @@ function editTaskDetails(targetId) {
   editDueDate();
   editPriority();
   editAssignee(targetId);
-  editSubtasks();
+  editSubtasks(targetId);
   createOkSaveButton();
 }
 
@@ -319,18 +318,18 @@ async function editAssigneeImage() {
 /**
  * Updates the UI for editing subtasks of a task.
  */
-function editSubtasks() {
-  let mainTaskKey = tasks[taskKey].id;
+function editSubtasks(targetId) {
+  let taskKey = tasks.findIndex((task) => task.id === targetId);
   document.getElementById("subtaskContainer").innerHTML = "";
-  document.getElementById("subtaskContainer").innerHTML = insertSubtaskContainer(mainTaskKey);
-  editSubtasksList(mainTaskKey);
+  document.getElementById("subtaskContainer").innerHTML = insertSubtaskContainer(targetId);
+  editSubtasksList(targetId, taskKey);
 }
 
 /**
  * Populates the list of subtasks for the given task.
  * @param {string} mainTaskKey - The unique identifier for the main task.
  */
-function editSubtasksList(mainTaskKey) {
+function editSubtasksList(mainTaskKey, taskKey) {
   for (let indexTaskKey = 0; indexTaskKey < tasks[taskKey].subtasks.length; indexTaskKey++) {
     let subtaskText = tasks[taskKey].subtasks[indexTaskKey].text;
     let subtaskId = tasks[taskKey].subtasks[indexTaskKey].id;
