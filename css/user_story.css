@@ -206,6 +206,28 @@
   max-width: 433px;
 }
 
+#inputDescriptionEdit::-webkit-scrollbar{
+  width: 10px;
+}
+#inputDescriptionEdit::-webkit-scrollbar-thumb{
+  background-color: #a8a8a8;
+  width: 8px;
+  border-radius: 45px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+#inputDescriptionEdit::-webkit-scrollbar-button:single-button:vertical:decrement {
+  width: 6px;
+  background: url(../assets/icons/contacts/scrollbar_up.svg) no-repeat center
+    bottom;
+}
+#inputDescriptionEdit::-webkit-scrollbar-button:single-button:vertical:increment {
+  width: 6px;
+  background: url(../assets/icons/contacts/scrollbar_down.svg) no-repeat center
+    top;
+}
+
 #assigneeList{
   flex-direction: row;
 }
@@ -252,7 +274,7 @@
     background: url(../assets/icons/contacts/scrollbar_down.svg) no-repeat center
       top;
   }
-  
+
   .userStoryContainer {
     transform: translate(0%, -2%);
   }
@@ -339,8 +361,13 @@
   #detailsHeader {
     font-size: 30px;
   }
+
+  .editTaskContainer {
+    padding: 8px;
+  }
+
   .editTaskContainer::-webkit-scrollbar {
-    width: 0px;
+    display: none;
 }
 }
 
