@@ -59,7 +59,7 @@
 .addContactWindow {
   position: absolute;
   top: 96px;
-  left: 15%;
+  left: 20%;
   transform: translate(0, 0);
   transition-timing-function: ease-in;
   transition: 0.2s;
@@ -229,9 +229,16 @@ input#telInput {
   }
 }
 
+@media(max-width: 1350px){
+  .addContactWindow{
+    left: 15%;
+  }
+}
+
 @media (max-width: 1211px) {
   .addContactWindow {
-    left: 20%;
+    left: 30%;
+    top: 45px;
   }
 
   .contactWindowFull {
@@ -318,7 +325,8 @@ input#telInput {
 @media (max-width: 960px) {
   .addContactWindow {
     position: fixed;
-    top: 80px;
+    top: 40px;
+    left: 30%;
   }
   .openContactMenu {
     display: block;
@@ -398,6 +406,18 @@ input#telInput {
   }
 }
 
+@media (max-width: 700px) {
+  .addContactWindow {
+    left: 25%;
+  }
+}
+
+@media (max-width: 600px) {
+  .addContactWindow {
+    left: 20%;
+  }
+}
+
 @media (max-width: 550px) {
   .addContactsLogo {
     width: 310px;
@@ -416,9 +436,15 @@ input#telInput {
   }
 }
 
-@media (max-width: 410px) {
+@media (max-width: 440px) {
   .addContactWindow {
     left: 10%;
+  }
+}
+
+@media (max-width: 360px) {
+  .addContactWindow {
+    left: 7%;
   }
 }
 
@@ -434,7 +460,7 @@ input#telInput {
   }
 }
 
-@media (max-height: 850px) {
+@media (max-height: 850px) and (max-width: 1210px) {
   .dataInput form {
     gap: 0px;
     margin-top: -30px;
