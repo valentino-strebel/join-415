@@ -94,17 +94,31 @@ function setCheckbox(id) {
 }
 
 /**
- * Renders the assigned contacts based on selectedContactsIDs.
+ * Render assigned contacts in the UI.
+ * 
+ * This function filters the selected contacts, limits the displayed contacts to a maximum of 5,
+ * and displays a "+X" indicator if there are more contacts than the allowed limit.
+ * 
+ * @function
  */
 function renderAssignedContacts() {
   let contactInfo = contacts.filter((contact) =>
     selectedContactsIDs.some((selected) => selected.id === contact.id)
   );
   let content = document.getElementById("assignedContacts");
-  content.innerHTML = contactInfo
-    .map((contact) => listAssingedContacts(contact.name, contact.colorId))
-    .join("");
+  content.innerHTML = "";
+  let maxContactsToShow = 5;
+  let displayedContacts = contactInfo.slice(0, maxContactsToShow);
+
+  displayedContacts.forEach((contact) => {
+    content.innerHTML += listAssingedContacts(contact.name, contact.colorId);
+  });
+  if (contactInfo.length > maxContactsToShow) {
+    let remainingContacts = contactInfo.length - maxContactsToShow;
+    content.innerHTML += `<div class="more-contacts">+${remainingContacts}</div>`;
+  }
 }
+
 
 /**
  * Sets the background color of a selected button and resets other buttons.

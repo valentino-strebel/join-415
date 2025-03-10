@@ -365,6 +365,23 @@ select {
   width: 100%;
 }
 
+.more-contacts {
+  color: white;
+  font-weight: 800;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-text-stroke-width: 0.8px;
+  -webkit-text-stroke-color: black;
+  margin-left: 0px;
+  background-color: rgb(207, 207, 207);
+  width: 32px;
+  height: 32px;
+  border-radius: 45px;
+  border: 1px white solid;
+}
+
 .list-item-container:hover {
   transition-duration: 100ms;
   transform: scale(1.01);

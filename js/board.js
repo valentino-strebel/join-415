@@ -89,17 +89,8 @@ function getAssignedContacts(contactIDs, index) {
  * @param {number} index - Index of the task in the tasks array.
  * @param {HTMLElement} content - The HTML element where the contacts will be displayed.
  */
-function assignAvailableContacts(
-  maxContactsToShow,
-  totalContacts,
-  index,
-  content
-) {
-  for (
-    let indexMy = 0;
-    indexMy < Math.min(totalContacts, maxContactsToShow);
-    indexMy++
-  ) {
+function assignAvailableContacts(maxContactsToShow, totalContacts, index, content) {
+  for (let indexMy = 0; indexMy < Math.min(totalContacts, maxContactsToShow); indexMy++) {
     let contactIdentifier = tasks[index].assigned[indexMy].mainContactId;
     let contactIndex = contacts.findIndex(
       (contact) => contact.id === contactIdentifier
@@ -190,7 +181,7 @@ function createTaskContainers(searchInput, taskContainers) {
   taskContainers.forEach((task) => {
     let title = task.querySelector(".card-title-discription p.weight700")?.innerText.trim().toLowerCase();
     let description = task.querySelector(".card-title-discription p.weight400")?.innerText.trim().toLowerCase();
-    if (searchInput === "" ||(title && title.startsWith(searchInput)) ||(description && description.startsWith(searchInput))) {
+    if (searchInput === "" || (title && title.startsWith(searchInput)) || (description && description.startsWith(searchInput))) {
       task.style.display = "flex";
       foundTasks = true;
     } else {
