@@ -126,15 +126,7 @@ async function registrationData() {
   let emailValid = checkRegistrationData(email, "regErrorEmail", "regInpEmail");
   let passValid = checkRegistrationData(password, "regErrorPw", "regInpPw");
   let checkBoxValid = checkBoxValidity(checkBox, "regErrorCheckBox");
-  registrationValidation(
-    nameValid,
-    emailValid,
-    passValid,
-    checkBoxValid,
-    email,
-    password,
-    name
-  );
+  registrationValidation(nameValid, emailValid, passValid, checkBoxValid, email, password, name);
 }
 
 /**
@@ -149,22 +141,9 @@ async function registrationData() {
  * @param {HTMLInputElement} name Name input field.
  * @returns {Promise<void>}
  */
-async function registrationValidation(
-  nameValid,
-  emailValid,
-  passValid,
-  checkBoxValid,
-  email,
-  password,
-  name
-) {
+async function registrationValidation(nameValid, emailValid, passValid, checkBoxValid, email, password, name) {
   if (
-    confirmPassword() &&
-    emailValid &&
-    passValid &&
-    nameValid &&
-    checkBoxValid
-  ) {
+    confirmPassword() && emailValid && passValid && nameValid && checkBoxValid) {
     successNotice();
     await update_data("/login-data", {
       email: email.value.trim(),

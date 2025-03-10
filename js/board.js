@@ -188,19 +188,9 @@ function searchTasks() {
 function createTaskContainers(searchInput, taskContainers) {
   let foundTasks = false;
   taskContainers.forEach((task) => {
-    let title = task
-      .querySelector(".card-title-discription p.weight700")
-      ?.innerText.trim()
-      .toLowerCase();
-    let description = task
-      .querySelector(".card-title-discription p.weight400")
-      ?.innerText.trim()
-      .toLowerCase();
-    if (
-      searchInput === "" ||
-      (title && title.startsWith(searchInput)) ||
-      (description && description.startsWith(searchInput))
-    ) {
+    let title = task.querySelector(".card-title-discription p.weight700")?.innerText.trim().toLowerCase();
+    let description = task.querySelector(".card-title-discription p.weight400")?.innerText.trim().toLowerCase();
+    if (searchInput === "" ||(title && title.startsWith(searchInput)) ||(description && description.startsWith(searchInput))) {
       task.style.display = "flex";
       foundTasks = true;
     } else {

@@ -1,67 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login</title>
-    <link rel="icon" type="image/x-icon" href="../assets/icons/favicon_join.svg" />
-    <link rel="stylesheet" href="../css/font_styles.css" />
-    <link rel="stylesheet" href="../css/login.css" />
-    <link rel="stylesheet" href="../css/signup.css" />
 
-    <script src="../js/script.js"></script>
-    <script src="../js/script_contacts_render.js"></script>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login</title>
+  <link rel="icon" type="image/x-icon" href="../assets/icons/favicon_join.svg" />
+  <link rel="stylesheet" href="../css/font_styles.css" />
+  <link rel="stylesheet" href="../css/login.css" />
+  <link rel="stylesheet" href="../css/signup.css" />
 
-    <script src="../js/registration.js"></script>
-  </head>
+  <script src="../js/script.js"></script>
+  <script src="../js/script_contacts_render.js"></script>
 
-  <body onload="mediaQuery()">
-    <header>
-      <div class="displayFlex">
-        <div>
-          <img src="../assets/join_logo/join-logo-capa2.svg" alt="join-logo" id="join-logo" />
-        </div>
-        <div id="no-user-container">Not a Join user? <button onclick="openSignUpHTML()">Sign up</button></div>
+  <script src="../js/registration.js"></script>
+</head>
+
+<body onload="mediaQuery()">
+  <header>
+    <div class="displayFlex">
+      <div>
+        <img src="../assets/join_logo/join-logo-capa2.svg" alt="join-logo" id="join-logo" />
       </div>
-    </header>
+      <div id="no-user-container">Not a Join user? <button onclick="openSignUpHTML()">Sign up</button></div>
+    </div>
+  </header>
 
-    <main>
-      <div id="login-container">
-        <h1>Log in</h1>
-        <form onsubmit="event.preventDefault()">
-          <div id="login-inputfields">
-            <div id="logInpName" class="">
-              <input type="email" placeholder="Email" id="email-login" /> <img src="../assets/icons/login_signup/mail.svg" alt="mail-icon" id="mail-icon" />
+  <main>
+    <div id="login-container">
+      <h1>Log in</h1>
+      <form onsubmit="event.preventDefault()">
+        <div id="login-inputfields">
+          <div id="logInpName" class="">
+            <input type="email" placeholder="Email" id="email-login" /> <img src="../assets/icons/login_signup/mail.svg"
+              alt="mail-icon" id="mail-icon" />
 
-              <div class="regError">
-                <p id="logErrorName" class="size12 d_none">Please insert a correct email address - e.g.: name@email.com</p>
-              </div>
-            </div>
-
-            <div id="logInpPw" class="password-container">
-              <input type="password" id="password-login" placeholder="Password" />
-
-              <button type="button" id="toggle-password" class="toogle-visibility">
-                <img id="eye-icon" src="../assets/icons/login_signup/lock.svg" alt="Lock icon" />
-              </button>
-            </div>
             <div class="regError">
-              <p id="logErrorPw" class="size12 d_none">Please insert the correct password</p>
+              <p id="logErrorName" class="size12 d_none">Please insert a correct email address - e.g.: name@email.com
+              </p>
             </div>
           </div>
 
-          <div id="login-buttons">
-            <button id="login" onclick="getLoggedIn()">Log in</button>
-            <button id="guest-login" onclick="openGuestLogin()">Guest Log in</button>
+          <div id="logInpPw" class="password-container">
+            <input type="password" id="password-login" placeholder="Password" />
+
+            <button type="button" id="toggle-password" class="toogle-visibility">
+              <img id="eye-icon" src="../assets/icons/login_signup/lock.svg" alt="Lock icon" />
+            </button>
           </div>
-        </form>
-      </div>
-    </main>
-    <div id="no-user-container-mobile" class="d_none">Not a Join user? <button onclick="openSignUpHTML()">Sign up</button></div>
-    <footer>
-      <a href="./privacy_policy.html">Privacy Policy</a>
-      <a href="./legal_notice.html">Legal notice</a>
-    </footer>
-    <script src="../js/event_listener.js"></script>
-  </body>
+          <div class="regError">
+            <p id="logErrorPw" class="size12 d_none">Please insert the correct password</p>
+          </div>
+        </div>
+
+        <div id="login-buttons">
+          <button id="login" onclick="getLoggedIn()">Log in</button>
+          <button id="guest-login" onclick="openGuestLogin()">Guest Log in</button>
+        </div>
+      </form>
+    </div>
+  </main>
+  <div id="no-user-container-mobile" class="d_none">Not a Join user? <button onclick="openSignUpHTML()">Sign up</button>
+  </div>
+  <footer>
+    <a href="./privacy_policy.html">Privacy Policy</a>
+    <a href="./legal_notice.html">Legal notice</a>
+  </footer>
+  <script src="../js/event_listener.js"></script>
+</body>
+
 </html>
