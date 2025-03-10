@@ -6,6 +6,9 @@
   overflow-x: hidden;
 }
 
+.overflowHidden {
+  overflow-y: hidden;
+}
 .contactsList {
   display: flex;
   position: relative;

@@ -4,7 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Contacts</title>
-    <link rel="icon" type="image/x-icon" href="../assets/icons/favicon_join.svg" />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="../assets/icons/favicon_join.svg"
+    />
     <link rel="stylesheet" href="../css/style.css" />
     <link rel="stylesheet" href="../css/navbar.css" />
     <link rel="stylesheet" href="../css/contacts.css" />
@@ -19,15 +23,28 @@
     <script src="../js/contacts_window_change.js"></script>
     <script src="../js/db.js"></script>
   </head>
-  <body onload="pageLoadHandler('contacts')" onresize="changeMobileDesktop('contactsDetailsMobile','contactsDetailsOpen','contactsDetails')">
+  <body
+    onload="pageLoadHandler('contacts')"
+    onresize="changeMobileDesktop('contactsDetailsMobile','contactsDetailsOpen','contactsDetails')"
+  >
     <!--Content is divided into Header and Main-->
     <header onmousedown="prevent(event)">
       <div class="header_content">
-        <img src="../assets/join_logo/join-logo-capa2.svg" alt="join-logo" class="join-mobile-logo" />
+        <img
+          src="../assets/join_logo/join-logo-capa2.svg"
+          alt="join-logo"
+          class="join-mobile-logo"
+        />
         <p class="weight400 size20 kanban">Kanban Project Management Tool</p>
         <div class="profileSection">
-          <a href="../html/help.html" class="help"> <img src="../assets/icons/header/help.svg" alt="help" /></a>
-          <div class="headerInitails size20 weight600" onclick="d_none(`dropdown-menu`)" id="header-initials-contacts"></div>
+          <a href="../html/help.html" class="help">
+            <img src="../assets/icons/header/help.svg" alt="help"
+          /></a>
+          <div
+            class="headerInitails size20 weight600"
+            onclick="d_none(`dropdown-menu`)"
+            id="header-initials-contacts"
+          ></div>
         </div>
       </div>
       <section id="dropdown-menu" class="d_none">
@@ -43,22 +60,45 @@
       <nav class="navbar" onmousedown="prevent(event)">
         <img src="../assets/join_logo/join-logo.svg" />
         <div class="navbar-menu">
-          <div class="navbar-menu-button-wrapper" onclick='changeNavbarItems("summary")'>
-            <button class="navbar-menu-button"><img src="../assets/icons/nav_bar/summary-icon.svg" />Summary</button>
+          <div
+            class="navbar-menu-button-wrapper"
+            onclick='changeNavbarItems("summary")'
+          >
+            <button class="navbar-menu-button">
+              <img src="../assets/icons/nav_bar/summary-icon.svg" />Summary
+            </button>
           </div>
-          <div class="navbar-menu-button-wrapper" onclick='changeNavbarItems("addtask")'>
-            <button class="navbar-menu-button"><img src="../assets/icons/nav_bar/addtask-icon.svg" />Add Task</button>
+          <div
+            class="navbar-menu-button-wrapper"
+            onclick='changeNavbarItems("addtask")'
+          >
+            <button class="navbar-menu-button">
+              <img src="../assets/icons/nav_bar/addtask-icon.svg" />Add Task
+            </button>
           </div>
-          <div class="navbar-menu-button-wrapper" onclick='changeNavbarItems("board")'>
-            <button class="navbar-menu-button"><img src="../assets/icons/nav_bar/board-icon.svg" />Board</button>
+          <div
+            class="navbar-menu-button-wrapper"
+            onclick='changeNavbarItems("board")'
+          >
+            <button class="navbar-menu-button">
+              <img src="../assets/icons/nav_bar/board-icon.svg" />Board
+            </button>
           </div>
-          <div class="navbar-menu-button-wrapper" style="background-color: rgba(9, 25, 49, 1)" onclick='changeNavbarItems("contacts")'>
-            <button class="navbar-menu-button"><img src="../assets/icons/nav_bar/contacts-icon.svg" />Contacts</button>
+          <div
+            class="navbar-menu-button-wrapper"
+            style="background-color: rgba(9, 25, 49, 1)"
+            onclick='changeNavbarItems("contacts")'
+          >
+            <button class="navbar-menu-button">
+              <img src="../assets/icons/nav_bar/contacts-icon.svg" />Contacts
+            </button>
           </div>
         </div>
         <div class="navbar-terms-links">
           <a href="../html/privacy_policy.html">
-            <button class="navbar-term-button" onclick="">Privacy Policy</button>
+            <button class="navbar-term-button" onclick="">
+              Privacy Policy
+            </button>
           </a>
           <a href="../html/legal_notice.html">
             <button class="navbar-term-button" onclick="">Legal notice</button>
@@ -72,11 +112,15 @@
         <div
           class="contactsList"
           onclick="hideDetails('contactsDisplay',
-        'detailsWindowClosed', 'detailsWindow')">
+        'detailsWindowClosed', 'detailsWindow')"
+        >
           <div class="sticky" onmousedown="prevent(event)">
             <button onclick="d_none(`overlay`), openAddContact()">
               <p class="weight700 size21">Add new contact</p>
-              <img src="../assets/icons/contacts/person_add.svg" alt="Add Person Symbol" />
+              <img
+                src="../assets/icons/contacts/person_add.svg"
+                alt="Add Person Symbol"
+              />
             </button>
           </div>
 
@@ -89,12 +133,17 @@
           id="contactsDetailsMobile"
           class="contactsDetails"
           onmousedown="prevent(event)"
-          onclick="closeDetailsMenu('editButtonsPosition', 'editButtonsPosition','editButtonsPositionOpen')">
+          onclick="closeDetailsMenu('editButtonsPosition', 'editButtonsPosition','editButtonsPositionOpen')"
+        >
           <div
             class="backButton"
-            onclick="mobileContactDetails('contactsDetailsMobile', 'contactsDetails', 'contactsDetailsOpen'), d_none('contactsDetailsMobile')">
+            onclick="mobileContactDetails('contactsDetailsMobile', 'contactsDetails', 'contactsDetailsOpen'), d_none('contactsDetailsMobile'),  reinstateScrollbar('body')"
+          >
             <button>
-              <img src="../assets/icons/contacts/arrow-left-line.svg" alt="Button Back" />
+              <img
+                src="../assets/icons/contacts/arrow-left-line.svg"
+                alt="Button Back"
+              />
             </button>
           </div>
           <div class="contactsDetailsHeader">
@@ -105,7 +154,10 @@
           </div>
           <!--Div containing rendered Details. Inserted with JS into IDs-->
           <div class="createdContactPosition">
-            <div id="contactsDisplay" class="contactsDisplay detailsWindowClosed">
+            <div
+              id="contactsDisplay"
+              class="contactsDisplay detailsWindowClosed"
+            >
               <div id="detailsProfile" class="detailsProfile"></div>
               <p class="weight400 size20">Contact Information</p>
               <div id="detailsContact" class="detailsContact"></div>
@@ -128,22 +180,33 @@
       id="overlay"
       class="overlay d_none"
       onclick="d_none(this.id), clearInput('nameInput', 'mailInput', 'telInput'), closeAddContact()"
-      onmousedown="prevent(event)"></div>
+      onmousedown="prevent(event)"
+    ></div>
 
     <!--Window to Create Contact -->
-    <div id="contactWindow" class="addContactWindowClosed d_none" onclick="noBubble(event) ">
+    <div
+      id="contactWindow"
+      class="addContactWindowClosed d_none"
+      onclick="noBubble(event) "
+    >
       <div class="contactWindowFull">
         <div class="addContactsLogo">
           <div class="addContactsText">
             <headline class="weight700">Add contact</headline>
             <subtitle class="weight400">Tasks are better with a team!</subtitle>
-            <img class="addContactsJoin" src="../assets/icons/contacts/Capa 1.svg" alt="Logo Join" />
+            <img
+              class="addContactsJoin"
+              src="../assets/icons/contacts/Capa 1.svg"
+              alt="Logo Join"
+            />
             <div class="separatorHorizontal"></div>
           </div>
         </div>
         <div class="addContactsInput">
           <div class="closeAddContact">
-            <button onclick="d_none('overlay'), clearInput('nameInput', 'mailInput', 'telInput'), closeAddContact()"></button>
+            <button
+              onclick="d_none('overlay'), clearInput('nameInput', 'mailInput', 'telInput'), closeAddContact()"
+            ></button>
           </div>
           <div class="emptyProfile emptyProfileAdd">
             <img src="../assets/icons/contacts/empty_profile.svg" alt="" />
@@ -159,31 +222,60 @@
                     type="text"
                     required
                     placeholder="Name"
-                    pattern="[A-Za-zÀ-ÖØ-öø-ÿ]{1,30} [A-Za-zÀ-ÖØ-öø-ÿ]{1,30}" />
+                    pattern="[A-Za-zÀ-ÖØ-öø-ÿ]{1,30} [A-Za-zÀ-ÖØ-öø-ÿ]{1,30}"
+                  />
                   <div class="contactError">
-                    <p id="contactErrorName" class="size12 d_none">Please insert a name and a surname - e.g.: John Doe</p>
+                    <p id="contactErrorName" class="size12 d_none">
+                      Please insert a name and a surname - e.g.: John Doe
+                    </p>
                   </div>
                 </div>
                 <div id="inputContactErrorEmail" class="">
-                  <input id="mailInput" class="weight400 size20" type="email" required placeholder="Email" pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$" />
+                  <input
+                    id="mailInput"
+                    class="weight400 size20"
+                    type="email"
+                    required
+                    placeholder="Email"
+                    pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$"
+                  />
                   <div class="contactError">
-                    <p id="contactErrorEmail" class="size12 d_none">Please insert a valid email - e.g.: name@email.com</p>
+                    <p id="contactErrorEmail" class="size12 d_none">
+                      Please insert a valid email - e.g.: name@email.com
+                    </p>
                   </div>
                 </div>
                 <div id="inputContactErrorTel" class="">
-                  <input id="telInput" class="weight400 size20" type="tel" required placeholder="Phone" pattern="[0-9]{4,20}" />
+                  <input
+                    id="telInput"
+                    class="weight400 size20"
+                    type="tel"
+                    required
+                    placeholder="Phone"
+                    pattern="[0-9]{4,20}"
+                  />
                   <div class="contactError">
-                    <p id="contactErrorTel" class="size12 d_none">Please insert a valid number - at least 4 characters</p>
+                    <p id="contactErrorTel" class="size12 d_none">
+                      Please insert a valid number - at least 4 characters
+                    </p>
                   </div>
                 </div>
               </form>
             </div>
             <div class="add-task-bottom-buttons mobile-add-contact-button">
-              <button class="add-task-button-clear" onclick="closeAddContact(), clearInput('nameInput', 'mailInput', 'telInput')">
+              <button
+                class="add-task-button-clear"
+                onclick="closeAddContact(), clearInput('nameInput', 'mailInput', 'telInput')"
+              >
                 Cancel<img src="../assets/icons/add_task/cross-icon.svg" />
               </button>
-              <button class="add-task-button-create" onclick="getContactData('nameInput', 'mailInput', 'telInput', 'overlay')">
-                Create contact<img src="../assets/icons/add_task/check-icon.svg" />
+              <button
+                class="add-task-button-create"
+                onclick="getContactData('nameInput', 'mailInput', 'telInput', 'overlay')"
+              >
+                Create contact<img
+                  src="../assets/icons/add_task/check-icon.svg"
+                />
               </button>
             </div>
           </div>
@@ -197,20 +289,31 @@
       id="overlayEdit"
       class="overlay d_none"
       onclick="d_none(this.id), clearInput('nameInputEdit', 'mailInputEdit', 'telInputEdit'), closeEditContact()"
-      onmousedown="prevent(event)"></div>
+      onmousedown="prevent(event)"
+    ></div>
     <!--Edit Contact window-->
-    <div id="editWindow" class="addContactWindowClosed d_none" onclick="noBubble(event) ">
+    <div
+      id="editWindow"
+      class="addContactWindowClosed d_none"
+      onclick="noBubble(event) "
+    >
       <div class="contactWindowFull">
         <div class="addContactsLogo">
           <div class="addContactsText">
             <headline class="weight700">Edit contact</headline>
-            <img class="addContactsJoin" src="../assets/icons/contacts/Capa 1.svg" alt="Logo Join" />
+            <img
+              class="addContactsJoin"
+              src="../assets/icons/contacts/Capa 1.svg"
+              alt="Logo Join"
+            />
             <div class="separatorHorizontal"></div>
           </div>
         </div>
         <div class="addContactsInput">
           <div class="closeAddContact">
-            <button onclick="d_none('overlayEdit'), clearInput('nameInputEdit', 'mailInputEdit', 'telInputEdit'), closeEditContact()"></button>
+            <button
+              onclick="d_none('overlayEdit'), clearInput('nameInputEdit', 'mailInputEdit', 'telInputEdit'), closeEditContact()"
+            ></button>
           </div>
           <div class="emptyProfileEdit">
             <div id="editInitialsColor"></div>
@@ -220,7 +323,10 @@
             <div class="dataInput">
               <form id="editForm"></form>
             </div>
-            <div id="editButtons" class="add-task-bottom-buttons mobile-add-contact-button"></div>
+            <div
+              id="editButtons"
+              class="add-task-bottom-buttons mobile-add-contact-button"
+            ></div>
           </div>
         </div>
       </div>
@@ -231,7 +337,10 @@
 
     <footer class="footer_nav">
       <nav class="nav-footer" onmousedown="prevent(event)">
-        <div class="navbar-wrapper-footer" onclick='changeNavbarItems("summary")'>
+        <div
+          class="navbar-wrapper-footer"
+          onclick='changeNavbarItems("summary")'
+        >
           <button class="navbar-menu-button navbar-footer-button">
             <img src="../assets/icons/nav_bar/summary-icon.svg" />
           </button>
@@ -243,13 +352,20 @@
           </button>
           <span>Board</span>
         </div>
-        <div class="navbar-wrapper-footer" onclick='changeNavbarItems("addtask")'>
+        <div
+          class="navbar-wrapper-footer"
+          onclick='changeNavbarItems("addtask")'
+        >
           <button class="navbar-menu-button navbar-footer-button">
             <img src="../assets/icons/nav_bar/addtask-icon.svg" />
           </button>
           <span>Add Task</span>
         </div>
-        <div class="navbar-wrapper-footer" style="background-color: rgba(9, 25, 49, 1)" onclick='changeNavbarItems("contacts")'>
+        <div
+          class="navbar-wrapper-footer"
+          style="background-color: rgba(9, 25, 49, 1)"
+          onclick='changeNavbarItems("contacts")'
+        >
           <button class="navbar-menu-button navbar-footer-button">
             <img src="../assets/icons/nav_bar/contacts-icon.svg" />
           </button>

@@ -22,13 +22,17 @@ function listContactData(contact, index, currentUser) {
     <div
       class="contactsContainer"
       tabindex="0"
-      onclick="mobileContactDetails('contactsDetailsMobile', 'contactsDetails', 'contactsDetailsOpen'), openContactDetails(${index}), showContactDetails('contactsDisplay', 'detailsWindowClosed', 'detailsWindow'), noBubble(event)"
+      onclick="hideScrollbar('body'), mobileContactDetails('contactsDetailsMobile', 'contactsDetails', 'contactsDetailsOpen'), openContactDetails(${index}), showContactDetails('contactsDisplay', 'detailsWindowClosed', 'detailsWindow'), noBubble(event)"
     >
-      <div class="background-contacts" style="background-color: ${bgcolors[contact.colorId].rgba};">
+      <div class="background-contacts" style="background-color: ${
+        bgcolors[contact.colorId].rgba
+      };">
         ${getInitials(contact.name)}
       </div>
       <div class="contactsContainerUserinfo">
-        <p class="weight400 size20">${contact.name}${currentUser.name === contact.name ? " (You)" : ""}</p>
+        <p class="weight400 size20">${contact.name}${
+    currentUser.name === contact.name ? " (You)" : ""
+  }</p>
         <a class="weight400 size16 emailLink">${contact.email}</a>
       </div>
     </div>
@@ -146,7 +150,9 @@ function listContactsAddtask(id, name, colorId, currentUser) {
  * @returns {string} - The generated HTML string for the assigned contact.
  */
 function listAssingedContacts(name, colorId) {
-  return `<div class="background-contacts bg-contact-chechbox" style="background-color: ${bgcolors[colorId].rgba};">${getInitials(name)}</div>`;
+  return `<div class="background-contacts bg-contact-chechbox" style="background-color: ${
+    bgcolors[colorId].rgba
+  };">${getInitials(name)}</div>`;
 }
 
 /**
@@ -225,7 +231,9 @@ function editButtonsInsert(contact, index) {
  */
 function editInitialsInsert(contact) {
   return `
-    <div class="background-contacts bg-details" style="background-color: ${bgcolors[contact.colorId].rgba};">
+    <div class="background-contacts bg-details" style="background-color: ${
+      bgcolors[contact.colorId].rgba
+    };">
       ${getInitials(contact.name)}
     </div>
   `;
@@ -306,7 +314,9 @@ function listTasks(task, i, category) {
         <div class="crad-category size16 ${category}">${task.category}</div>
         <div class="boardChangeStatus">
           <button
-            onclick="noBubble(event), d_none('mobileEditStatusPosition${task.id}')"
+            onclick="noBubble(event), d_none('mobileEditStatusPosition${
+              task.id
+            }')"
           >
             <img src="../assets/icons/board/plus button.svg" />
           </button>
@@ -340,7 +350,9 @@ function listTasks(task, i, category) {
       <div class="card-title-discription">
         <p class="size16 weight700">${task.title}</p>
         <p class="size16 weight400 colorGrey">
-          ${truncateText(task.description === undefined ? "" : task.description)}
+          ${truncateText(
+            task.description === undefined ? "" : task.description
+          )}
         </p>
       </div>
       <div class="crad-subtask-wrapper" id="subtaskStatus-${i}">
@@ -366,7 +378,9 @@ function listTasks(task, i, category) {
  */
 function listCardContacts(assignedName, assignedCode) {
   return ` 
-  <div class="background-contacts card-contact-bg" style="background-color:${bgcolors[assignedCode].rgba};">${getInitials(assignedName)}</div> 
+  <div class="background-contacts card-contact-bg" style="background-color:${
+    bgcolors[assignedCode].rgba
+  };">${getInitials(assignedName)}</div> 
   `;
 }
 /**

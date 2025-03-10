@@ -5,7 +5,10 @@
  * @param {string} styleB - The alternative style class.
  */
 function hideDetails(windowId, styleA, styleB) {
-  if (document.getElementById(windowId).classList == "contactsDisplay detailsWindow") {
+  if (
+    document.getElementById(windowId).classList ==
+    "contactsDisplay detailsWindow"
+  ) {
     toggleStyleChange(windowId, styleA, styleB);
   }
 }
@@ -82,7 +85,11 @@ function openAddContact() {
   if (contactOverlay) contactOverlay.classList.remove("d_none");
 
   setTimeout(() => {
-    toggleStyleChange("contactWindow", "addContactWindowClosed", "addContactWindow");
+    toggleStyleChange(
+      "contactWindow",
+      "addContactWindowClosed",
+      "addContactWindow"
+    );
   }, 100);
 }
 
@@ -97,7 +104,11 @@ function openEditContact() {
   if (contactOverlay) contactOverlay.classList.remove("d_none");
 
   setTimeout(() => {
-    toggleStyleChange("editWindow", "addContactWindowClosed", "addContactWindow");
+    toggleStyleChange(
+      "editWindow",
+      "addContactWindowClosed",
+      "addContactWindow"
+    );
   }, 100);
 }
 
@@ -108,7 +119,12 @@ function closeAddContact() {
   let contactWindow = document.getElementById("contactWindow");
   let contactOverlay = document.getElementById("overlay");
 
-  contactNoAction("contactWindow", "addContactWindowClosed", "addContactWindow", "addContactWindowNoAction");
+  contactNoAction(
+    "contactWindow",
+    "addContactWindowClosed",
+    "addContactWindow",
+    "addContactWindowNoAction"
+  );
 
   setTimeout(() => {
     if (contactWindow) contactWindow.classList.add("d_none");
@@ -123,7 +139,12 @@ function closeEditContact() {
   let contactWindow = document.getElementById("editWindow");
   let contactOverlay = document.getElementById("overlay-edit");
 
-  contactNoAction("editWindow", "addContactWindowClosed", "addContactWindow", "addContactWindowNoAction");
+  contactNoAction(
+    "editWindow",
+    "addContactWindowClosed",
+    "addContactWindow",
+    "addContactWindowNoAction"
+  );
 
   setTimeout(() => {
     if (contactWindow) contactWindow.classList.add("d_none");
@@ -157,4 +178,18 @@ function closeAddContactSuccess() {
     if (contactWindow) contactWindow.classList.add("d_none");
     if (contactOverlay) contactOverlay.classList.add("d_none");
   }, 100);
+}
+
+function hideScrollbar(tagName) {
+  let thisTag = document.getElementsByTagName(tagName)[0];
+  if (thisTag.classList != "overflowHidden") {
+    thisTag.classList.toggle("overflowHidden");
+  }
+}
+
+function reinstateScrollbar(tagName) {
+  let thisTag = document.getElementsByTagName(tagName)[0];
+  if (thisTag.classList == "overflowHidden") {
+    thisTag.classList.toggle("overflowHidden");
+  }
 }
