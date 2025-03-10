@@ -122,7 +122,13 @@
 }
 
 .divFocus {
-  background-color: #f0f0f0 !important;
+  background-color: rgba(42, 54, 71, 1) !important;
+  color: white;
+  border-radius: 10px;
+}
+
+.divFocus li:hover {
+  background-color: rgb(32, 44, 61) !important;
 }
 
 .checkbox-name {
