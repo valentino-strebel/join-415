@@ -11,10 +11,12 @@ let login;
 async function getLoggedIn(guest) {
   try {
     await getLoginData("/login-data");
-  
-    if(guest){
-      changeNavbarItems(window.innerWidth < 960 ? "mobile_greeting" : "summary");
-    } else{
+
+    if (guest) {
+      changeNavbarItems(
+        window.innerWidth < 960 ? "mobile_greeting" : "summary"
+      );
+    } else {
       proofLoginData();
     }
   } catch (error) {
@@ -61,35 +63,50 @@ async function proofLoginData(userId, findUser) {
  * @param {Object} findUser The authenticated user object.
  * @returns {Promise<void>}
  */
-async function proofLoginTry(emailLogin, passwordLogin, loginData, userId, findUser) {
-  let results= findMatchingLoginData(emailLogin, passwordLogin, loginData)
-    if (results.success) {
-      userId = results.userId;
-      findUser = results.findUser; 
-      await edit_data("/current-user", findUser);
-      await changeNavbarItems(window.innerWidth < 960 ? "mobile_greeting" : "summary");
-      regAlright("logErrorName", "logInpName");
-      regAlright("logErrorPw", "logInpPw");
-      return;
-    } else {
-      regError("logErrorName", "logInpName");
-      regError("logErrorPw", "logInpPw");
-    }
+async function proofLoginTry(
+  emailLogin,
+  passwordLogin,
+  loginData,
+  userId,
+  findUser
+) {
+  let results = findMatchingLoginData(emailLogin, passwordLogin, loginData);
+  if (results.success) {
+    userId = results.userId;
+    findUser = results.findUser;
+    await edit_data("/current-user", findUser);
+    await changeNavbarItems(
+      window.innerWidth < 960 ? "mobile_greeting" : "summary"
+    );
+    regAlright("logErrorName", "logInpName");
+    regAlright("logErrorPw", "logInpPw");
+    return;
+  } else {
+    regError("logErrorName", "logInpName");
+    regError("logErrorPw", "logInpPw");
   }
+}
 
-  /**
+/**
  * Searches for a matching user in the login data based on email and password input.
  *
  * @param {HTMLInputElement} emailLogin - The input field containing the user's email.
  * @param {HTMLInputElement} passwordLogin - The input field containing the user's password.
  * @param {Array<Object>} loginData - An array of user objects containing email and password information.
- * @returns {{ userId: string|null, findUser: Object|null, success: boolean }} 
+ * @returns {{ userId: string|null, findUser: Object|null, success: boolean }}
  *          Returns an object with the userId, findUser object, and a success boolean.
  */
 function findMatchingLoginData(emailLogin, passwordLogin, loginData) {
   for (let id in loginData) {
-    if (loginData[id].email === emailLogin.value.trim() && loginData[id].password === passwordLogin.value.trim()) {
-      return { userId: Object.keys(login)[id], findUser: loginData[id], success: true };
+    if (
+      loginData[id].email === emailLogin.value.trim() &&
+      loginData[id].password === passwordLogin.value.trim()
+    ) {
+      return {
+        userId: Object.keys(login)[id],
+        findUser: loginData[id],
+        success: true,
+      };
     }
   }
   return { userId: null, findUser: null, success: false };
@@ -109,7 +126,15 @@ async function registrationData() {
   let emailValid = checkRegistrationData(email, "regErrorEmail", "regInpEmail");
   let passValid = checkRegistrationData(password, "regErrorPw", "regInpPw");
   let checkBoxValid = checkBoxValidity(checkBox, "regErrorCheckBox");
-  registrationValidation(nameValid, emailValid, passValid, checkBoxValid, email, password, name);
+  registrationValidation(
+    nameValid,
+    emailValid,
+    passValid,
+    checkBoxValid,
+    email,
+    password,
+    name
+  );
 }
 
 /**
@@ -124,8 +149,22 @@ async function registrationData() {
  * @param {HTMLInputElement} name Name input field.
  * @returns {Promise<void>}
  */
-async function registrationValidation(nameValid, emailValid, passValid, checkBoxValid, email, password, name) {
-  if (confirmPassword() && emailValid && passValid && nameValid && checkBoxValid) {
+async function registrationValidation(
+  nameValid,
+  emailValid,
+  passValid,
+  checkBoxValid,
+  email,
+  password,
+  name
+) {
+  if (
+    confirmPassword() &&
+    emailValid &&
+    passValid &&
+    nameValid &&
+    checkBoxValid
+  ) {
     successNotice();
     await update_data("/login-data", {
       email: email.value.trim(),
@@ -144,7 +183,10 @@ async function registrationValidation(nameValid, emailValid, passValid, checkBox
 function confirmPassword() {
   let passwordInput = document.getElementById("password-input");
   let confPasswordInput = document.getElementById("confirm-password-input");
-  if (passwordInput.value.trim() === confPasswordInput.value.trim() && passwordInput.value.trim() !== "") {
+  if (
+    passwordInput.value.trim() === confPasswordInput.value.trim() &&
+    passwordInput.value.trim() !== ""
+  ) {
     regAlright("regErrorPwCheck", "regInpPwCheck");
     return true;
   } else {
@@ -152,6 +194,7 @@ function confirmPassword() {
     return false;
   }
 }
+
 /**
  * Validates the input field against the provided pattern.
  * @param {HTMLInputElement} insertedData - The input field element.
@@ -212,7 +255,8 @@ function regAlright(remove, add) {
  */
 function changePWImage() {
   let pwInput = document.getElementById("password-input");
-  pwInput.style.backgroundImage = "url(../assets/icons/login_signup/visibility_off.svg)";
+  pwInput.style.backgroundImage =
+    "url(../assets/icons/login_signup/visibility_off.svg)";
 }
 
 /**
@@ -220,7 +264,8 @@ function changePWImage() {
  */
 function changeConfPWImage() {
   let confPWInput = document.getElementById("confirm-password-input");
-  confPWInput.style.backgroundImage = "url(../assets/icons/login_signup/visibility_off.svg)";
+  confPWInput.style.backgroundImage =
+    "url(../assets/icons/login_signup/visibility_off.svg)";
 }
 
 /**
@@ -228,7 +273,8 @@ function changeConfPWImage() {
  */
 function changeImageLogin() {
   let pwLogin = document.getElementById("password-login");
-  pwLogin.style.backgroundImage = "url(../assets/icons/login_signup/visibility_off.svg)";
+  pwLogin.style.backgroundImage =
+    "url(../assets/icons/login_signup/visibility_off.svg)";
 }
 
 /**
@@ -242,6 +288,7 @@ function changeLogoSize() {
     openLoginHTML();
   }, 1200);
 }
+
 /**
  * Logs in a guest user by setting default credentials,
  * updating user data, and changing the navigation bar accordingly.

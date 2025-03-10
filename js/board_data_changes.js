@@ -6,7 +6,9 @@
  */
 function calcProgressSubtask(cardSubtasks) {
   let totalQuantity = cardSubtasks.length;
-  let checkedQuantity = cardSubtasks.filter((task) => task.checked === 1).length;
+  let checkedQuantity = cardSubtasks.filter(
+    (task) => task.checked === 1
+  ).length;
 
   return {
     totalQuantity,
@@ -23,6 +25,7 @@ function clearTasksContent() {
   document.getElementById("board_feedback").innerHTML = "";
   document.getElementById("board_done").innerHTML = "";
 }
+
 /**
  * Checks if a column is empty and updates its content accordingly.
  *
@@ -53,7 +56,9 @@ function checkColumnEmpty(columnId) {
 function adjustSearchContainerPosition() {
   let searchContainer = document.getElementById("board-search-container");
   let boardHeader = document.querySelector(".board-header");
-  let searchContainerParent = document.querySelector(".board-search-add-container");
+  let searchContainerParent = document.querySelector(
+    ".board-search-add-container"
+  );
 
   if (window.innerWidth <= 960) {
     if (!searchContainer.classList.contains("search-container-moved")) {
@@ -79,7 +84,11 @@ function openUserStory() {
   if (overlay) overlay.classList.remove("d_none");
 
   setTimeout(() => {
-    toggleStyleChange("taskDetailsWindow", "addContactWindowClosed", "addContactWindow");
+    toggleStyleChange(
+      "taskDetailsWindow",
+      "addContactWindowClosed",
+      "addContactWindow"
+    );
   }, 100);
 }
 
@@ -90,7 +99,12 @@ function closeUserStory() {
   let window = document.getElementById("taskDetailsWindow");
   let overlay = document.getElementById("overlayTasksDetail");
 
-  contactNoAction("taskDetailsWindow", "addContactWindowClosed", "addContactWindow", "addContactWindowNoAction");
+  contactNoAction(
+    "taskDetailsWindow",
+    "addContactWindowClosed",
+    "addContactWindow",
+    "addContactWindowNoAction"
+  );
 
   setTimeout(() => {
     if (window) window.classList.add("d_none");

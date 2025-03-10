@@ -158,6 +158,7 @@ function insertEditHeader(headerText) {
     </div>
   `;
 }
+
 /**
  * Generates the HTML for an editable task description input field.
  * @param {string} descriptionText - The pre-filled text for the description field.
@@ -286,6 +287,7 @@ function insertEditAssigneeImage(assigneeImageColor, assigneeImageInitials) {
     </div>
   `;
 }
+
 /**
  * Generates the HTML structure for a subtask input field and subtask list container.
  *
@@ -396,6 +398,7 @@ function insertSubtasksList(subtaskText, subtaskId, mainTaskKey) {
     </div>
   `;
 }
+
 /**
  * Generates an HTML string for an "Ok" save button inside a task overlay.
  *

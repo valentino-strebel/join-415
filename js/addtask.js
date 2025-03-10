@@ -80,6 +80,7 @@ function toggleCheckbox(id, selectId) {
   }
   renderAssignedContacts(id);
 }
+
 /**
  * Toggles the state of a checkbox and calls toggleCheckbox function.
  * @param {string} id - The identifier for the checkbox.
@@ -302,6 +303,7 @@ async function resetAllInputs() {
   renderAssignedContacts();
   renderSubtasks();
 }
+
 /**
  * Resets all checkboxes assigned to selected contacts.
  * @async

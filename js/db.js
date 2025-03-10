@@ -56,6 +56,7 @@ let newPrio = "";
  * Array of urgency icons representing priority levels.
  * @type {Array<string>}
  */
+
 let urgencySymbols = [
   "../assets/icons/add_task/prio-low-icon.svg",
   "../assets/icons/add_task/prio-medium-icon.svg",
@@ -154,6 +155,7 @@ async function loadDataAddTask() {
   setButtonColor("Medium", "#FFA800");
   minDate("date");
 }
+
 /**
  * Fetches contacts from the Firebase database.
  * Retrieves and processes contact data, storing it in the `contacts` array.
@@ -180,14 +182,7 @@ async function getContacts(path = `contacts/`) {
     });
   }
 }
-/**
- * Asynchronously retrieves task data from Firebase via API and processes it.
- *
- * @async
- * @function getTasks
- * @param {string} [path="tasks/"] - The endpoint path to fetch tasks from Firebase.
- * @returns {Promise<void>} - A promise that resolves when task data is fetched and processed.
- */
+
 /**
  * Fetches tasks data from a given path and processes it.
  * @async

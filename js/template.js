@@ -104,6 +104,7 @@ function detailsContactInsert(contact) {
     </a>
   `;
 }
+
 /**
  * Generates an HTML string for displaying a contact in the task list.
  *
@@ -238,6 +239,7 @@ function editInitialsInsert(contact) {
     </div>
   `;
 }
+
 /**
  * Generates HTML markup for a subtask list item.
  *
@@ -383,6 +385,7 @@ function listCardContacts(assignedName, assignedCode) {
   };">${getInitials(assignedName)}</div> 
   `;
 }
+
 /**
  * Generates the HTML for the mobile footer when the user is logged out.
  *

@@ -51,7 +51,11 @@ function renderContacts(sortedGroups, grouped) {
     contactsListRef.innerHTML += listContactHeader(letter);
     for (let j = 0; j < grouped[letter].length; j++) {
       let contact = grouped[letter][j];
-      contactsListRef.innerHTML += listContactData(contact, globalIndex, currentUser);
+      contactsListRef.innerHTML += listContactData(
+        contact,
+        globalIndex,
+        currentUser
+      );
       globalIndex++;
     }
   }
@@ -67,8 +71,12 @@ function openContactDetails(indexContacts) {
   let detailsMobile = document.getElementById("contactsDetailsMobile");
   let contact = contacts[indexContacts];
   detailsMobile.classList.remove("d_none");
-  document.getElementById("detailsProfile").innerHTML = detailsProfileInsert(contact, indexContacts);
-  document.getElementById("detailsContact").innerHTML = detailsContactInsert(contact);
+  document.getElementById("detailsProfile").innerHTML = detailsProfileInsert(
+    contact,
+    indexContacts
+  );
+  document.getElementById("detailsContact").innerHTML =
+    detailsContactInsert(contact);
 }
 
 /**
@@ -79,7 +87,11 @@ function openContactDetails(indexContacts) {
  * @param {string} overId - Additional parameter for UI interactions.
  */
 async function getContactData(inputName, inputEmail, inputPhone, overId) {
-  if ([inputName, inputEmail, inputPhone].some((input, i) => [checkName, checkEmail, checkPhone][i](input))) {
+  if (
+    [inputName, inputEmail, inputPhone].some((input, i) =>
+      [checkName, checkEmail, checkPhone][i](input)
+    )
+  ) {
     return;
   }
   await userCreateSuccess(inputName, inputEmail, inputPhone);
@@ -105,7 +117,7 @@ async function userCreateSuccess(inputName, inputEmail, inputPhone) {
       email: email,
       phone: phone,
       colorId: getRandomNumber(),
-    }),
+    })
   );
 }
 
@@ -116,6 +128,7 @@ async function userCreateSuccess(inputName, inputEmail, inputPhone) {
 function getRandomNumber() {
   return Math.floor(Math.random() * 10);
 }
+
 /**
  * Clears input fields and updates UI for contact creation.
  * @param {string} inputName - The ID of the name input field.
@@ -126,8 +139,16 @@ function getRandomNumber() {
 function cleanWindow(inputName, inputEmail, inputPhone, overId) {
   clearInput(inputName, inputEmail, inputPhone);
   d_none(overId);
-  showCreationHint("createdInfo", "createdContactInfo", "createdContactInfoOut");
-  toggleStyleChange("contactWindow", "addContactWindowClosed", "addContactWindow");
+  showCreationHint(
+    "createdInfo",
+    "createdContactInfo",
+    "createdContactInfoOut"
+  );
+  toggleStyleChange(
+    "contactWindow",
+    "addContactWindowClosed",
+    "addContactWindow"
+  );
   showContactDetails("contactsDisplay", "detailsWindowClosed", "detailsWindow");
   findLastContactIndex();
 }
@@ -163,7 +184,14 @@ function checkName(insertedName) {
   let name = document.getElementById(insertedName).value.trim();
   let namePattern = new RegExp(nameInput.pattern);
   if (!namePattern.test(name)) {
-    inputCheck("nameInput", insertedName, "contactErrorName", "inputContactErrorName", "editErrorName", "inputEditErrorName");
+    inputCheck(
+      "nameInput",
+      insertedName,
+      "contactErrorName",
+      "inputContactErrorName",
+      "editErrorName",
+      "inputEditErrorName"
+    );
     return true;
   }
   if (insertedName == "nameInput") {
@@ -204,7 +232,14 @@ function checkEmail(insertedEmail) {
   let standardPattern = document.getElementById("mailInput");
   let emailPattern = new RegExp(standardPattern.pattern);
   if (!emailPattern.test(email)) {
-    inputCheck("mailInput", insertedEmail, "contactErrorEmail", "inputContactErrorEmail", "editErrorEmail", "inputEditErrorEmail");
+    inputCheck(
+      "mailInput",
+      insertedEmail,
+      "contactErrorEmail",
+      "inputContactErrorEmail",
+      "editErrorEmail",
+      "inputEditErrorEmail"
+    );
     return true;
   }
   if (insertedEmail == "mailInput") {
@@ -224,7 +259,14 @@ function checkPhone(insertedPhone) {
   let phone = document.getElementById(insertedPhone).value.trim();
   let telPattern = new RegExp(telInput.pattern);
   if (!telPattern.test(phone)) {
-    inputCheck("telInput", insertedPhone, "contactErrorTel", "inputContactErrorTel", "editErrorTel", "inputEditErrorTel");
+    inputCheck(
+      "telInput",
+      insertedPhone,
+      "contactErrorTel",
+      "inputContactErrorTel",
+      "editErrorTel",
+      "inputEditErrorTel"
+    );
     return true;
   }
   if (insertedPhone == "telInput") {
@@ -233,6 +275,7 @@ function checkPhone(insertedPhone) {
     inputClassListClear("editErrorTel", "inputEditErrorTel");
   }
 }
+
 /**
  * Deletes a contact and reloads the page.
  * @async
@@ -296,7 +339,13 @@ async function editUserSuccess(name, email, tel, id, indexContacts) {
  * @param {string} changeTel - The new phone number value.
  * @param {string} id - The ID of the user.
  */
-async function editUserSubmit(indexContacts, changeName, changeEmail, changeTel, id) {
+async function editUserSubmit(
+  indexContacts,
+  changeName,
+  changeEmail,
+  changeTel,
+  id
+) {
   await edit_data(`contacts/` + id, {
     name: changeName,
     email: changeEmail,
@@ -363,6 +412,7 @@ function inputClassListClear(add, remove) {
   document.getElementById(add).classList.add("d_none");
   document.getElementById(remove).classList.remove("inputContactDisplay");
 }
+
 /**
  * Opens the edit overlay and populates it with contact details.
  *
@@ -376,8 +426,12 @@ function openEditOverlay(indexContacts) {
 
   let contact = contacts[indexContacts];
   document.getElementById("editForm").innerHTML = editFormInsert(contact);
-  document.getElementById("editInitialsColor").innerHTML = editInitialsInsert(contact);
-  document.getElementById("editButtons").innerHTML = editButtonsInsert(contact, indexContacts);
+  document.getElementById("editInitialsColor").innerHTML =
+    editInitialsInsert(contact);
+  document.getElementById("editButtons").innerHTML = editButtonsInsert(
+    contact,
+    indexContacts
+  );
 }
 
 /**
@@ -400,7 +454,10 @@ function toggleStyleChange(windowId, styleA, styleB) {
  * @param {string} styleB - The second class to toggle.
  */
 async function showContactDetails(windowId, styleA, styleB) {
-  if (document.getElementById(windowId).classList.value == "contactsDisplay detailsWindow") {
+  if (
+    document.getElementById(windowId).classList.value ==
+    "contactsDisplay detailsWindow"
+  ) {
     toggleStyleChange(windowId, styleA, styleB);
     await delay(0.1);
     toggleStyleChange(windowId, styleA, styleB);
@@ -418,7 +475,12 @@ async function showContactDetails(windowId, styleA, styleB) {
  * @param {string} styleB - The second class to toggle.
  */
 function closeDetailsMenu(windowId, styleA, styleB) {
-  if (window.innerWidth <= 960 && document.getElementById("editButtonsPosition").classList.contains("editButtonsPositionOpen")) {
+  if (
+    window.innerWidth <= 960 &&
+    document
+      .getElementById("editButtonsPosition")
+      .classList.contains("editButtonsPositionOpen")
+  ) {
     toggleStyleChange(windowId, styleA, styleB);
   }
 }

@@ -6,7 +6,17 @@
  */
 async function generateContactsBoardEdit(targetId, sortedContacts) {
   let mainTaskKey = targetId;
-  return sortedContacts.map((contact) => editAddContacts(contact.id, contact.name, contact.colorId, currentUser, mainTaskKey)).join("");
+  return sortedContacts
+    .map((contact) =>
+      editAddContacts(
+        contact.id,
+        contact.name,
+        contact.colorId,
+        currentUser,
+        mainTaskKey
+      )
+    )
+    .join("");
 }
 
 /**
@@ -17,13 +27,15 @@ async function generateContactsBoardEdit(targetId, sortedContacts) {
  * @param {string} mainTaskKey - The ID of the main task.
  */
 async function assignEditContact(contactId, mainTaskKey) {
-  let myCheckbox = document.getElementById(`checkboxEdit-${contactId}-${mainTaskKey}`);
+  let myCheckbox = document.getElementById(
+    `checkboxEdit-${contactId}-${mainTaskKey}`
+  );
   if (myCheckbox.checked == true) {
     await update_data(
       (path = `tasks/${mainTaskKey}/contact/`),
       (data = {
         id: contactId,
-      }),
+      })
     );
   } else {
     await findDeleteContact(myCheckbox, mainTaskKey);
@@ -45,10 +57,13 @@ async function findDeleteContact(myCheckbox, mainTaskKey) {
   for (let index = 0; index < tasks[thisKey].assigned.length; index++) {
     assigneeArray.push(tasks[thisKey].assigned[index]);
   }
-  let assigneeIdentifier = assigneeArray.findIndex((item) => item.mainContactId == myCheckbox.value);
+  let assigneeIdentifier = assigneeArray.findIndex(
+    (item) => item.mainContactId == myCheckbox.value
+  );
   let assigneeDeleter = tasks[thisKey].assigned[assigneeIdentifier].assigneeId;
   await delete_data((path = `tasks/${mainTaskKey}/contact/${assigneeDeleter}`));
 }
+
 /**
  * Toggles the checkbox state and updates the UI for editing a contact.
  * @param {string} checkboxId - The ID of the checkbox element.
@@ -90,9 +105,15 @@ function editAssigneeData(mainTaskKey) {
  * Processes assigned contacts and updates the UI accordingly, adding the assignee circle with initials to task.
  */
 function assigneeEditSuccess(taskKey) {
-  for (let indexAssignee = 0; indexAssignee < tasks[taskKey].assigned.length; indexAssignee++) {
+  for (
+    let indexAssignee = 0;
+    indexAssignee < tasks[taskKey].assigned.length;
+    indexAssignee++
+  ) {
     let assigneeId = tasks[taskKey].assigned[indexAssignee].mainContactId;
-    let assigneeKey = Object.keys(contacts).find((key) => contacts[key].id == assigneeId);
+    let assigneeKey = Object.keys(contacts).find(
+      (key) => contacts[key].id == assigneeId
+    );
     if (contacts[assigneeKey] !== undefined) {
       assigneeEditKey.push(assigneeKey);
       editAssigneeImage();
@@ -105,10 +126,18 @@ function assigneeEditSuccess(taskKey) {
  * @param {string} targetId - The target ID to apply changes to.
  */
 function editInsertCheckmark(targetId) {
-  for (let indexSelect = 0; indexSelect < selectedAssignee.length; indexSelect++) {
+  for (
+    let indexSelect = 0;
+    indexSelect < selectedAssignee.length;
+    indexSelect++
+  ) {
     let contactId = selectedAssignee[indexSelect];
-    let checkboxEdit = document.getElementById(`checkboxEdit-${contactId}-${targetId}`);
-    let focusEdit = document.getElementById(`focusEdit-${contactId}-${targetId}`);
+    let checkboxEdit = document.getElementById(
+      `checkboxEdit-${contactId}-${targetId}`
+    );
+    let focusEdit = document.getElementById(
+      `focusEdit-${contactId}-${targetId}`
+    );
     if (checkboxEdit) checkboxEdit.checked = true;
     if (focusEdit) focusEdit.classList.add("divFocus");
   }
@@ -121,6 +150,7 @@ function editInsertCheckmark(targetId) {
 function updatePrio(chosenPrio) {
   newPrio = chosenPrio;
 }
+
 /**
  * Updates the status of task in mobile view.
  * @param {string} taskId - The ID of the task.
@@ -141,7 +171,13 @@ async function saveEditedTaskDetails(updatePath, mainTaskKey) {
   let updateDesc = document.getElementById("inputDescriptionEdit").value;
   let updateDate = document.getElementById("inputDueDateEdit").value;
   let updatePrio = newPrio;
-  await submitTaskChanges(updateTitle, updateDesc, updateDate, updatePrio, updatePath);
+  await submitTaskChanges(
+    updateTitle,
+    updateDesc,
+    updateDate,
+    updatePrio,
+    updatePath
+  );
   await getTasks();
   await renderTasks();
   getTaskDetails(mainTaskKey);
@@ -150,7 +186,13 @@ async function saveEditedTaskDetails(updatePath, mainTaskKey) {
 /**
  * Submits changes to the task via a patch request.
  */
-async function submitTaskChanges(updateTitle, updateDesc, updateDate, updatePrio, updatePath) {
+async function submitTaskChanges(
+  updateTitle,
+  updateDesc,
+  updateDate,
+  updatePrio,
+  updatePath
+) {
   await patch_data(
     (path = updatePath),
     (data = {
@@ -158,7 +200,7 @@ async function submitTaskChanges(updateTitle, updateDesc, updateDate, updatePrio
       description: updateDesc,
       date: updateDate,
       prio: updatePrio,
-    }),
+    })
   );
 }
 
@@ -172,7 +214,14 @@ async function updateListEdit(index, mainTaskKey) {
   let textChange = listItem.innerText;
   let editIcon = document.getElementById(`editIcon-${index}`);
   let checkIcon = document.getElementById(`checkIcon-${index}`);
-  await submitSubtaskChanges(textChange, index, mainTaskKey, listItem, editIcon, checkIcon);
+  await submitSubtaskChanges(
+    textChange,
+    index,
+    mainTaskKey,
+    listItem,
+    editIcon,
+    checkIcon
+  );
   await getTasks();
   getTaskDetails(mainTaskKey);
   editTaskDetails(mainTaskKey);
@@ -187,7 +236,14 @@ async function updateListEdit(index, mainTaskKey) {
  * @param {HTMLElement} editIcon - The edit icon element.
  * @param {HTMLElement} checkIcon - The check icon element.
  */
-async function submitSubtaskChanges(textChange, index, mainTaskKey, listItem, editIcon, checkIcon) {
+async function submitSubtaskChanges(
+  textChange,
+  index,
+  mainTaskKey,
+  listItem,
+  editIcon,
+  checkIcon
+) {
   if (textChange.trim() === "") {
     deleteSubtask(`tasks/${mainTaskKey}/subtask/${index}`);
   } else {
@@ -195,13 +251,14 @@ async function submitSubtaskChanges(textChange, index, mainTaskKey, listItem, ed
       (path = `tasks/${mainTaskKey}/subtask/${index}`),
       (data = {
         text: textChange,
-      }),
+      })
     );
     listItem.setAttribute("contenteditable", "false");
     editIcon.style.display = "block";
     checkIcon.style.display = "none";
   }
 }
+
 /**
  * Adds or edits a subtask after validating input.
  * @param {string} inputId - The ID of the input field.
@@ -234,7 +291,7 @@ async function submitSubTextChange(mainTaskId, inputText) {
     (data = {
       text: inputText,
       checked: 0,
-    }),
+    })
   );
 }
 
@@ -245,7 +302,12 @@ async function submitSubTextChange(mainTaskId, inputText) {
  * @param {string} subtaskEditId - The ID of the subtask edit element.
  * @param {string} statusText - The text of the subtask.
  */
-async function subtaskStatusChange(subtaskId, taskKey, subtaskEditId, statusText) {
+async function subtaskStatusChange(
+  subtaskId,
+  taskKey,
+  subtaskEditId,
+  statusText
+) {
   let checkStatus = document.getElementById(subtaskEditId);
   let statusChange = checkStatus.checked ? 1 : 0;
   await submitStatusChange(subtaskId, taskKey, statusText, statusChange);
@@ -260,13 +322,18 @@ async function subtaskStatusChange(subtaskId, taskKey, subtaskEditId, statusText
  * @param {string} statusText - The text of the subtask.
  * @param {number} statusChange - The new status (0 for unchecked, 1 for checked).
  */
-async function submitStatusChange(subtaskId, taskKey, statusText, statusChange) {
+async function submitStatusChange(
+  subtaskId,
+  taskKey,
+  statusText,
+  statusChange
+) {
   await edit_data(
     (path = `tasks/${taskKey}/subtask/${subtaskId}`),
     (data = {
       text: statusText,
       checked: statusChange,
-    }),
+    })
   );
 }
 

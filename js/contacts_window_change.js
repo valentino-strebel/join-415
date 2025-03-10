@@ -80,10 +80,8 @@ function changeMobileDesktop(windowId, styleA, styleB) {
 function openAddContact() {
   let contactWindow = document.getElementById("contactWindow");
   let contactOverlay = document.getElementById("overlay");
-
   if (contactWindow) contactWindow.classList.remove("d_none");
   if (contactOverlay) contactOverlay.classList.remove("d_none");
-
   setTimeout(() => {
     toggleStyleChange(
       "contactWindow",
@@ -99,10 +97,8 @@ function openAddContact() {
 function openEditContact() {
   let contactWindow = document.getElementById("editWindow");
   let contactOverlay = document.getElementById("overlay-edit");
-
   if (contactWindow) contactWindow.classList.remove("d_none");
   if (contactOverlay) contactOverlay.classList.remove("d_none");
-
   setTimeout(() => {
     toggleStyleChange(
       "editWindow",
@@ -118,14 +114,12 @@ function openEditContact() {
 function closeAddContact() {
   let contactWindow = document.getElementById("contactWindow");
   let contactOverlay = document.getElementById("overlay");
-
   contactNoAction(
     "contactWindow",
     "addContactWindowClosed",
     "addContactWindow",
     "addContactWindowNoAction"
   );
-
   setTimeout(() => {
     if (contactWindow) contactWindow.classList.add("d_none");
     if (contactOverlay) contactOverlay.classList.add("d_none");
@@ -138,14 +132,12 @@ function closeAddContact() {
 function closeEditContact() {
   let contactWindow = document.getElementById("editWindow");
   let contactOverlay = document.getElementById("overlay-edit");
-
   contactNoAction(
     "editWindow",
     "addContactWindowClosed",
     "addContactWindow",
     "addContactWindowNoAction"
   );
-
   setTimeout(() => {
     if (contactWindow) contactWindow.classList.add("d_none");
     if (contactOverlay) contactOverlay.classList.add("d_none");
@@ -173,13 +165,15 @@ function closeEditContactSave() {
 function closeAddContactSuccess() {
   let contactWindow = document.getElementById("contactWindow");
   let contactOverlay = document.getElementById("overlay");
-
   setTimeout(() => {
     if (contactWindow) contactWindow.classList.add("d_none");
     if (contactOverlay) contactOverlay.classList.add("d_none");
   }, 100);
 }
 
+/**
+ * Hides scroll bar when opening contact details in mobile version.
+ */
 function hideScrollbar(tagName) {
   let thisTag = document.getElementsByTagName(tagName)[0];
   if (thisTag.classList != "overflowHidden") {
@@ -187,6 +181,9 @@ function hideScrollbar(tagName) {
   }
 }
 
+/**
+ * Reinstates scroll bar when closing contact details in mobile version.
+ */
 function reinstateScrollbar(tagName) {
   let thisTag = document.getElementsByTagName(tagName)[0];
   if (thisTag.classList == "overflowHidden") {

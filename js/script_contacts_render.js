@@ -23,6 +23,7 @@ function getTimeGreeting() {
     if (content) content.textContent = greeting;
   }
 }
+
 /**
  * Get the initials of a name.
  * @param {string} name - The full name of the user.
@@ -91,7 +92,9 @@ function renderInitials(id, currentUser) {
  * @returns {Object[]} Sorted array of contacts.
  */
 function sortContacts(contacts) {
-  return contacts.sort((a, b) => a.name.localeCompare(b.name, "de", { sensitivity: "base" }));
+  return contacts.sort((a, b) =>
+    a.name.localeCompare(b.name, "de", { sensitivity: "base" })
+  );
 }
 
 /**

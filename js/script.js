@@ -2,7 +2,8 @@
  * Base URL for the Firebase database.
  * @constant {string}
  */
-const BASE_URL = "https://join-415-default-rtdb.europe-west1.firebasedatabase.app/";
+const BASE_URL =
+  "https://join-415-default-rtdb.europe-west1.firebasedatabase.app/";
 
 /**
  * Media query to detect viewport width below 960px.
@@ -126,6 +127,7 @@ function openAddTask(status) {
     openAddTaskOverlay(status);
   }
 }
+
 /**
  * Triggers a greeting animation and changes navbar items based on screen width.
  * If the screen width is less than 960px, delays navbar change for 2.9 seconds.
@@ -257,6 +259,7 @@ function mediaQueryDNone(header, footer, kanban, help, logo) {
     Array.from(logo).forEach((el) => el.classList.add("d_none"));
   }
 }
+
 /**
  * Toggles between mobile and desktop "join" views based on media query match.
  * Also updates intro background color and triggers transition effect.
@@ -370,7 +373,14 @@ async function changeNavbar(styleID) {
  * @param {number} styleID - The index for the style element to modify.
  * @returns {Promise<void>}
  */
-async function changeNavbarExecute(styleDiv, desktopID, footerID, profile, help, styleID) {
+async function changeNavbarExecute(
+  styleDiv,
+  desktopID,
+  footerID,
+  profile,
+  help,
+  styleID
+) {
   if (await checkLoggedIn()) {
     footerID.innerHTML = mobileFooterLoggedIn();
     desktopID.innerHTML = desktopNavbarLoggedIn();
