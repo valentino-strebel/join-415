@@ -3,7 +3,7 @@
   position: absolute;
   left: 50%;
   top: 50%;
-  transform: translate(50%, -7%);
+  transform: translate(50%, 0%);
 }
 
 .userStory {
@@ -231,10 +231,27 @@
 #assigneeList{
   flex-direction: row;
 }
+.contactsList input[type="checkbox"] {
+  display: none;
+}
 
-@media (max-width: 1220px) {
+.contactsList label {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  background-image: url(../assets/icons/task_details/uncheck_button.svg);
+  background-size: auto;
+  background-repeat: no-repeat;
+}
+
+.contactsList input[type="checkbox"]:checked + label {
+  background-image: url(../assets/icons/task_details/Check_button.svg) !important;
+}
+
+@media (max-width: 1210px) {
   .userStoryContainer {
-    transform: translate(30%, -7%);
+    transform: translate(30%, 5%);
   }
 
   #detailsHeader {
@@ -244,7 +261,7 @@
 
 @media (max-width: 1100px) {
   .userStoryContainer {
-    transform: translate(30%, 0%);
+    transform: translate(15%, 5%);
   }
 }
 
@@ -276,7 +293,7 @@
   }
 
   .userStoryContainer {
-    transform: translate(0%, -2%);
+    transform: translate(-10%, 5%);
   }
   #detailsHeader {
     font-size: 36px;
@@ -313,7 +330,7 @@
 @media (max-width: 550px) {
   
   .userStoryContainer {
-    transform: translate(-20%, -2%);
+    transform: translate(-10%, 5%);
   }
   .tag {
     font-size: 16px;
@@ -348,6 +365,9 @@
   .userStoryContainer {
     width: 300px;
   }
+  .userStoryContainer {
+    transform: translate(-20%, 5%);
+}
 }
 
 @media (max-width: 450px) {
@@ -371,6 +391,12 @@
 }
 }
 
+@media (max-width: 440px){
+  .userStoryContainer {
+    transform: translate(-5%, 5%);
+}
+}
+
 @media (max-width: 410px) {
   .userStory {
     min-width: 300px;
@@ -382,7 +408,7 @@
   }
 
   .userStoryContainer {
-    transform: translate(5%, -2%);
+    transform: translate(3%, 5%);
   }
 
   .taskDetailsButtons {
@@ -394,30 +420,7 @@
 
 @media (max-width: 360px) {
   .userStoryContainer {
-    transform: translate(0%, -2%);
+    transform: translate(0%, 5%);
   }
 }
 
-@media (max-width: 330px) {
-  .userStoryContainer {
-    transform: translate(2%, -2%);
-  }
-}
-
-.contactsList input[type="checkbox"] {
-  display: none;
-}
-
-.contactsList label {
-  display: inline-block;
-  width: 24px;
-  height: 24px;
-  cursor: pointer;
-  background-image: url(../assets/icons/task_details/uncheck_button.svg);
-  background-size: auto;
-  background-repeat: no-repeat;
-}
-
-.contactsList input[type="checkbox"]:checked + label {
-  background-image: url(../assets/icons/task_details/Check_button.svg) !important;
-}
