@@ -389,7 +389,7 @@ function insertSubtasksList(subtaskText, subtaskId, mainTaskKey) {
           <img
             src="../assets/icons/add_task/delete.svg"
             alt="Delete"
-            onclick="deleteSubtask('tasks/${mainTaskKey}/subtask/${subtaskId}')"
+            onclick="deleteSubtask('tasks/${mainTaskKey}/subtask/${subtaskId}','${mainTaskKey}')"
           />
         </div>
       </div>

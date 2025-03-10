@@ -218,7 +218,7 @@ async function addEditSubtask(inputId, mainTaskId) {
     await submitSubTextChange(mainTaskId, inputText);
     clearSubtaskInput(inputId);
     await loadDataBoard();
-    editSubtasks();
+    editSubtasks(mainTaskId);
   }
 }
 
@@ -282,8 +282,8 @@ async function deleteTask(path) {
  * Deletes a subtask and updates the UI.
  * @param {string} path - The API path to delete the subtask.
  */
-async function deleteSubtask(path) {
+async function deleteSubtask(path, mainTaskKey) {
   await delete_data(path);
   await loadDataBoard();
-  editSubtasks();
+  editSubtasks(mainTaskKey);
 }
