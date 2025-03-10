@@ -78,7 +78,8 @@ function selectContact(contactId, mainTaskKey) {
 function editAssigneeData(mainTaskKey) {
   assigneeEditKey = [];
   let thisTaskKey = tasks.findIndex((task) => task.id === mainTaskKey);
-  if (typeof tasks[thisTaskKey].assigned !== "undefined" && tasks[thisTaskKey].assigned.length > 0) {
+  let assignedContacts = tasks[thisTaskKey].assigned;
+  if (assignedContacts.length > 0) {
     assigneeEditSuccess(thisTaskKey);
   } else {
     document.getElementById("editAssigneeImage").innerHTML = "";
