@@ -175,7 +175,8 @@ input#telInput {
   background-color: transparent;
   border-style: none;
   cursor: pointer;
-  background: url(../assets/icons/add_task/cross-icon.svg) no-repeat center center;
+  background: url(../assets/icons/add_task/cross-icon.svg) no-repeat center
+    center;
   height: 32px;
   width: 32px;
 }
@@ -304,6 +305,13 @@ input#telInput {
 
   .closeAddContact button {
     background-image: url(../assets/icons/add_task/cross-icon-white.svg);
+  }
+}
+
+@media (max-height: 850px) {
+  .closeAddContact {
+    top: -250px;
+    right: 24px;
   }
 }
 
