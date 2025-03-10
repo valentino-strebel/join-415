@@ -4,16 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sign-Up</title>
-    <link
-      rel="icon"
-      type="image/x-icon"
-      href="../assets/icons/favicon_join.svg"
-    />
+    <link rel="icon" type="image/x-icon" href="../assets/icons/favicon_join.svg" />
     <link rel="stylesheet" href="../css/font_styles.css" />
     <link rel="stylesheet" href="../css/login.css" />
     <link rel="stylesheet" href="../css/signup.css" />
 
     <script src="../js/script.js"></script>
+    <script src="../js/script_contacts_render.js"></script>
+
     <script src="../js/registration.js"></script>
     <script src="../js/db.js"></script>
   </head>
@@ -21,11 +19,7 @@
   <body>
     <header>
       <div class="displayFlex">
-        <img
-          src="../assets/join_logo/join-logo-capa2.svg"
-          alt="join-logo"
-          id="join-logo"
-        />
+        <img src="../assets/join_logo/join-logo-capa2.svg" alt="join-logo" id="join-logo" />
       </div>
     </header>
 
@@ -43,46 +37,21 @@
         <form onsubmit="event.preventDefault()" novalidate>
           <div id="signup-inputfields">
             <div id="regInpName" class="">
-              <input
-                type="text"
-                placeholder="Name"
-                id="name-input"
-                required
-                pattern="[A-Za-zÀ-ÖØ-öø-ÿ]{1,30} [A-Za-zÀ-ÖØ-öø-ÿ]{1,30}"
-              />
+              <input type="text" placeholder="Name" id="name-input" required pattern="[A-Za-zÀ-ÖØ-öø-ÿ]{1,30} [A-Za-zÀ-ÖØ-öø-ÿ]{1,30}" />
               <div class="regError">
-                <p id="regErrorName" class="size12 d_none">
-                  Please insert a name and a surname - e.g.: John Doe
-                </p>
+                <p id="regErrorName" class="size12 d_none">Please insert a name and a surname - e.g.: John Doe</p>
               </div>
             </div>
             <div id="regInpEmail" class="">
-              <input
-                type="email"
-                placeholder="Email"
-                id="email-input"
-                required
-                pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$"
-              />
+              <input type="email" placeholder="Email" id="email-input" required pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$" />
               <div class="regError">
-                <p id="regErrorEmail" class="size12 d_none">
-                  Please insert a valid email - e.g.: name@email.com
-                </p>
+                <p id="regErrorEmail" class="size12 d_none">Please insert a valid email - e.g.: name@email.com</p>
               </div>
             </div>
             <div id="regInpPw" class="">
-              <input
-                type="password"
-                pattern="[A-Za-z0-9]{8,}"
-                placeholder="Password"
-                id="password-input"
-                required
-                oninput="changePWImage()"
-              />
+              <input type="password" pattern="[A-Za-z0-9]{8,}" placeholder="Password" id="password-input" required oninput="changePWImage()" />
               <div class="regError">
-                <p id="regErrorPw" class="size12 d_none">
-                  Please insert a password of at least 8 characters
-                </p>
+                <p id="regErrorPw" class="size12 d_none">Please insert a password of at least 8 characters</p>
               </div>
             </div>
             <div id="regInpPwCheck" class="">
@@ -92,12 +61,9 @@
                 placeholder="Confirm Password"
                 id="confirm-password-input"
                 required
-                oninput="changeConfPWImage()"
-              />
+                oninput="changeConfPWImage()" />
               <div class="regError">
-                <p id="regErrorPwCheck" class="size12 d_none">
-                  Your passwords don't match. Please try again.
-                </p>
+                <p id="regErrorPwCheck" class="size12 d_none">Your passwords don't match. Please try again.</p>
               </div>
             </div>
             <div class="privacy_policy">
@@ -107,9 +73,7 @@
               <a href="privacy_policy.html">Privacy Policy</a>
             </div>
             <div class="regError">
-              <p id="regErrorCheckBox" class="size12 d_none">
-                Please accept the Privacy Policy
-              </p>
+              <p id="regErrorCheckBox" class="size12 d_none">Please accept the Privacy Policy</p>
             </div>
           </div>
           <button id="signup" onclick="registrationData()">Sign Up</button>
