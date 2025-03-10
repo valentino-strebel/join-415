@@ -22,7 +22,16 @@ let todayDate = new Date().toJSON().slice(0, 10);
  * @returns {string} - HTML string for contacts.
  */
 function generateContactsHTML(contacts) {
-  return contacts.map((contact) => listContactsAddtask(contact.id, contact.name, contact.colorId, currentUser)).join("");
+  return contacts
+    .map((contact) =>
+      listContactsAddtask(
+        contact.id,
+        contact.name,
+        contact.colorId,
+        currentUser
+      )
+    )
+    .join("");
 }
 
 /**
@@ -50,7 +59,11 @@ async function renderContacts(filteredContacts = contacts) {
  */
 function filterContacts(contactsCheck) {
   let searchTerm = document.getElementById(contactsCheck).value.toLowerCase();
-  let filteredContacts = searchTerm ? contacts.filter((contact) => contact.name.toLowerCase().startsWith(searchTerm)) : contacts;
+  let filteredContacts = searchTerm
+    ? contacts.filter((contact) =>
+        contact.name.toLowerCase().startsWith(searchTerm)
+      )
+    : contacts;
   renderContacts(filteredContacts);
 }
 
@@ -58,7 +71,8 @@ function filterContacts(contactsCheck) {
  * Toggles a contact's selection status.
  * @param {number|string} id - The ID of the contact.
  */
-function toggleCheckbox(id) {
+function toggleCheckbox(id, selectId) {
+  focusDiv(selectId);
   if (selectedContactsIDs.some((obj) => obj.id === id)) {
     selectedContactsIDs = selectedContactsIDs.filter((obj) => obj.id !== id);
   } else {
@@ -82,9 +96,13 @@ function setCheckbox(id) {
  * Renders the assigned contacts based on selectedContactsIDs.
  */
 function renderAssignedContacts() {
-  let contactInfo = contacts.filter((contact) => selectedContactsIDs.some((selected) => selected.id === contact.id));
+  let contactInfo = contacts.filter((contact) =>
+    selectedContactsIDs.some((selected) => selected.id === contact.id)
+  );
   let content = document.getElementById("assignedContacts");
-  content.innerHTML = contactInfo.map((contact) => listAssingedContacts(contact.name, contact.colorId)).join("");
+  content.innerHTML = contactInfo
+    .map((contact) => listAssingedContacts(contact.name, contact.colorId))
+    .join("");
 }
 
 /**
@@ -100,7 +118,8 @@ function setButtonColor(selectedButton, colorCode) {
   if (!img) return;
   activeButton.style.backgroundColor = colorCode;
   activeButton.style.color = "#FFFFFF";
-  img.style.filter = "brightness(0) saturate(100%) invert(93%) sepia(100%) saturate(0%) hue-rotate(141deg) brightness(104%) contrast(101%)";
+  img.style.filter =
+    "brightness(0) saturate(100%) invert(93%) sepia(100%) saturate(0%) hue-rotate(141deg) brightness(104%) contrast(101%)";
   selectedPrio = selectedButton.toLowerCase();
 }
 
@@ -209,7 +228,9 @@ function editListItem(index) {
   let listItem = document.getElementById(`listItem-${index}`);
   let editIcon = document.getElementById(`editIcon-${index}`);
   let checkIcon = document.getElementById(`checkIcon-${index}`);
-  let listItemContainer = document.getElementById(`list-item-container-${index}`);
+  let listItemContainer = document.getElementById(
+    `list-item-container-${index}`
+  );
 
   listItem.setAttribute("contenteditable", "true");
   listItemContainer.classList.toggle("edit-subtask");
@@ -368,7 +389,9 @@ function stautsEmpty(stauts) {
  * @returns {boolean} False if an error is displayed, true otherwise.
  */
 function showError(element, message) {
-  let parent = element.closest(".add-task-input-fields") || element.closest(".add-task-prio");
+  let parent =
+    element.closest(".add-task-input-fields") ||
+    element.closest(".add-task-prio");
   let errorSpan = parent.querySelector(".error-text");
   if (errorSpan) {
     errorSpan.remove();

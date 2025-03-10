@@ -30,7 +30,11 @@ function validateRequiredFields() {
 function validateContacts() {
   let contactSearch = document.getElementById("contacts-search");
   contactSearch.addEventListener("input", () => showError(contactSearch, ""));
-  if (!selectedContactsIDs || !Array.isArray(selectedContactsIDs) || selectedContactsIDs.length === 0) {
+  if (
+    !selectedContactsIDs ||
+    !Array.isArray(selectedContactsIDs) ||
+    selectedContactsIDs.length === 0
+  ) {
     return showError(contactSearch, "Please select at least one contact");
   }
   return showError(contactSearch, "");
@@ -75,7 +79,12 @@ function validatePriority() {
  * @returns {boolean} - Returns true if all validations pass, otherwise false.
  */
 function validateData() {
-  return validateRequiredFields() && validateContacts() && validateCategory() && validatePriority();
+  return (
+    validateRequiredFields() &&
+    validateContacts() &&
+    validateCategory() &&
+    validatePriority()
+  );
 }
 
 /**
@@ -106,8 +115,7 @@ function closeContactsList(listId) {
 function selectCheckBox(checkboxId, contactId, selectId) {
   let checkStatus = document.getElementById(checkboxId);
   checkStatus.checked = !checkStatus.checked;
-  focusDiv(selectId);
-  toggleCheckbox(contactId);
+  toggleCheckbox(contactId, selectId);
 }
 
 /**
