@@ -526,6 +526,12 @@ select {
   }
 }
 
+@media (max-width: 1000px){
+  .add-task-wrapper {
+    padding: 110px 46px 0;
+  }
+}
+
 @media (max-width: 960px) {
   .add-task-items li:hover {
     background-color: transparent;
