@@ -66,7 +66,20 @@ let urgencySymbols = [
  * Array of month names.
  * @type {Array<string>}
  */
-let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+let months = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
 
 /**
  * Array of background colors with ID and RGBA value.
@@ -175,34 +188,70 @@ async function getContacts(path = `contacts/`) {
  * @param {string} [path="tasks/"] - The endpoint path to fetch tasks from Firebase.
  * @returns {Promise<void>} - A promise that resolves when task data is fetched and processed.
  */
+/**
+ * Fetches tasks data from a given path and processes it.
+ * @async
+ * @function
+ * @param {string} [path='tasks/'] - The relative path to fetch tasks from.
+ * @returns {Promise<void>}
+ */
 async function getTasks(path = `tasks/`) {
   tasks = [];
   let response = await fetch(BASE_URL + path + ".json");
   let tasksData = await response.json();
-  if (tasksData != null) {
-    Object.entries(tasksData).forEach(([id, content]) => {
-      let subtasksArray = [];
-      if (content.subtask) {
-        subtasksArray = Object.entries(content.subtask)
-          .filter(([key, value]) => value !== null && value !== undefined)
-          .map(([subtaskId, subtaskContent]) => ({
-            id: subtaskId,
-            checked: subtaskContent.checked,
-            text: subtaskContent.text,
-          }));
-      }
-      let contactArray = [];
-      if (content.contact) {
-        contactArray = Object.entries(content.contact)
-          .filter(([key, value]) => value !== null && value !== undefined)
-          .map(([assigneeId, assigneeContent]) => ({
-            "assigneeId": assigneeId,
-            "mainContactId": assigneeContent.id,
-          }));
-      }
-      tasksPush(tasks, id, content, subtasksArray, contactArray);
-    });
+  if (tasksData != null) processTasks(tasksData);
+}
+
+/**
+ * Processes the raw tasks data, extracting subtasks and contacts, and pushes them into the tasks array.
+ * @function
+ * @param {Object} tasksData - The raw tasks data object fetched from the server.
+ */
+function processTasks(tasksData) {
+  Object.entries(tasksData).forEach(([id, content]) => {
+    let subtasksArray = getSubtasksArray(content);
+    let contactArray = getContactArray(content);
+    tasksPush(tasks, id, content, subtasksArray, contactArray);
+  });
+}
+
+/**
+ * Converts the subtask object within a task content to an array of structured subtasks.
+ * @function
+ * @param {Object} content - The task content that may include a subtask object.
+ * @returns {Array<Object>} Array of subtasks with id, checked status, and text.
+ */
+function getSubtasksArray(content) {
+  let subtasksArray = [];
+  if (content.subtask) {
+    subtasksArray = Object.entries(content.subtask)
+      .filter(([key, value]) => value !== null && value !== undefined)
+      .map(([subtaskId, subtaskContent]) => ({
+        id: subtaskId,
+        checked: subtaskContent.checked,
+        text: subtaskContent.text,
+      }));
   }
+  return subtasksArray;
+}
+
+/**
+ * Converts the contact object within a task content to an array of structured contacts.
+ * @function
+ * @param {Object} content - The task content that may include a contact object.
+ * @returns {Array<Object>} Array of contacts with assigneeId and mainContactId.
+ */
+function getContactArray(content) {
+  let contactArray = [];
+  if (content.contact) {
+    contactArray = Object.entries(content.contact)
+      .filter(([key, value]) => value !== null && value !== undefined)
+      .map(([assigneeId, assigneeContent]) => ({
+        "assigneeId": assigneeId,
+        "mainContactId": assigneeContent.id,
+      }));
+  }
+  return contactArray;
 }
 
 /**
