@@ -30,7 +30,7 @@ function getTimeGreeting() {
  * @returns {string} The initials of the name in uppercase.
  */
 function getInitials(name) {
-  return name
+ if(name) return name
     .split(" ")
     .map((word) => word[0].toUpperCase())
     .join("");
