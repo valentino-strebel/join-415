@@ -4,6 +4,11 @@
 let login;
 
 /**
+ * @type {Object} Stores contact data globally.
+ */
+let contactData;
+
+/**
  * Fetches and verifies login data.
  * @async
  * @returns {Promise<void>}
@@ -36,6 +41,47 @@ async function getLoginData(path = "") {
 }
 
 /**
+ *  Fetches contact data from the server
+ * @async
+ * @returns {Promise<void>}
+ */
+async function getContactList(){
+  let response = await fetch(BASE_URL + `contacts/` + ".json");
+  contactData = await response.json();
+}
+
+/**
+ * Adds a new user to the contact list if they do not already exist.
+ * 
+ * @async
+ * @function addCurrentUserContact
+ * @param {Object} findUser - The user to be added.
+ * @param {string} findUser.name - The name of the user.
+ * @param {string} findUser.email - The email address of the user.
+ * @returns {Promise<void>} - A promise that resolves when the operation is complete.
+ */
+async function addCurrentUserContact(findUser) {
+  await getContactList()
+  let contacts = Object.values(contactData || {});
+  let findContact = true;
+  
+  for (let id in contacts) {
+    if (contacts[id].email === findUser.email && contacts[id].name === findUser.name){
+      findContact = false; } 
+    }
+    
+  if (findContact){
+    await update_data((path = `contacts/`),(data = {
+      name: findUser.name,
+      email: findUser.email,
+      phone: '-',
+      colorId: getRandomNumber(),})
+    );
+  }
+}
+
+
+/**
  * Verifies user login credentials.
  * @async
  * @param {string} [userId] The user ID (to be updated after verification).
@@ -63,21 +109,14 @@ async function proofLoginData(userId, findUser) {
  * @param {Object} findUser The authenticated user object.
  * @returns {Promise<void>}
  */
-async function proofLoginTry(
-  emailLogin,
-  passwordLogin,
-  loginData,
-  userId,
-  findUser
-) {
+async function proofLoginTry(emailLogin, passwordLogin, loginData, userId, findUser) {
   let results = findMatchingLoginData(emailLogin, passwordLogin, loginData);
   if (results.success) {
     userId = results.userId;
     findUser = results.findUser;
     await edit_data("/current-user", findUser);
-    await changeNavbarItems(
-      window.innerWidth < 960 ? "mobile_greeting" : "summary"
-    );
+    await addCurrentUserContact(findUser);
+    await changeNavbarItems(window.innerWidth < 960 ? "mobile_greeting" : "summary");
     regAlright("logErrorName", "logInpName");
     regAlright("logErrorPw", "logInpPw");
     return;
