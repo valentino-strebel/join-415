@@ -624,6 +624,12 @@ select {
   }
 }
 
+@media (max-width: 600px) {
+  .more-contacts{
+    -webkit-text-stroke-width: 0.5px;
+  }
+}
+
 @media (max-width: 428px) {
   .add-task-bottom-buttons > button {
     font-size: 21px;

@@ -1,86 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mobile Greeting</title>
+    <link rel="icon" type="image/x-icon" href="../assets/icons/favicon_join.svg" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/font_styles.css" />
+    <link rel="stylesheet" href="../css/summary.css" />
+    <link rel="stylesheet" href="../css/navbar.css" />
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mobile Greeting</title>
-  <link rel="icon" type="image/x-icon" href="../assets/icons/favicon_join.svg" />
+    <script src="../js/board.js"></script>
+    <script src="../js/board_data_changes.js"></script>
+    <script src="../js/script.js"></script>
+    <script src="../js/script_contacts_render.js"></script>
+    <script src="../js/summary.js"></script>
+    <script src="../js/db.js"></script>
+  </head>
 
-  <link rel="stylesheet" href="../css/style.css" />
-  <link rel="stylesheet" href="../css/font_styles.css" />
-  <link rel="stylesheet" href="../css/summary.css" />
-  <link rel="stylesheet" href="../css/navbar.css" />
-  <script src="../js/board.js"></script>
-  <script src="../js/board_data_changes.js"></script>
-
-  <script src="../js/script.js"></script>
-  <script src="../js/script_contacts_render.js"></script>
-
-  <script src="../js/summary.js"></script>
-  <script src="../js/db.js"></script>
-</head>
-
-<body id="body-greeting" onload="pageLoadHandler('mobile-greeting'), greetingAnimation()">
-  <header>
-    <div class="header_content">
-      <img src="../assets/join_logo/join-logo-capa2.svg" alt="join-logo" class="join-mobile-logo d_none" />
-      <p class="weight400 size20 kanban">Kanban Project Management Tool</p>
-      <div class="profileSection">
-        <a href="../html/help.html" class="help"> <img src="../assets/icons/header/help.svg" alt="help" /></a>
-        <div class="headerInitails size20 weight600" onclick="d_none(`dropdown-menu`)"
-          id="header-initials-mobile-greeting"></div>
-      </div>
-    </div>
-    <section id="dropdown-menu" class="d_none">
-      <div id="help-menu" onclick="openHelp()">Help</div>
-      <div onclick="openLegalNotice()">Legal Notice</div>
-      <div onclick="openPrivacyPolicy()">Privacy Policy</div>
-      <div onclick="logOut()">Log out</div>
-    </section>
-  </header>
-  <main>
-    <section id="mobileIntro">
-      <div class="dashboardWelcome animationGreeting" id="welcome-dash-mobile">
-        <div class="timeOfDayWelcome">
-          <p id="greeting-mobile" class="colorDarkBlue weight500 size47"></p>
-        </div>
-        <div class="userWelcome">
-          <p id="user-name-mobile" class="colorLightBlue weight700 size64"></p>
+  <body id="body-greeting" onload="pageLoadHandler('mobile-greeting'), greetingAnimation()">
+    <header>
+      <div class="header_content">
+        <img src="../assets/join_logo/join-logo-capa2.svg" alt="join-logo" class="join-mobile-logo d_none" />
+        <p class="weight400 size20 kanban">Kanban Project Management Tool</p>
+        <div class="profileSection">
+          <a href="../html/help.html" class="help"> <img src="../assets/icons/header/help.svg" alt="help" /></a>
+          <div class="headerInitails size20 weight600" onclick="d_none(`dropdown-menu`)" id="header-initials-mobile-greeting"></div>
         </div>
       </div>
-    </section>
-  </main>
+      <section id="dropdown-menu" class="d_none">
+        <div id="help-menu" onclick="openHelp()">Help</div>
+        <div onclick="openLegalNotice()">Legal Notice</div>
+        <div onclick="openPrivacyPolicy()">Privacy Policy</div>
+        <div onclick="logOut()">Log out</div>
+      </section>
+    </header>
+    <main>
+      <section id="mobileIntro">
+        <div class="dashboardWelcome animationGreeting" id="welcome-dash-mobile">
+          <div class="timeOfDayWelcome">
+            <p id="greeting-mobile" class="colorDarkBlue weight500 size47"></p>
+          </div>
+          <div class="userWelcome">
+            <p id="user-name-mobile" class="colorLightBlue weight700 size64"></p>
+          </div>
+        </div>
+      </section>
+    </main>
 
-  <footer class="d_none footer_nav">
-    <nav class="nav-footer" onmousedown="prevent(event)">
-      <div class="navbar-wrapper-footer" onclick='changeNavbarItems("summary")'
-        style="background-color: rgba(9, 25, 49, 1)">
-        <button class="navbar-menu-button navbar-footer-button">
-          <img src="../assets/icons/nav_bar/summary-icon.svg" />
-        </button>
-        <span>Summary</span>
-      </div>
-      <div class="navbar-wrapper-footer" onclick='changeNavbarItems("board")'>
-        <button class="navbar-menu-button navbar-footer-button">
-          <img src="../assets/icons/nav_bar/board-icon.svg" />
-        </button>
-        <span>Board</span>
-      </div>
-      <div class="navbar-wrapper-footer" onclick='changeNavbarItems("addtask")'>
-        <button class="navbar-menu-button navbar-footer-button">
-          <img src="../assets/icons/nav_bar/addtask-icon.svg" />
-        </button>
-        <span>Add Task</span>
-      </div>
-      <div class="navbar-wrapper-footer" onclick='changeNavbarItems("contacts")'>
-        <button class="navbar-menu-button navbar-footer-button">
-          <img src="../assets/icons/nav_bar/contacts-icon.svg" />
-        </button>
-        <span>Contacts</span>
-      </div>
-    </nav>
-  </footer>
-</body>
-
+    <footer class="d_none footer_nav">
+      <nav class="nav-footer" onmousedown="prevent(event)">
+        <div class="navbar-wrapper-footer" onclick='changeNavbarItems("summary")' style="background-color: rgba(9, 25, 49, 1)">
+          <button class="navbar-menu-button navbar-footer-button">
+            <img src="../assets/icons/nav_bar/summary-icon.svg" />
+          </button>
+          <span>Summary</span>
+        </div>
+        <div class="navbar-wrapper-footer" onclick='changeNavbarItems("board")'>
+          <button class="navbar-menu-button navbar-footer-button">
+            <img src="../assets/icons/nav_bar/board-icon.svg" />
+          </button>
+          <span>Board</span>
+        </div>
+        <div class="navbar-wrapper-footer" onclick='changeNavbarItems("addtask")'>
+          <button class="navbar-menu-button navbar-footer-button">
+            <img src="../assets/icons/nav_bar/addtask-icon.svg" />
+          </button>
+          <span>Add Task</span>
+        </div>
+        <div class="navbar-wrapper-footer" onclick='changeNavbarItems("contacts")'>
+          <button class="navbar-menu-button navbar-footer-button">
+            <img src="../assets/icons/nav_bar/contacts-icon.svg" />
+          </button>
+          <span>Contacts</span>
+        </div>
+      </nav>
+    </footer>
+  </body>
 </html>

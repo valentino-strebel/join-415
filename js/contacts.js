@@ -339,13 +339,7 @@ async function editUserSuccess(name, email, tel, id, indexContacts) {
  * @param {string} changeTel - The new phone number value.
  * @param {string} id - The ID of the user.
  */
-async function editUserSubmit(
-  indexContacts,
-  changeName,
-  changeEmail,
-  changeTel,
-  id
-) {
+async function editUserSubmit(indexContacts, changeName, changeEmail, changeTel, id) {
   await edit_data(`contacts/` + id, {
     name: changeName,
     email: changeEmail,
@@ -411,76 +405,4 @@ function inputClassListError(remove, add) {
 function inputClassListClear(add, remove) {
   document.getElementById(add).classList.add("d_none");
   document.getElementById(remove).classList.remove("inputContactDisplay");
-}
-
-/**
- * Opens the edit overlay and populates it with contact details.
- *
- * @param {number} indexContacts - The index of the contact in the contacts array.
- */
-function openEditOverlay(indexContacts) {
-  document.getElementById("editInitialsColor").innerHTML = "";
-  document.getElementById("editForm").innerHTML = "";
-  document.getElementById("editButtons").innerHTML = "";
-  document.getElementById("editWindow").classList.remove("d_none");
-
-  let contact = contacts[indexContacts];
-  document.getElementById("editForm").innerHTML = editFormInsert(contact);
-  document.getElementById("editInitialsColor").innerHTML =
-    editInitialsInsert(contact);
-  document.getElementById("editButtons").innerHTML = editButtonsInsert(
-    contact,
-    indexContacts
-  );
-}
-
-/**
- * Toggles between two CSS classes on an element.
- *
- * @param {string} windowId - The ID of the element to toggle classes on.
- * @param {string} styleA - The first class to toggle.
- * @param {string} styleB - The second class to toggle.
- */
-function toggleStyleChange(windowId, styleA, styleB) {
-  document.getElementById(windowId).classList.toggle(styleA);
-  document.getElementById(windowId).classList.toggle(styleB);
-}
-
-/**
- * Displays contact details window with a toggle animation.
- *
- * @param {string} windowId - The ID of the details window element.
- * @param {string} styleA - The first class to toggle.
- * @param {string} styleB - The second class to toggle.
- */
-async function showContactDetails(windowId, styleA, styleB) {
-  if (
-    document.getElementById(windowId).classList.value ==
-    "contactsDisplay detailsWindow"
-  ) {
-    toggleStyleChange(windowId, styleA, styleB);
-    await delay(0.1);
-    toggleStyleChange(windowId, styleA, styleB);
-  } else {
-    toggleStyleChange(windowId, styleA, styleB);
-  }
-}
-
-/**
- * Closes the details menu if the window width is less than or equal to 960 pixels
- * and the edit buttons are in the open position.
- *
- * @param {string} windowId - The ID of the details window element.
- * @param {string} styleA - The first class to toggle.
- * @param {string} styleB - The second class to toggle.
- */
-function closeDetailsMenu(windowId, styleA, styleB) {
-  if (
-    window.innerWidth <= 960 &&
-    document
-      .getElementById("editButtonsPosition")
-      .classList.contains("editButtonsPositionOpen")
-  ) {
-    toggleStyleChange(windowId, styleA, styleB);
-  }
 }

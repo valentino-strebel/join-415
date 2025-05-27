@@ -190,7 +190,7 @@
 }
 
 @media (max-width: 960px) {
-  #body-greeting {
+  #body-greeting, body {
     overflow-y: hidden;
   }
   #mobileIntro {
@@ -235,11 +235,12 @@
   }
   .summaryContent {
     display: flex;
+    position: relative;
     flex-direction: column;
     align-items: center;
     padding: 40px 16px 40px 16px;
     overflow-x: hidden;
-    overflow-y: scroll;
+    overflow-y: hidden;
     margin-bottom: 120px;
   }
   .summaryContent::-webkit-scrollbar-thumb {
@@ -323,9 +324,13 @@
   .dashboardContent {
     align-items: center;
     justify-content: center;
+    height: 460px;
+    overflow-y: scroll;
+    padding-top: 80px;
+    margin-bottom: 20px;
   }
   .dashboard {
-    margin-top: 400px;
+    margin-top: 340px;
     align-items: center;
   }
   .contentFullStatus {

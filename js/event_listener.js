@@ -46,7 +46,8 @@ let searchBox = document.getElementById("contact-search");
  * Hides the contact list if clicked outside of the list or the search box.
  * @param {MouseEvent} event - The click event.
  */
-if (window.location.pathname.includes("board.html")) {
+function searchContainerPosition(){
+  if (window.location.pathname.includes("board.html")) {
   window.addEventListener("resize", adjustSearchContainerPosition);
   window.addEventListener("load", adjustSearchContainerPosition);
   document.addEventListener("click", function (event) {
@@ -54,7 +55,8 @@ if (window.location.pathname.includes("board.html")) {
       list.style.display = "none";
     }
   });
-}
+}}
+
 
 /**
  * Adds an event listener to the subtask input field when clicking "Enter".
@@ -62,22 +64,30 @@ if (window.location.pathname.includes("board.html")) {
  *
  * @param {KeyboardEvent} event - The keyboard event.
  */
-if (subtaskRef) {
+function subtaskInput(){
+  if (subtaskRef) {
   subtaskRef.addEventListener("keydown", function (event) {
     if (event.key === "Enter") {
       event.preventDefault();
       confirmInput();
     }
   });
-}
+}}
+
 
 /**
  * Adds event listeners when password is set. Only if the current page is 'login.html'.
  */
-if (window.location.pathname.includes("login.html")) {
+function passwordVisibility(){
+  if (window.location.pathname.includes("login.html")) {
   document.addEventListener("DOMContentLoaded", function () {
     toggleButton.addEventListener("click", togglePasswordVisibility);
     passwordField.addEventListener("focus", handleFocus);
     passwordField.addEventListener("blur", handleBlur);
   });
 }
+}
+
+searchContainerPosition();
+subtaskInput();
+passwordVisibility();

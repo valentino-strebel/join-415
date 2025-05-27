@@ -1,94 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign-Up</title>
+    <link rel="icon" type="image/x-icon" href="../assets/icons/favicon_join.svg" />
+    <link rel="stylesheet" href="../css/font_styles.css" />
+    <link rel="stylesheet" href="../css/login.css" />
+    <link rel="stylesheet" href="../css/signup.css" />
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sign-Up</title>
-  <link rel="icon" type="image/x-icon" href="../assets/icons/favicon_join.svg" />
-  <link rel="stylesheet" href="../css/font_styles.css" />
-  <link rel="stylesheet" href="../css/login.css" />
-  <link rel="stylesheet" href="../css/signup.css" />
+    <script src="../js/script.js"></script>
+    <script src="../js/script_contacts_render.js"></script>
+    <script src="../js/registration.js"></script>
+    <script src="../js/db.js"></script>
+  </head>
 
-  <script src="../js/script.js"></script>
-  <script src="../js/script_contacts_render.js"></script>
-
-  <script src="../js/registration.js"></script>
-  <script src="../js/db.js"></script>
-</head>
-
-<body>
-  <header>
-    <div class="displayFlex">
-      <img src="../assets/join_logo/join-logo-capa2.svg" alt="join-logo" id="join-logo" />
-    </div>
-  </header>
-
-  <main>
-    <div id="signup-container">
-      <div id="signup-header">
-        <div id="back-button" onclick="changeNavbarItems('login')">
-          <img src="../assets/icons/login_signup/Vector.svg" />
-        </div>
-        <h1>Sign Up</h1>
-        <div style="width: 10px"></div>
+  <body>
+    <header>
+      <div class="displayFlex">
+        <img src="../assets/join_logo/join-logo-capa2.svg" alt="join-logo" id="join-logo" />
       </div>
+    </header>
 
-      <hr />
-      <form onsubmit="event.preventDefault()" novalidate>
-        <div id="signup-inputfields">
-          <div id="regInpName" class="">
-            <input type="text" placeholder="Name" id="name-input" required
-              pattern="[A-Za-zÀ-ÖØ-öø-ÿ]{1,30} [A-Za-zÀ-ÖØ-öø-ÿ]{1,30}" />
-            <div class="regError">
-              <p id="regErrorName" class="size12 d_none">Please insert a name and a surname - e.g.: John Doe</p>
-            </div>
+    <main>
+      <div id="signup-container">
+        <div id="signup-header">
+          <div id="back-button" onclick="changeNavbarItems('login')">
+            <img src="../assets/icons/login_signup/Vector.svg" />
           </div>
-          <div id="regInpEmail" class="">
-            <input type="email" placeholder="Email" id="email-input" required pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$" />
-            <div class="regError">
-              <p id="regErrorEmail" class="size12 d_none">Please insert a valid email - e.g.: name@email.com</p>
-            </div>
-          </div>
-          <div id="regInpPw" class="">
-            <input type="password" pattern="[A-Za-z0-9]{8,}" placeholder="Password" id="password-input" required
-              oninput="changePWImage()" />
-            <div class="regError">
-              <p id="regErrorPw" class="size12 d_none">Please insert a password of at least 8 characters</p>
-            </div>
-          </div>
-          <div id="regInpPwCheck" class="">
-            <input type="password" pattern="[A-Za-z0-9]{8,}" placeholder="Confirm Password" id="confirm-password-input"
-              required oninput="changeConfPWImage()" />
-            <div class="regError">
-              <p id="regErrorPwCheck" class="size12 d_none">Your passwords don't match. Please try again.</p>
-            </div>
-          </div>
-          <div class="privacy_policy">
-            <input type="checkbox" id="privacyPolicy" />
-            <label for="privacyPolicy"> </label>
-            <p>I accept the</p>
-            <a href="privacy_policy.html">Privacy Policy</a>
-          </div>
-          <div class="regError">
-            <p id="regErrorCheckBox" class="size12 d_none">Please accept the Privacy Policy</p>
-          </div>
+          <h1>Sign Up</h1>
+          <div style="width: 10px"></div>
         </div>
-        <button id="signup" onclick="registrationData()">Sign Up</button>
-      </form>
-    </div>
-  </main>
 
-  <footer>
-    <a>Privacy Policy</a>
-    <a>Legal notice</a>
-  </footer>
-  <div id="registrationOverlay" class="registraitonOverlay d_none"></div>
-  <div id="creationSuccessContainer" class="creationSuccessContainerClosed">
-    <div class="creationSuccessNotice">
-      <p class="weight400 size20">You Signed Up successfully</p>
-    </div>
-  </div>
-</body>
+        <hr />
+        <form onsubmit="event.preventDefault()" novalidate>
+          <div id="signup-inputfields">
+            <div id="regInpName" class="">
+              <input type="text" placeholder="Name" id="name-input" required pattern="[A-Za-zÀ-ÖØ-öø-ÿ]{1,30} [A-Za-zÀ-ÖØ-öø-ÿ]{1,30}" />
+              <div class="regError">
+                <p id="regErrorName" class="size12 d_none">Please insert a name and a surname - e.g.: John Doe</p>
+              </div>
+            </div>
+            <div id="regInpEmail" class="">
+              <input type="email" placeholder="Email" id="email-input" required pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$" />
+              <div class="regError">
+                <p id="regErrorEmail" class="size12 d_none">Please insert a valid email - e.g.: name@email.com</p>
+              </div>
+            </div>
+            <div id="regInpPw" class="">
+              <input type="password" pattern="[A-Za-z0-9]{8,}" placeholder="Password" id="password-input" required oninput="changePWImage()" />
+              <div class="regError">
+                <p id="regErrorPw" class="size12 d_none">Please insert a password of at least 8 characters</p>
+              </div>
+            </div>
+            <div id="regInpPwCheck" class="">
+              <input
+                type="password"
+                pattern="[A-Za-z0-9]{8,}"
+                placeholder="Confirm Password"
+                id="confirm-password-input"
+                required
+                oninput="changeConfPWImage()" />
+              <div class="regError">
+                <p id="regErrorPwCheck" class="size12 d_none">Your passwords don't match. Please try again.</p>
+              </div>
+            </div>
+            <div class="privacy_policy">
+              <input type="checkbox" id="privacyPolicy" />
+              <label for="privacyPolicy"> </label>
+              <p>I accept the</p>
+              <a href="privacy_policy.html">Privacy Policy</a>
+            </div>
+            <div class="regError">
+              <p id="regErrorCheckBox" class="size12 d_none">Please accept the Privacy Policy</p>
+            </div>
+          </div>
+          <button id="signup" onclick="registrationData()">Sign Up</button>
+        </form>
+      </div>
+    </main>
 
+    <footer>
+      <a>Privacy Policy</a>
+      <a>Legal notice</a>
+    </footer>
+    <div id="registrationOverlay" class="registraitonOverlay d_none"></div>
+    <div id="creationSuccessContainer" class="creationSuccessContainerClosed">
+      <div class="creationSuccessNotice">
+        <p class="weight400 size20">You Signed Up successfully</p>
+      </div>
+    </div>
+  </body>
 </html>
